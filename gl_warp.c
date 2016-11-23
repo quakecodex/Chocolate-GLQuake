@@ -178,7 +178,7 @@ void GL_SubdivideSurface (msurface_t *fa)
 
 
 // speed up sin calculations - Ed
-float	turbsin[] =
+double	turbsin[] =
 {
 	#include "gl_warp_sin.h"
 };

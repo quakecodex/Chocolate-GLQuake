@@ -15,4 +15,6 @@
 - Removed WinQuake Build.
 
 ## [Unreleased]
+## Changes
 - Fixed level 1 warnings.
+- Fixed level 2 warnings.

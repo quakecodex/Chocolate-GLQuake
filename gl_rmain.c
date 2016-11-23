@@ -264,7 +264,7 @@ void R_DrawSpriteModel (entity_t *e)
 
 #define NUMVERTEXNORMALS	162
 
-float	r_avertexnormals[NUMVERTEXNORMALS][3] = {
+double	r_avertexnormals[NUMVERTEXNORMALS][3] = {
 #include "anorms.h"
 };
 
@@ -273,11 +273,11 @@ float	shadelight, ambientlight;
 
 // precalculated dot products for quantized angles
 #define SHADEDOT_QUANT 16
-float	r_avertexnormal_dots[SHADEDOT_QUANT][256] =
+double	r_avertexnormal_dots[SHADEDOT_QUANT][256] =
 #include "anorm_dots.h"
 ;
 
-float	*shadedots = r_avertexnormal_dots[0];
+float	*shadedots = (float*)r_avertexnormal_dots[0];
 
 int	lastposenum;
 
@@ -513,7 +513,7 @@ void R_DrawAliasModel (entity_t *e)
 		|| !strcmp (clmodel->name, "progs/flame.mdl") )
 		ambientlight = shadelight = 256;
 
-	shadedots = r_avertexnormal_dots[((int)(e->angles[1] * (SHADEDOT_QUANT / 360.0))) & (SHADEDOT_QUANT - 1)];
+	shadedots = (float*)r_avertexnormal_dots[((int)(e->angles[1] * (SHADEDOT_QUANT / 360.0))) & (SHADEDOT_QUANT - 1)];
 	shadelight = shadelight / 200.0;
 	
 	an = e->angles[1]/180*M_PI;
@@ -1003,7 +1003,7 @@ void R_Clear (void)
 		if (trickframe & 1)
 		{
 			gldepthmin = 0;
-			gldepthmax = 0.49999;
+			gldepthmax = 0.49999f;
 			glDepthFunc (GL_LEQUAL);
 		}
 		else
