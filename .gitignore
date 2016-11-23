@@ -35,6 +35,6 @@
 # Directories
 Debug/
 Release/
-gl_debug
-gl_release
+gl_debug/
+gl_release/
 
