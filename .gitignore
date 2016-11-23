@@ -31,3 +31,10 @@
 # Debug files
 *.dSYM/
 *.su
+
+# Directories
+Debug/
+Release/
+gl_debug
+gl_release
+
