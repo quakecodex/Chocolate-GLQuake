@@ -32,6 +32,14 @@
 *.dSYM/
 *.su
 
+# Visual Studio Files
+*.ncb
+*.user
+*.suo
+*.manifest
+*.pdb
+*.pch
+
 # Directories
 Debug/
 Release/
