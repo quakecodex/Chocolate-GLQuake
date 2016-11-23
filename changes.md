@@ -5,7 +5,7 @@
 - Built Visual C++ 2008 solution.
 
 ## [Unreleased]
-## Changed
+### Changed
 - Forced GL Quake to use 32-bit texures.
 
 ## [0.0.2] - 2016-11-23
