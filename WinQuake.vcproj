@@ -146,6 +146,7 @@
 				ObjectFile=".\debug_gl/"
 				ProgramDataBaseFileName=".\debug_gl/"
 				BrowseInformation="1"
+				WarningLevel="2"
 				SuppressStartupBanner="true"
 				DebugInformationFormat="4"
 			/>
