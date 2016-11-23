@@ -38,13 +38,13 @@
 *.suo
 *.manifest
 *.pdb
-*.pch
 *.htm
 *.html
 *.ilk
 *.dep
 *.idb
 *.bsc
+*.aps
 
 # Directories
 Debug/
