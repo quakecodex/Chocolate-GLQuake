@@ -61,3 +61,8 @@ release_gl/BuildLog.htm
 *.bsc
 debug_gl/mt.dep
 *.ilk
+*.htm
+debug_gl/BuildLog.htm
+*.htm
+*.idb
+*.dep
