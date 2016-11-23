@@ -117,6 +117,8 @@ qboolean	block_drawing;
 
 void SCR_ScreenShot_f (void);
 
+extern void GL_Set2D (void); // Defined in gl_vidnt.c
+
 /*
 ===============================================================================
 
@@ -254,7 +256,6 @@ Internal use only
 */
 static void SCR_CalcRefdef (void)
 {
-	vrect_t		vrect;
 	float		size;
 	int		h;
 	qboolean		full = false;
@@ -316,8 +317,8 @@ static void SCR_CalcRefdef (void)
 	}
 
 	r_refdef.vrect.height = vid.height * size;
-	if (r_refdef.vrect.height > vid.height - sb_lines)
-		r_refdef.vrect.height = vid.height - sb_lines;
+	if (r_refdef.vrect.height > vid.height - (unsigned int)sb_lines)
+		r_refdef.vrect.height = vid.height - (unsigned int)sb_lines;
 	if (r_refdef.vrect.height > vid.height)
 			r_refdef.vrect.height = vid.height;
 	r_refdef.vrect.x = (vid.width - r_refdef.vrect.width)/2;

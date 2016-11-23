@@ -22,6 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "quakedef.h"
 #include "winquake.h"
 #include "resource.h"
+
 #include <commctrl.h>
 
 #define MAX_MODE_LIST	30
@@ -137,6 +138,8 @@ lp3DFXFUNC glColorTableEXT;
 qboolean is8bit = false;
 qboolean isPermedia = false;
 qboolean gl_mtexable = false;
+
+extern LONG CDAudio_MessageHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 //====================================
 
@@ -1308,8 +1311,6 @@ void VID_DescribeModes_f (void)
 void VID_InitDIB (HINSTANCE hInstance)
 {
 	WNDCLASS		wc;
-	HDC				hdc;
-	int				i;
 
 	/* Register the frame class */
     wc.style         = 0;
@@ -1365,7 +1366,7 @@ VID_InitFullDIB
 void VID_InitFullDIB (HINSTANCE hInstance)
 {
 	DEVMODE	devmode;
-	int		i, modenum, cmodes, originalnummodes, existingmode, numlowresmodes;
+	int		i, modenum, originalnummodes, existingmode, numlowresmodes;
 	int		j, bpp, done;
 	BOOL	stat;
 
@@ -1576,7 +1577,6 @@ void	VID_Init (unsigned char *palette)
 {
 	int		i, existingmode;
 	int		basenummodes, width, height, bpp, findbpp, done;
-	byte	*ptmp;
 	char	gldir[MAX_OSPATH];
 	HDC		hdc;
 	DEVMODE	devmode;
@@ -1868,8 +1868,7 @@ void VID_MenuDraw (void)
 {
 	qpic_t		*p;
 	char		*ptr;
-	int			lnummodes, i, j, k, column, row, dup, dupmode;
-	char		temp[100];
+	int			lnummodes, i, k, column, row;
 	vmode_t		*pv;
 
 	p = Draw_CachePic ("gfx/vidmodes.lmp");
