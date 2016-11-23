@@ -51,4 +51,6 @@ Debug/
 Release/
 debug_gl/
 release_gl/
+debug_gl/*
+release_gl/*
 
