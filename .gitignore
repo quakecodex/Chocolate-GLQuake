@@ -54,3 +54,10 @@ release_gl/
 debug_gl/*
 release_gl/*
 
+*.bsc
+release_gl/WinQuake.bsc
+*.idb
+release_gl/BuildLog.htm
+*.bsc
+debug_gl/mt.dep
+*.ilk
