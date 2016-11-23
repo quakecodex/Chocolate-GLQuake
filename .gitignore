@@ -39,6 +39,12 @@
 *.manifest
 *.pdb
 *.pch
+*.htm
+*.html
+*.ilk
+*.dep
+*.idb
+*.bsc
 
 # Directories
 Debug/
