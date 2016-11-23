@@ -1516,6 +1516,8 @@ void VID_Init8bitPalette()
 	char thePalette[256*3];
 	char *oldPalette, *newPalette;
 
+	return; // Force 32-bit textures
+
 	glColorTableEXT = (void *)wglGetProcAddress("glColorTableEXT");
     if (!glColorTableEXT || strstr(gl_extensions, "GL_EXT_shared_texture_palette") ||
 		COM_CheckParm("-no8bit"))
