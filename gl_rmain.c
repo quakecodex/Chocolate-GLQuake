@@ -101,6 +101,17 @@ cvar_t	gl_doubleeyes = {"gl_doubleeys", "1"};
 
 extern	cvar_t	gl_ztrick;
 
+// TODO: Give these guys a header
+extern int R_LightPoint (vec3_t p); // Defined in gl_rlight.c
+extern void R_DrawBrushModel (entity_t *e); // Defined in gl_rsurf.c
+extern void R_AnimateLight (void); // Defined in gl_rlight.c
+extern void R_SetupFrame (void); // gl_rmain.c
+extern void R_RenderDlights (void); // gl_rlight.c
+extern void R_DrawParticles (void); // r_part.c
+extern void R_DrawWaterSurfaces (void); // gl_rsurf.c
+extern void R_RenderBrushPoly (msurface_t *fa); // gl_rsurf.c
+extern void R_DrawWorld (void); // gl_rsurf.c
+
 /*
 =================
 R_CullBox
@@ -288,15 +299,9 @@ GL_DrawAliasFrame
 */
 void GL_DrawAliasFrame (aliashdr_t *paliashdr, int posenum)
 {
-	float	s, t;
 	float 	l;
-	int		i, j;
-	int		index;
-	trivertx_t	*v, *verts;
-	int		list;
+	trivertx_t *verts;
 	int		*order;
-	vec3_t	point;
-	float	*normal;
 	int		count;
 
 lastposenum = posenum;
@@ -346,14 +351,9 @@ extern	vec3_t			lightspot;
 
 void GL_DrawAliasShadow (aliashdr_t *paliashdr, int posenum)
 {
-	float	s, t, l;
-	int		i, j;
-	int		index;
-	trivertx_t	*v, *verts;
-	int		list;
+	trivertx_t *verts;
 	int		*order;
 	vec3_t	point;
-	float	*normal;
 	float	height, lheight;
 	int		count;
 
@@ -445,16 +445,14 @@ R_DrawAliasModel
 */
 void R_DrawAliasModel (entity_t *e)
 {
-	int			i, j;
+	int			i;
 	int			lnum;
 	vec3_t		dist;
 	float		add;
 	model_t		*clmodel;
 	vec3_t		mins, maxs;
 	aliashdr_t	*paliashdr;
-	trivertx_t	*verts, *v;
-	int			index;
-	float		s, t, an;
+	float		an;
 	int			anim;
 
 	clmodel = currententity->model;
@@ -809,10 +807,6 @@ R_SetupFrame
 */
 void R_SetupFrame (void)
 {
-	int				edgecount;
-	vrect_t			vrect;
-	float			w, h;
-
 // don't allow cheats in multiplayer
 	if (cl.maxclients > 1)
 		Cvar_Set ("r_fullbright", "0");
@@ -864,8 +858,6 @@ R_SetupGL
 void R_SetupGL (void)
 {
 	float	screenaspect;
-	float	yfov;
-	int		i;
 	extern	int glwidth, glheight;
 	int		x, x2, y2, y, w, h;
 

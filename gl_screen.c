@@ -317,10 +317,10 @@ static void SCR_CalcRefdef (void)
 	}
 
 	r_refdef.vrect.height = vid.height * size;
-	if (r_refdef.vrect.height > vid.height - (unsigned int)sb_lines)
-		r_refdef.vrect.height = vid.height - (unsigned int)sb_lines;
-	if (r_refdef.vrect.height > vid.height)
-			r_refdef.vrect.height = vid.height;
+	if (r_refdef.vrect.height > (int)vid.height - sb_lines)
+		r_refdef.vrect.height = (int)vid.height - sb_lines;
+	if (r_refdef.vrect.height > (int)vid.height)
+			r_refdef.vrect.height = (int)vid.height;
 	r_refdef.vrect.x = (vid.width - r_refdef.vrect.width)/2;
 	if (full)
 		r_refdef.vrect.y = 0;
@@ -822,7 +822,6 @@ needs almost the entire 256k of stack space!
 void SCR_UpdateScreen (void)
 {
 	static float	oldscr_viewsize;
-	vrect_t		vrect;
 
 	if (block_drawing)
 		return;

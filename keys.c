@@ -237,8 +237,8 @@ void Key_Console (int key)
 	if (key == K_PGUP || key==K_MWHEELUP)
 	{
 		con_backscroll += 2;
-		if (con_backscroll > con_totallines - (vid.height>>3) - 1)
-			con_backscroll = con_totallines - (vid.height>>3) - 1;
+		if ((unsigned int)con_backscroll > (unsigned int)con_totallines - (vid.height>>3) - 1)
+			(unsigned int)con_backscroll = (unsigned int)con_totallines - (vid.height>>3) - 1;
 		return;
 	}
 

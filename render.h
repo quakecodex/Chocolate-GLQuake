@@ -156,3 +156,8 @@ void D_DeleteSurfaceCache (void);
 void D_InitCaches (void *buffer, int size);
 void R_SetVrect (vrect_t *pvrect, vrect_t *pvrectin, int lineadj);
 
+// JJ - 2016-11-24
+// Missing from header
+qboolean R_CullBox (vec3_t mins, vec3_t maxs);
+void R_InitParticles (void);
+
