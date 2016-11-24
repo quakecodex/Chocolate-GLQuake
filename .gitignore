@@ -38,11 +38,18 @@
 *.suo
 *.manifest
 *.pdb
-*.pch
+*.htm
+*.html
+*.ilk
+*.dep
+*.idb
+*.bsc
+*.aps
 
 # Directories
 Debug/
 Release/
-gl_debug/
-gl_release/
-
+debug_gl/
+release_gl/
+debug_gl/*
+release_gl/*

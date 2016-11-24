@@ -25,6 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef _MSC_VER
 #include <unistd.h>
 #endif
+#include <io.h>
 #include <fcntl.h>
 #include "quakedef.h"
 
@@ -222,7 +223,7 @@ void Con_Init (void)
 		if (strlen (com_gamedir) < (MAXGAMEDIRLEN - strlen (t2)))
 		{
 			sprintf (temp, "%s%s", com_gamedir, t2);
-			unlink (temp);
+			_unlink (temp);
 		}
 	}
 
@@ -359,9 +360,9 @@ void Con_DebugLog(char *file, char *fmt, ...)
     va_start(argptr, fmt);
     vsprintf(data, fmt, argptr);
     va_end(argptr);
-    fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0666);
-    write(fd, data, strlen(data));
-    close(fd);
+    fd = _open(file, O_WRONLY | O_CREAT | O_APPEND, 0666);
+    _write(fd, data, strlen(data));
+    _close(fd);
 }
 
 

@@ -150,7 +150,6 @@ void GL_SubdivideSurface (msurface_t *fa)
 	int			i;
 	int			lindex;
 	float		*vec;
-	texture_t	*t;
 
 	warpface = fa;
 
@@ -178,7 +177,7 @@ void GL_SubdivideSurface (msurface_t *fa)
 
 
 // speed up sin calculations - Ed
-float	turbsin[] =
+double	turbsin[] =
 {
 	#include "gl_warp_sin.h"
 };
@@ -273,10 +272,6 @@ will have them chained together.
 */
 void EmitBothSkyLayers (msurface_t *fa)
 {
-	int			i;
-	int			lindex;
-	float		*vec;
-
 	GL_DisableMultitexture();
 
 	GL_Bind (solidskytexture);

@@ -20,8 +20,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 // r_misc.c
 
 #include "quakedef.h"
+#include "r_local.h" // FIXME: This file is def'ed out in GL Quake
 
-
+extern void GL_Upload8_EXT (byte *data, int width, int height,  qboolean mipmap, qboolean alpha); // Defined in gl_rmisc
+extern void R_ClearParticles (void); // Defined in r_part.c
+extern void GL_BuildLightmaps (void); // Defined in gl_rsurf.c
 
 /*
 ==================
@@ -106,7 +109,6 @@ Grab six views for environment mapping tests
 void R_Envmap_f (void)
 {
 	byte	buffer[256*256*4];
-	char	name[1024];
 
 	glDrawBuffer  (GL_FRONT);
 	glReadBuffer  (GL_FRONT);
@@ -319,11 +321,11 @@ void R_TranslatePlayerSkin (int playernum)
 		out2 = (byte *)pixels;
 		memset(pixels, 0, sizeof(pixels));
 		fracstep = inwidth*0x10000/scaled_width;
-		for (i=0 ; i<scaled_height ; i++, out2 += scaled_width)
+		for (i=0 ; i < (int)scaled_height ; i++, out2 += (int)scaled_width)
 		{
 			inrow = original + inwidth*(i*inheight/scaled_height);
 			frac = fracstep >> 1;
-			for (j=0 ; j<scaled_width ; j+=4)
+			for (j=0 ; j< (int)scaled_width ; j+=4)
 			{
 				out2[j] = translate[inrow[frac>>16]];
 				frac += fracstep;
@@ -345,11 +347,11 @@ void R_TranslatePlayerSkin (int playernum)
 
 	out = pixels;
 	fracstep = inwidth*0x10000/scaled_width;
-	for (i=0 ; i<scaled_height ; i++, out += scaled_width)
+	for (i=0 ; i < (int)scaled_height ; i++, out += scaled_width)
 	{
 		inrow = original + inwidth*(i*inheight/scaled_height);
 		frac = fracstep >> 1;
-		for (j=0 ; j<scaled_width ; j+=4)
+		for (j=0 ; j < (int)scaled_width ; j+=4)
 		{
 			out[j] = translate32[inrow[frac>>16]];
 			frac += fracstep;
@@ -426,8 +428,6 @@ void R_TimeRefresh_f (void)
 {
 	int			i;
 	float		start, stop, time;
-	int			startangle;
-	vrect_t		vr;
 
 	glDrawBuffer  (GL_FRONT);
 	glFinish ();

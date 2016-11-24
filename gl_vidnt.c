@@ -22,6 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "quakedef.h"
 #include "winquake.h"
 #include "resource.h"
+
 #include <commctrl.h>
 
 #define MAX_MODE_LIST	30
@@ -138,6 +139,8 @@ qboolean is8bit = false;
 qboolean isPermedia = false;
 qboolean gl_mtexable = false;
 
+extern LONG CDAudio_MessageHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+
 //====================================
 
 cvar_t		vid_mode = {"vid_mode","0", false};
@@ -190,7 +193,6 @@ void D_EndDirectRect (int x, int y, int width, int height)
 
 void CenterWindow(HWND hWndCenter, int width, int height, BOOL lefttopjustify)
 {
-    RECT    rect;
     int     CenterX, CenterY;
 
 	CenterX = (GetSystemMetrics(SM_CXSCREEN) - width) / 2;
@@ -263,10 +265,10 @@ qboolean VID_SetWindowedMode (int modenum)
 	PatBlt(hdc,0,0,WindowRect.right,WindowRect.bottom,BLACKNESS);
 	ReleaseDC(dibwindow, hdc);
 
-	if (vid.conheight > modelist[modenum].height)
-		vid.conheight = modelist[modenum].height;
-	if (vid.conwidth > modelist[modenum].width)
-		vid.conwidth = modelist[modenum].width;
+	if (vid.conheight > (unsigned int)modelist[modenum].height)
+		vid.conheight = (unsigned int)modelist[modenum].height;
+	if (vid.conwidth > (unsigned int)modelist[modenum].width)
+		vid.conwidth = (unsigned int)modelist[modenum].width;
 	vid.width = vid.conwidth;
 	vid.height = vid.conheight;
 
@@ -348,10 +350,10 @@ qboolean VID_SetFullDIBMode (int modenum)
 	PatBlt(hdc,0,0,WindowRect.right,WindowRect.bottom,BLACKNESS);
 	ReleaseDC(dibwindow, hdc);
 
-	if (vid.conheight > modelist[modenum].height)
-		vid.conheight = modelist[modenum].height;
-	if (vid.conwidth > modelist[modenum].width)
-		vid.conwidth = modelist[modenum].width;
+	if (vid.conheight > (unsigned int)modelist[modenum].height)
+		vid.conheight = (unsigned int)modelist[modenum].height;
+	if (vid.conwidth > (unsigned int)modelist[modenum].width)
+		vid.conwidth = (unsigned int)modelist[modenum].width;
 	vid.width = vid.conwidth;
 	vid.height = vid.conheight;
 
@@ -375,7 +377,6 @@ int VID_SetMode (int modenum, unsigned char *palette)
 	int				original_mode, temp;
 	qboolean		stat;
     MSG				msg;
-	HDC				hdc;
 
 	if ((windowed && (modenum != 0)) ||
 		(!windowed && (modenum < 1)) ||
@@ -610,10 +611,10 @@ void GL_Init (void)
 
 //	Con_Printf ("%s %s\n", gl_renderer, gl_version);
 
-    if (strnicmp(gl_renderer,"PowerVR",7)==0)
+    if (_strnicmp(gl_renderer,"PowerVR",7)==0)
          fullsbardraw = true;
 
-    if (strnicmp(gl_renderer,"Permedia",8)==0)
+    if (_strnicmp(gl_renderer,"Permedia",8)==0)
          isPermedia = true;
 
 	CheckTextureExtensions ();
@@ -624,7 +625,7 @@ void GL_Init (void)
 	glEnable(GL_TEXTURE_2D);
 
 	glEnable(GL_ALPHA_TEST);
-	glAlphaFunc(GL_GREATER, 0.666);
+	glAlphaFunc(GL_GREATER, 0.666f);
 
 	glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);
 	glShadeModel (GL_FLAT);
@@ -706,13 +707,9 @@ void	VID_SetPalette (unsigned char *palette)
 	unsigned r,g,b;
 	unsigned v;
 	int     r1,g1,b1;
-	int		j,k,l,m;
+	int		j,k,l;
 	unsigned short i;
 	unsigned	*table;
-	FILE *f;
-	char s[255];
-	HWND hDlg, hProgress;
-	float gamma;
 
 //
 // 8 8 8 encoding
@@ -953,9 +950,6 @@ void AppActivate(BOOL fActive, BOOL minimize)
 *
 ****************************************************************************/
 {
-	MSG msg;
-    HDC			hdc;
-    int			i, t;
 	static BOOL	sound_active;
 
 	ActiveApp = fActive;
@@ -1020,7 +1014,7 @@ LONG WINAPI MainWndProc (
     LPARAM  lParam)
 {
     LONG    lRet = 1;
-	int		fwKeys, xPos, yPos, fActive, fMinimized, temp;
+	int		fActive, fMinimized, temp;
 	extern unsigned int uiWheelMessage;
 
 	if ( uMsg == uiWheelMessage )
@@ -1308,8 +1302,6 @@ void VID_DescribeModes_f (void)
 void VID_InitDIB (HINSTANCE hInstance)
 {
 	WNDCLASS		wc;
-	HDC				hdc;
-	int				i;
 
 	/* Register the frame class */
     wc.style         = 0;
@@ -1365,7 +1357,7 @@ VID_InitFullDIB
 void VID_InitFullDIB (HINSTANCE hInstance)
 {
 	DEVMODE	devmode;
-	int		i, modenum, cmodes, originalnummodes, existingmode, numlowresmodes;
+	int		i, modenum, originalnummodes, existingmode, numlowresmodes;
 	int		j, bpp, done;
 	BOOL	stat;
 
@@ -1549,7 +1541,7 @@ static void Check_Gamma (unsigned char *pal)
 			(gl_vendor && strstr(gl_vendor, "3Dfx")))
 			vid_gamma = 1;
 		else
-			vid_gamma = 0.7; // default to 0.7 on non-3dfx hardware
+			vid_gamma = 0.7f; // default to 0.7 on non-3dfx hardware
 	} else
 		vid_gamma = Q_atof(com_argv[i+1]);
 
@@ -1576,7 +1568,6 @@ void	VID_Init (unsigned char *palette)
 {
 	int		i, existingmode;
 	int		basenummodes, width, height, bpp, findbpp, done;
-	byte	*ptmp;
 	char	gldir[MAX_OSPATH];
 	HDC		hdc;
 	DEVMODE	devmode;
@@ -1868,8 +1859,7 @@ void VID_MenuDraw (void)
 {
 	qpic_t		*p;
 	char		*ptr;
-	int			lnummodes, i, j, k, column, row, dup, dupmode;
-	char		temp[100];
+	int			lnummodes, i, k, column, row;
 	vmode_t		*pv;
 
 	p = Draw_CachePic ("gfx/vidmodes.lmp");

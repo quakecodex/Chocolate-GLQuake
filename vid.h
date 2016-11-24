@@ -83,3 +83,6 @@ int VID_SetMode (int modenum, unsigned char *palette);
 void VID_HandlePause (qboolean pause);
 // called only on Win32, when pause happens, so the mouse can be released
 
+qboolean VID_Is8bit();
+// Returns true when video is 8-bit only
+

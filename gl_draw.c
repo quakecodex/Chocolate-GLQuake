@@ -84,6 +84,9 @@ void GL_Bind (int texnum)
 #endif
 }
 
+// TODO: Give these funcs a header
+extern int GL_LoadPicTexture (qpic_t *pic); // gl_draw.c
+
 
 /*
 =============================================================================
@@ -110,7 +113,6 @@ int Scrap_AllocBlock (int w, int h, int *x, int *y)
 {
 	int		i, j;
 	int		best, best2;
-	int		bestx;
 	int		texnum;
 
 	for (texnum=0 ; texnum<MAX_SCRAPS ; texnum++)
@@ -145,6 +147,7 @@ int Scrap_AllocBlock (int w, int h, int *x, int *y)
 	}
 
 	Sys_Error ("Scrap_AllocBlock: full");
+	return -1;
 }
 
 int	scrap_uploads;
@@ -369,13 +372,12 @@ void Draw_Init (void)
 {
 	int		i;
 	qpic_t	*cb;
-	byte	*dest, *src;
+	byte	*dest;
 	int		x, y;
 	char	ver[40];
 	glpic_t	*gl;
 	int		start;
 	byte	*ncdata;
-	int		f, fstep;
 
 
 	Cvar_RegisterVariable (&gl_nobind);
@@ -495,11 +497,7 @@ smoothly scrolled off.
 ================
 */
 void Draw_Character (int x, int y, int num)
-{
-	byte			*dest;
-	byte			*source;
-	unsigned short	*pusdest;
-	int				drawline;	
+{	
 	int				row, col;
 	float			frow, fcol, size;
 
@@ -567,9 +565,6 @@ Draw_AlphaPic
 */
 void Draw_AlphaPic (int x, int y, qpic_t *pic, float alpha)
 {
-	byte			*dest, *source;
-	unsigned short	*pusdest;
-	int				v, u;
 	glpic_t			*gl;
 
 	if (scrap_dirty)
@@ -604,9 +599,6 @@ Draw_Pic
 */
 void Draw_Pic (int x, int y, qpic_t *pic)
 {
-	byte			*dest, *source;
-	unsigned short	*pusdest;
-	int				v, u;
 	glpic_t			*gl;
 
 	if (scrap_dirty)
@@ -634,10 +626,6 @@ Draw_TransPic
 */
 void Draw_TransPic (int x, int y, qpic_t *pic)
 {
-	byte	*dest, *source, tbyte;
-	unsigned short	*pusdest;
-	int				v, u;
-
 	if (x < 0 || (unsigned)(x + pic->width) > vid.width || y < 0 ||
 		 (unsigned)(y + pic->height) > vid.height)
 	{
@@ -778,7 +766,7 @@ void Draw_FadeScreen (void)
 {
 	glEnable (GL_BLEND);
 	glDisable (GL_TEXTURE_2D);
-	glColor4f (0, 0, 0, 0.8);
+	glColor4f (0, 0, 0, 0.8f);
 	glBegin (GL_QUADS);
 
 	glVertex2f (0,0);
@@ -1090,7 +1078,6 @@ void GL_Upload8_EXT (byte *data, int width, int height,  qboolean mipmap, qboole
 {
 	int			i, s;
 	qboolean	noalpha;
-	int			p;
 	static unsigned j;
 	int			samples;
     static	unsigned char scaled[1024*512];	// [512*256];
@@ -1233,8 +1220,7 @@ GL_LoadTexture
 */
 int GL_LoadTexture (char *identifier, int width, int height, byte *data, qboolean mipmap, qboolean alpha)
 {
-	qboolean	noalpha;
-	int			i, p, s;
+	int			i;
 	gltexture_t	*glt;
 
 	// see if the texture is allready present
