@@ -49,9 +49,9 @@
 				Name="VCCLCompilerTool"
 				Optimization="4"
 				FavorSizeOrSpeed="1"
-				AdditionalIncludeDirectories="&quot;C:\Users\James\Projects\Quake\chocolate-glquake\SDL-1.2.15\include&quot;;.\dxsdk\sdk\inc"
+				AdditionalIncludeDirectories=".\dxsdk\sdk\inc"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;GLQUAKE;_CRT_SECURE_NO_WARNINGS"
-				RuntimeLibrary="2"
+				RuntimeLibrary="0"
 				PrecompiledHeaderFile=".\release_gl/WinQuake.pch"
 				AssemblerListingLocation=".\release_gl/"
 				ObjectFile=".\release_gl/"
@@ -72,11 +72,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies=".\dxsdk\sdk\lib\dxguid.lib sdl.lib sdlmain.lib comctl32.lib winmm.lib wsock32.lib opengl32.lib glu32.lib odbc32.lib odbccp32.lib"
+				AdditionalDependencies=".\dxsdk\sdk\lib\dxguid.lib comctl32.lib winmm.lib wsock32.lib opengl32.lib glu32.lib odbc32.lib odbccp32.lib"
 				OutputFile=".\release_gl\glquake.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="&quot;C:\Users\James\Projects\Quake\chocolate-glquake\SDL-1.2.15\lib\x86&quot;"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
@@ -139,9 +138,9 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;C:\Users\James\Projects\Quake\chocolate-glquake\SDL-1.2.15\include&quot;;.\dxsdk\sdk\inc"
+				AdditionalIncludeDirectories=".\dxsdk\sdk\inc"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;GLQUAKE;_CRT_SECURE_NO_WARNINGS"
-				RuntimeLibrary="3"
+				RuntimeLibrary="0"
 				PrecompiledHeaderFile=".\debug_gl/WinQuake.pch"
 				AssemblerListingLocation=".\debug_gl/"
 				ObjectFile=".\debug_gl/"
@@ -164,11 +163,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies=".\dxsdk\sdk\lib\dxguid.lib sdl.lib sdlmain.lib comctl32.lib winmm.lib wsock32.lib opengl32.lib glu32.lib odbc32.lib odbccp32.lib"
+				AdditionalDependencies=".\dxsdk\sdk\lib\dxguid.lib comctl32.lib winmm.lib wsock32.lib opengl32.lib glu32.lib odbc32.lib odbccp32.lib"
 				OutputFile=".\debug_gl\glquake.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="&quot;C:\Users\James\Projects\Quake\chocolate-glquake\SDL-1.2.15\lib\x86&quot;"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile=".\debug_gl/glquake.pdb"
 				SubSystem="2"
@@ -1331,7 +1329,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\sys_sdl.c"
+				RelativePath="sys_win.c"
 				>
 				<FileConfiguration
 					Name="GL Release|Win32"
@@ -1623,10 +1621,6 @@
 			</File>
 			<File
 				RelativePath="screen.h"
-				>
-			</File>
-			<File
-				RelativePath=".\sdlquake.h"
 				>
 			</File>
 			<File
