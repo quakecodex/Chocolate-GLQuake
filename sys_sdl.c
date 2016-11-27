@@ -23,6 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "quakedef.h"
 #include "winquake.h"
+#include "sdlquake.h"
 #include "errno.h"
 #include "resource.h"
 #include "conproc.h"
@@ -342,6 +343,13 @@ void Sys_Init (void)
 		WinNT = true;
 	else
 		WinNT = false;
+
+	/* Initialize SDL */
+	if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
+		SDL_Quit();
+		Sys_Error("Unable to initialize SDL.\n");
+		
+	}
 }
 
 
@@ -456,6 +464,9 @@ void Sys_Quit (void)
 
 // shut down QHOST hooks if necessary
 	DeinitConProc ();
+
+	/* Shutdown SDL */
+	SDL_Quit();
 
 	exit (0);
 }
@@ -689,8 +700,12 @@ char		*argv[MAX_NUM_ARGVS];
 static char	*empty_string = "";
 HWND		hwnd_dialog;
 
+/* int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) */
 
-int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+/**
+ * Program main entry point. Checks command line params and makes sure there's enough memory for the game.
+ */
+int main(int argc, char* argv[])
 {
 	quakeparms_t	parms;
 	double			time, oldtime, newtime;
@@ -700,11 +715,16 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	RECT			rect;
 
     /* previous instances do not exist in Win32 */
+	/*
     if (hPrevInstance)
         return 0;
 
 	global_hInstance = hInstance;
 	global_nCmdShow = nCmdShow;
+	*/
+
+	HINSTANCE hInstance = (HINSTANCE)GetModuleHandle(NULL);
+	global_hInstance = hInstance;
 
 	lpBuffer.dwLength = sizeof(MEMORYSTATUS);
 	GlobalMemoryStatus (&lpBuffer);
@@ -718,9 +738,10 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	parms.basedir = cwd;
 	parms.cachedir = NULL;
 
-	parms.argc = 1;
-	argv[0] = empty_string;
+	parms.argc = argc;
+	/*argv[0] = empty_string;*/
 
+	/*
 	while (*lpCmdLine && (parms.argc < MAX_NUM_ARGVS))
 	{
 		while (*lpCmdLine && ((*lpCmdLine <= 32) || (*lpCmdLine > 126)))
@@ -741,7 +762,7 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 			}
 			
 		}
-	}
+	}*/
 
 	parms.argv = argv;
 
