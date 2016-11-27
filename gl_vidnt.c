@@ -21,6 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "quakedef.h"
 #include "winquake.h"
+#include "sdlquake.h"
 #include "resource.h"
 
 #include <commctrl.h>
@@ -89,6 +90,7 @@ RECT		WindowRect;
 DWORD		WindowStyle, ExWindowStyle;
 
 HWND	mainwindow, dibwindow;
+SDL_Surface* sdlwindow = NULL;
 
 int			vid_modenum = NO_MODE;
 int			vid_realmode;
@@ -205,6 +207,7 @@ void CenterWindow(HWND hWndCenter, int width, int height, BOOL lefttopjustify)
 			SWP_NOSIZE | SWP_NOZORDER | SWP_SHOWWINDOW | SWP_DRAWFRAME);
 }
 
+/*
 qboolean VID_SetWindowedMode (int modenum)
 {
 	HDC				hdc;
@@ -279,6 +282,59 @@ qboolean VID_SetWindowedMode (int modenum)
 	SendMessage (mainwindow, WM_SETICON, (WPARAM)TRUE, (LPARAM)hIcon);
 	SendMessage (mainwindow, WM_SETICON, (WPARAM)FALSE, (LPARAM)hIcon);
 
+	return true;
+}
+*/
+
+qboolean VID_SetWindowedMode (int modenum)
+{
+	HDC				hdc;
+	int				lastmodestate, width, height, bpp;
+	RECT			rect;
+	SDL_VideoInfo* info = NULL;
+
+	lastmodestate = modestate;
+
+	WindowRect.top = WindowRect.left = 0;
+
+	width = modelist[modenum].width;
+	height = modelist[modenum].height;
+	bpp = modelist[modenum].bpp;
+
+	DIBWidth = modelist[modenum].width;
+	DIBHeight = modelist[modenum].height;
+
+	modestate = MS_WINDOWED;
+
+	if (vid.conheight > (unsigned int)modelist[modenum].height)
+		vid.conheight = (unsigned int)modelist[modenum].height;
+	if (vid.conwidth > (unsigned int)modelist[modenum].width)
+		vid.conwidth = (unsigned int)modelist[modenum].width;
+	vid.width = vid.conwidth;
+	vid.height = vid.conheight;
+
+	vid.numpages = 2;
+
+	mainwindow = dibwindow;
+
+	SendMessage (mainwindow, WM_SETICON, (WPARAM)TRUE, (LPARAM)hIcon);
+	SendMessage (mainwindow, WM_SETICON, (WPARAM)FALSE, (LPARAM)hIcon);
+
+	info = SDL_GetVideoInfo();
+	bpp = info->vfmt->BitsPerPixel;
+
+	SDL_GL_SetAttribute( SDL_GL_RED_SIZE, 5 );
+    SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE, 5 );
+    SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE, 5 );
+    SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE, 16 );
+    SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
+	
+	sdlwindow = SDL_SetVideoMode(width, height, bpp, SDL_OPENGL);
+	if (sdlwindow == NULL) {
+		SDL_Quit();
+		Sys_Error("Unable to create window.");
+	}
+	SDL_WM_SetCaption("Chocolate GL Quake", "CGLQuake");
 	return true;
 }
 
@@ -674,8 +730,10 @@ void GL_BeginRendering (int *x, int *y, int *width, int *height)
 
 void GL_EndRendering (void)
 {
-	if (!scr_skipupdate || block_drawing)
-		SwapBuffers(maindc);
+	if (!scr_skipupdate || block_drawing) {
+		//SwapBuffers(maindc);
+		SDL_GL_SwapBuffers();
+	}
 
 // handle the mouse state when windowed if that's changed
 	if (modestate == MS_WINDOWED)
@@ -831,6 +889,8 @@ BOOL bSetupPixelFormat(HDC hDC)
 	0, 0, 0				// layer masks ignored
     };
     int pixelformat;
+
+	return TRUE; // FIXME: Gut this function
 
     if ( (pixelformat = ChoosePixelFormat(hDC, &pfd)) == 0 )
     {
@@ -1795,13 +1855,13 @@ void	VID_Init (unsigned char *palette)
 	VID_SetMode (vid_default, palette);
 
     maindc = GetDC(mainwindow);
-	bSetupPixelFormat(maindc);
+	//bSetupPixelFormat(maindc);
 
-    baseRC = wglCreateContext( maindc );
-	if (!baseRC)
-		Sys_Error ("Could not initialize GL (wglCreateContext failed).\n\nMake sure you in are 65535 color mode, and try running -window.");
-    if (!wglMakeCurrent( maindc, baseRC ))
-		Sys_Error ("wglMakeCurrent failed");
+    //baseRC = wglCreateContext( maindc );
+	//if (!baseRC)
+		//Sys_Error ("Could not initialize GL (wglCreateContext failed).\n\nMake sure you in are 65535 color mode, and try running -window.");
+    //if (!wglMakeCurrent( maindc, baseRC ))
+		//Sys_Error ("wglMakeCurrent failed");
 
 	GL_Init ();
 

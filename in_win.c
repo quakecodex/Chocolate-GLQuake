@@ -479,10 +479,6 @@ void IN_StartupMouse (void)
 IN_Init
 ===========
 */
-
-/**
- * Initializes the input system for Mouse & Joyticks.
- */
 void IN_Init (void)
 {
 	// mouse variables
