@@ -21,6 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "quakedef.h"
 #include "winquake.h"
+#include "sdlquake.h"
 #include "resource.h"
 
 #include <commctrl.h>
@@ -232,6 +233,7 @@ qboolean VID_SetWindowedMode (int modenum)
 	height = rect.bottom - rect.top;
 
 	// Create the DIB window
+	/*
 	dibwindow = CreateWindowEx (
 		 ExWindowStyle,
 		 "WinQuake",
@@ -244,16 +246,17 @@ qboolean VID_SetWindowedMode (int modenum)
 		 NULL,
 		 global_hInstance,
 		 NULL);
+		 */
 
-	if (!dibwindow)
-		Sys_Error ("Couldn't create DIB window");
+	//if (!dibwindow)
+		//Sys_Error ("Couldn't create DIB window");
 
 	// Center and show the DIB window
-	CenterWindow(dibwindow, WindowRect.right - WindowRect.left,
-				 WindowRect.bottom - WindowRect.top, false);
+	//CenterWindow(dibwindow, WindowRect.right - WindowRect.left,
+				 //WindowRect.bottom - WindowRect.top, false);
 
-	ShowWindow (dibwindow, SW_SHOWDEFAULT);
-	UpdateWindow (dibwindow);
+	//ShowWindow (dibwindow, SW_SHOWDEFAULT);
+	//UpdateWindow (dibwindow);
 
 	modestate = MS_WINDOWED;
 
@@ -674,8 +677,10 @@ void GL_BeginRendering (int *x, int *y, int *width, int *height)
 
 void GL_EndRendering (void)
 {
-	if (!scr_skipupdate || block_drawing)
-		SwapBuffers(maindc);
+	if (!scr_skipupdate || block_drawing) {
+		SDL_GL_SwapBuffers();
+		//SwapBuffers(maindc);
+	}
 
 // handle the mouse state when windowed if that's changed
 	if (modestate == MS_WINDOWED)
@@ -802,6 +807,9 @@ void	VID_Shutdown (void)
 
 		AppActivate(false, false);
 	}
+
+	/* Shutdown SDL */
+	SDL_Quit();
 }
 
 
@@ -1794,14 +1802,31 @@ void	VID_Init (unsigned char *palette)
 
 	VID_SetMode (vid_default, palette);
 
-    maindc = GetDC(mainwindow);
-	bSetupPixelFormat(maindc);
+    //maindc = GetDC(mainwindow);
+	//bSetupPixelFormat(maindc);
 
-    baseRC = wglCreateContext( maindc );
-	if (!baseRC)
-		Sys_Error ("Could not initialize GL (wglCreateContext failed).\n\nMake sure you in are 65535 color mode, and try running -window.");
-    if (!wglMakeCurrent( maindc, baseRC ))
-		Sys_Error ("wglMakeCurrent failed");
+	// Set up SDL
+	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+		SDL_Quit();
+		Sys_Error("Unable to initialize SDL.");
+	}
+	
+	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 32);
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+
+	if (SDL_SetVideoMode(640, 480, 32, SDL_OPENGL) < 0) {
+		SDL_Quit();
+		Sys_Error("Unable to set video mode.");
+	}
+
+    //baseRC = wglCreateContext( maindc );
+	//if (!baseRC)
+	//	Sys_Error ("Could not initialize GL (wglCreateContext failed).\n\nMake sure you in are 65535 color mode, and try running -window.");
+    //if (!wglMakeCurrent( maindc, baseRC ))
+	//	Sys_Error ("wglMakeCurrent failed");
 
 	GL_Init ();
 
