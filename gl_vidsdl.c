@@ -128,6 +128,7 @@ char *VID_GetModeDescription (int mode);
 void ClearAllStates (void);
 void VID_UpdateWindowStatus (void);
 void GL_Init (void);
+void enumerateVideoModes();
 
 PROC glArrayElementEXT;
 PROC glColorPointerEXT;
@@ -160,35 +161,15 @@ cvar_t		_windowed_mouse = {"_windowed_mouse","1", true};
 int			window_center_x, window_center_y, window_x, window_y, window_width, window_height;
 RECT		window_rect;
 
-// direct draw software compatability stuff
-
-void VID_HandlePause (qboolean pause)
-{
-}
-
-void VID_ForceLockState (int lk)
-{
-}
-
-void VID_LockBuffer (void)
-{
-}
-
-void VID_UnlockBuffer (void)
-{
-}
-
-int VID_ForceUnlockedAndReturnState (void)
-{
-	return 0;
-}
-
-void D_BeginDirectRect (int x, int y, byte *pbitmap, int width, int height)
-{
-}
-
-void D_EndDirectRect (int x, int y, int width, int height)
-{
+/** 
+ * Generates a list of all supported SDL video modes.
+ */
+void enumerateVideoModes() {
+	SDL_Rect** modes = NULL;
+	SDL_PixelFormat pf;
+	pf.BitsPerPixel = 32;
+	modes = SDL_ListModes(&pf, SDL_OPENGL | SDL_FULLSCREEN);
+	//printf(modes[0]->w);
 }
 
 
@@ -1805,6 +1786,10 @@ void	VID_Init (unsigned char *palette)
     //maindc = GetDC(mainwindow);
 	//bSetupPixelFormat(maindc);
 
+	//enumerateVideoModes();
+	//pf.BitsPerPixel = 32;
+	//modes = SDL_ListModes(&pf, SDL_OPENGL | SDL_FULLSCREEN);
+
 	// Set up SDL
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 		SDL_Quit();
@@ -1814,7 +1799,7 @@ void	VID_Init (unsigned char *palette)
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 32);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
 	if (SDL_SetVideoMode(640, 480, 32, SDL_OPENGL) < 0) {
@@ -1828,7 +1813,7 @@ void	VID_Init (unsigned char *palette)
     //if (!wglMakeCurrent( maindc, baseRC ))
 	//	Sys_Error ("wglMakeCurrent failed");
 
-	GL_Init ();
+	GL_Init();
 
 	sprintf (gldir, "%s/glquake", com_gamedir);
 	Sys_mkdir (gldir);

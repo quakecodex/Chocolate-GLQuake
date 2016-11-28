@@ -141,6 +141,8 @@
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;C:\Users\James\Projects\Quake\chocolate-glquake\SDL-1.2.15\include&quot;;.\dxsdk\sdk\inc"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;GLQUAKE;_CRT_SECURE_NO_WARNINGS"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				PrecompiledHeaderFile=".\debug_gl/WinQuake.pch"
 				AssemblerListingLocation=".\debug_gl/"
