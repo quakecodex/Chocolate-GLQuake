@@ -4,6 +4,6 @@ Chocolate GL Quake intends to create a stable, well commented code base to serve
 ## Planned Features
 - Fix all compiler warnings
 - Fix known bugs
-- Remove Assembly code and uneccesary source files
+- Remove Assembly code and unneccesary source files
 - Port to SDL
 
