@@ -847,7 +847,7 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	S_BlockSound ();
 
 	Sys_Printf ("Host_Init\n");
- 	Host_Init (&parms);
+	Host_Init (&parms);
 
 	oldtime = Sys_FloatTime ();
 

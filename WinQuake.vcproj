@@ -140,7 +140,7 @@
 				Optimization="0"
 				AdditionalIncludeDirectories=".\dxsdk\sdk\inc"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;GLQUAKE;_CRT_SECURE_NO_WARNINGS"
-				RuntimeLibrary="0"
+				RuntimeLibrary="1"
 				PrecompiledHeaderFile=".\debug_gl/WinQuake.pch"
 				AssemblerListingLocation=".\debug_gl/"
 				ObjectFile=".\debug_gl/"

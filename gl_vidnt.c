@@ -282,6 +282,7 @@ qboolean VID_SetWindowedMode (int modenum)
 	return true;
 }
 
+
 qboolean VID_SetFullDIBMode (int modenum)
 {
 	HDC				hdc;
@@ -673,9 +674,8 @@ void GL_BeginRendering (int *x, int *y, int *width, int *height)
 
 void GL_EndRendering (void)
 {
-	if (!scr_skipupdate || block_drawing) {
+	if (!scr_skipupdate || block_drawing)
 		SwapBuffers(maindc);
-	}
 
 // handle the mouse state when windowed if that's changed
 	if (modestate == MS_WINDOWED)
@@ -831,8 +831,6 @@ BOOL bSetupPixelFormat(HDC hDC)
 	0, 0, 0				// layer masks ignored
     };
     int pixelformat;
-
-	return TRUE; // FIXME: Gut this function
 
     if ( (pixelformat = ChoosePixelFormat(hDC, &pfd)) == 0 )
     {
@@ -1797,13 +1795,13 @@ void	VID_Init (unsigned char *palette)
 	VID_SetMode (vid_default, palette);
 
     maindc = GetDC(mainwindow);
-	//bSetupPixelFormat(maindc);
+	bSetupPixelFormat(maindc);
 
-    //baseRC = wglCreateContext( maindc );
-	//if (!baseRC)
-		//Sys_Error ("Could not initialize GL (wglCreateContext failed).\n\nMake sure you in are 65535 color mode, and try running -window.");
-    //if (!wglMakeCurrent( maindc, baseRC ))
-		//Sys_Error ("wglMakeCurrent failed");
+    baseRC = wglCreateContext( maindc );
+	if (!baseRC)
+		Sys_Error ("Could not initialize GL (wglCreateContext failed).\n\nMake sure you in are 65535 color mode, and try running -window.");
+    if (!wglMakeCurrent( maindc, baseRC ))
+		Sys_Error ("wglMakeCurrent failed");
 
 	GL_Init ();
 
