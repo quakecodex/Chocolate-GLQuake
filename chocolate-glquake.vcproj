@@ -19,7 +19,7 @@
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory=".\bin"
-			IntermediateDirectory=".\obj"
+			IntermediateDirectory=".\obj\debug"
 			ConfigurationType="1"
 			CharacterSet="2"
 			>
@@ -99,7 +99,7 @@
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory=".\bin"
-			IntermediateDirectory=".\obj"
+			IntermediateDirectory=".\obj\release"
 			ConfigurationType="1"
 			CharacterSet="2"
 			WholeProgramOptimization="1"
@@ -146,7 +146,7 @@
 				AdditionalDependencies="&quot;.\libs\dxsdk\SDK\LIB\dxguid.lib&quot; comctl32.lib winmm.lib wsock32.lib opengl32.lib glu32.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories=".\libs\dxsdk\SDK\LIB"
-				GenerateDebugInformation="true"
+				GenerateDebugInformation="false"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
