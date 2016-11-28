@@ -53,3 +53,7 @@ debug_gl/
 release_gl/
 debug_gl/*
 release_gl/*
+Bin
+bin/*
+obj
+obj/*
