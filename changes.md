@@ -17,8 +17,7 @@
 ## [Unreleased]
 ## Changes
 - Fixed level 1 warnings.
-- Fixed level 2 warnings.
 
-## [0.0.3] - 2016-11-24
+## [0.0.3]
 ## Changes
-- Fixed level 3 warnings.
+- Fixed level 2 warnings.
