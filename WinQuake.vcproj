@@ -141,7 +141,7 @@
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;C:\Users\James\Projects\Quake\chocolate-glquake\SDL-1.2.15\include&quot;;.\dxsdk\sdk\inc"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;GLQUAKE;_CRT_SECURE_NO_WARNINGS"
-				RuntimeLibrary="1"
+				RuntimeLibrary="3"
 				PrecompiledHeaderFile=".\debug_gl/WinQuake.pch"
 				AssemblerListingLocation=".\debug_gl/"
 				ObjectFile=".\debug_gl/"
@@ -1313,26 +1313,8 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="sys_win.c"
+				RelativePath=".\sys_sdl.c"
 				>
-				<FileConfiguration
-					Name="GL Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="GL Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AdditionalIncludeDirectories=""
-						PreprocessorDefinitions=""
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="view.c"
@@ -1605,6 +1587,10 @@
 			</File>
 			<File
 				RelativePath="screen.h"
+				>
+			</File>
+			<File
+				RelativePath=".\sdlquake.h"
 				>
 			</File>
 			<File
