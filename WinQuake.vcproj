@@ -148,7 +148,7 @@
 				AssemblerListingLocation=".\debug_gl/"
 				ObjectFile=".\debug_gl/"
 				ProgramDataBaseFileName=".\debug_gl/"
-				BrowseInformation="1"
+				BrowseInformation="0"
 				WarningLevel="3"
 				SuppressStartupBanner="true"
 				DebugInformationFormat="4"
@@ -175,7 +175,7 @@
 				ProgramDatabaseFile=".\debug_gl/glquake.pdb"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
-				DataExecutionPrevention="0"
+				DataExecutionPrevention="1"
 				TargetMachine="1"
 			/>
 			<Tool
