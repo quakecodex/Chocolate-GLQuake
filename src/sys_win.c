@@ -61,6 +61,10 @@ void Sys_PopFPCW (void);
 
 volatile int					sys_checksum;
 
+/* Defined in gl_vidnt.c */
+extern int VID_ForceUnlockedAndReturnState (void);
+extern void VID_ForceLockState (int lk);
+
 
 /*
 ================

@@ -599,6 +599,8 @@ GL_Init
 */
 void GL_Init (void)
 {
+	char ext[2048];
+
 	gl_vendor = glGetString (GL_VENDOR);
 	Con_Printf ("GL_VENDOR: %s\n", gl_vendor);
 	gl_renderer = glGetString (GL_RENDERER);
@@ -607,7 +609,11 @@ void GL_Init (void)
 	gl_version = glGetString (GL_VERSION);
 	Con_Printf ("GL_VERSION: %s\n", gl_version);
 	gl_extensions = glGetString (GL_EXTENSIONS);
-	Con_Printf ("GL_EXTENSIONS: %s\n", gl_extensions);
+	// Truncate extenstion string, to prevent buffer overrun
+	// Sometimes GL extenstion string doesn't have terminating null.
+	strncpy(ext, gl_extensions, 2048);
+	ext[2047] = '\0';
+	Con_Printf ("GL_EXTENSIONS: %s\n", ext);
 
 //	Con_Printf ("%s %s\n", gl_renderer, gl_version);
 
