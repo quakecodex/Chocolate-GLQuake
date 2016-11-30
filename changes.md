@@ -21,6 +21,7 @@
 ## [0.0.3]
 ## Changes
 - Fixed level 2 warnings.
+- Fixed level 3 warnings.
 
-## [Unreleased] - 2016-11-28
+## [0.1.0] - 2016-11-29
 - Organized source files
