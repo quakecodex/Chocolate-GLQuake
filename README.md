@@ -14,6 +14,6 @@ www.quakecodex.com
 - Port to SDL (In progress)
 
 ## Building
-CGL Quake requires Visual Studio 2008 to build. (Not the Express version.) Simply clown or download the code and open the provided VS solution. You can download the latest release here:
+CGL Quake requires Visual Studio 2008 to build. (Not the Express version.) Simply clone or download the code and open the provided VS solution. You can download the latest release here:
 
 https://github.com/quakecodex/chocolate-glquake/releases
