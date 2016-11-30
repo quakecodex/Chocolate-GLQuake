@@ -8,7 +8,7 @@ www.quakecodex.com
 
 ## Planned Features
 - Fix all compiler warnings (In progress)
-- Remove dead code, blank functions, etc.
+- Remove dead code, blank functions, etc
 - Fix known bugs
 - Remove Assembly code and unneccesary source files (Done)
 - Port to SDL (In progress)
