@@ -582,6 +582,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\sdlquake.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\server.h"
 				>
 			</File>

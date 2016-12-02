@@ -23,6 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "quakedef.h"
 #include "winquake.h"
+#include "sdlquake.h"
 #include "errno.h"
 #include "resource.h"
 #include "conproc.h"
@@ -694,7 +695,13 @@ static char	*empty_string = "";
 HWND		hwnd_dialog;
 
 
-int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+/**
+ * Quake's main entry point.
+ * @param	argc	Size of argv
+ * @param	argv	Array of strings containing any parameters passed in from the command line.
+ * @return	TRUE (1?) = no error, or 0
+ */
+int main(int argc, char* argv[])
 {
 	quakeparms_t	parms;
 	double			time, oldtime, newtime;
@@ -702,11 +709,11 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	static	char	cwd[1024];
 	int				t;
 	RECT			rect;
+	/* TODO: Remove win32 leftovers */
+	int				nCmdShow = -1;
+	HINSTANCE		hInstance;
 
-    /* previous instances do not exist in Win32 */
-    if (hPrevInstance)
-        return 0;
-
+	hInstance = (HINSTANCE)GetModuleHandle(NULL);
 	global_hInstance = hInstance;
 	global_nCmdShow = nCmdShow;
 
@@ -722,31 +729,8 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	parms.basedir = cwd;
 	parms.cachedir = NULL;
 
-	parms.argc = 1;
-	argv[0] = empty_string;
-
-	while (*lpCmdLine && (parms.argc < MAX_NUM_ARGVS))
-	{
-		while (*lpCmdLine && ((*lpCmdLine <= 32) || (*lpCmdLine > 126)))
-			lpCmdLine++;
-
-		if (*lpCmdLine)
-		{
-			argv[parms.argc] = lpCmdLine;
-			parms.argc++;
-
-			while (*lpCmdLine && ((*lpCmdLine > 32) && (*lpCmdLine <= 126)))
-				lpCmdLine++;
-
-			if (*lpCmdLine)
-			{
-				*lpCmdLine = 0;
-				lpCmdLine++;
-			}
-			
-		}
-	}
-
+	/* Parse command line arguments */
+	parms.argc = argc;
 	parms.argv = argv;
 
 	COM_InitArgv (parms.argc, parms.argv);
