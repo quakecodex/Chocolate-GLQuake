@@ -57,7 +57,7 @@
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="_DEBUG"
 				Culture="1033"
-				AdditionalIncludeDirectories=".\src"
+				AdditionalIncludeDirectories=".\resources"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -136,7 +136,7 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
-				AdditionalIncludeDirectories=".\src"
+				AdditionalIncludeDirectories=".\resources"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -640,7 +640,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\resource.h"
+				RelativePath=".\resources\resource.h"
 				>
 			</File>
 			<File
