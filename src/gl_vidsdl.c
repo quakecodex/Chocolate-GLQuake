@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "quakedef.h"
 #include "winquake.h"
-#include "resource.h"
+#include "../resources/resource.h"
 
 #include <commctrl.h>
 
@@ -1565,21 +1565,26 @@ static void Check_Gamma (unsigned char *pal)
 	memcpy (pal, palette, sizeof(palette));
 }
 
-/*
-===================
-VID_Init
-===================
-*/
+/**
+ * Initializes the video system. Creates a window and initializes OpenGL. 
+ * @ param	palette	Pointer to an array of 256 RGB triplets (unsigned byte) specifying the current palette
+ */
 void	VID_Init (unsigned char *palette)
 {
-	int		i, existingmode;
-	int		basenummodes, width, height, bpp, findbpp, done;
-	char	gldir[MAX_OSPATH];
-	HDC		hdc;
-	DEVMODE	devmode;
+	int		i; /* Counter */
+	int		existingmode; /* Current video mode */
+	int		basenummodes;
+	int width, height; /* Size of chosen mode in pixels */
+	int bpp; /* Bit per pixel of chosen mode */
+	int findbpp, done; /* Flags? */
+	char	gldir[MAX_OSPATH]; /* Directory in ID1 to store converted textures for OpenGL */
+	HDC		hdc; /* Handle to the window's device context */
+	DEVMODE	devmode; /* Holds Monitor's capabilities?  */
 
+	/* Clear the devmode struct */
 	memset(&devmode, 0, sizeof(devmode));
 
+	/* Set up video mode cvars and commands */
 	Cvar_RegisterVariable (&vid_mode);
 	Cvar_RegisterVariable (&vid_wait);
 	Cvar_RegisterVariable (&vid_nopageflip);
@@ -1597,15 +1602,20 @@ void	VID_Init (unsigned char *palette)
 	Cmd_AddCommand ("vid_describemode", VID_DescribeMode_f);
 	Cmd_AddCommand ("vid_describemodes", VID_DescribeModes_f);
 
+	/* Load the quake icon */
 	hIcon = LoadIcon (global_hInstance, MAKEINTRESOURCE (IDI_ICON2));
 
+	/* Windows crap */
 	InitCommonControls();
 
+	/* Get windowed video modes */
 	VID_InitDIB (global_hInstance);
 	basenummodes = nummodes = 1;
 
+	/* Get list of fullscreen video modes */
 	VID_InitFullDIB (global_hInstance);
 
+	/* Check if user specified video mode at the command line */
 	if (COM_CheckParm("-window"))
 	{
 		hdc = GetDC (NULL);
@@ -1668,7 +1678,7 @@ void	VID_Init (unsigned char *palette)
 				if (COM_CheckParm("-height"))
 					height = Q_atoi(com_argv[COM_CheckParm("-height")+1]);
 
-			// if they want to force it, add the specified mode to the list
+				/* Add a user's forced mode to the list of available modes */
 				if (COM_CheckParm("-force") && (nummodes < MAX_MODE_LIST))
 				{
 					modelist[nummodes].type = MS_FULLDIB;
@@ -1768,8 +1778,10 @@ void	VID_Init (unsigned char *palette)
 		}
 	}
 
+	/* Done finding modes */
 	vid_initialized = true;
 
+	/* Check if user specified size of console */
 	if ((i = COM_CheckParm("-conwidth")) != 0)
 		vid.conwidth = Q_atoi(com_argv[i+1]);
 	else
@@ -1788,18 +1800,23 @@ void	VID_Init (unsigned char *palette)
 	if (vid.conheight < 200)
 		vid.conheight = 200;
 
+	/* Set up basic video stuff */
 	vid.maxwarpwidth = WARP_WIDTH;
 	vid.maxwarpheight = WARP_HEIGHT;
 	vid.colormap = host_colormap;
 	vid.fullbright = 256 - LittleLong (*((int *)vid.colormap + 2048));
 
+	/* Close "Loading Quake" dialog */
 	DestroyWindow (hwnd_dialog);
 
+	/* Set up the palette */
 	Check_Gamma(palette);
 	VID_SetPalette (palette);
 
+	/* Create window at specified mode */
 	VID_SetMode (vid_default, palette);
 
+	/* Set up OpenGL Context */
     maindc = GetDC(mainwindow);
 	bSetupPixelFormat(maindc);
 
@@ -1809,8 +1826,10 @@ void	VID_Init (unsigned char *palette)
     if (!wglMakeCurrent( maindc, baseRC ))
 		Sys_Error ("wglMakeCurrent failed");
 
+	/* Initialize OpenGL */
 	GL_Init ();
 
+	/* Set up GL directory */
 	sprintf (gldir, "%s/glquake", com_gamedir);
 	Sys_mkdir (gldir);
 
@@ -1819,6 +1838,7 @@ void	VID_Init (unsigned char *palette)
 	// Check for 3DFX Extensions and initialize them.
 	VID_Init8bitPalette();
 
+	/* Final checks and cleanup? */
 	vid_menudrawfn = VID_MenuDraw;
 	vid_menukeyfn = VID_MenuKey;
 
