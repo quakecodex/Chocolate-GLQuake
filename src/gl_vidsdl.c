@@ -1608,7 +1608,7 @@ void	VID_Init (unsigned char *palette)
 	/* Windows crap */
 	InitCommonControls();
 
-	/* Get windowed video modes */
+	/* Get list of windowed video modes */
 	VID_InitDIB (global_hInstance);
 	basenummodes = nummodes = 1;
 
@@ -1678,7 +1678,7 @@ void	VID_Init (unsigned char *palette)
 				if (COM_CheckParm("-height"))
 					height = Q_atoi(com_argv[COM_CheckParm("-height")+1]);
 
-				/* Add a user's forced mode to the list of available modes */
+				/* Add user's forced mode to the list of available modes */
 				if (COM_CheckParm("-force") && (nummodes < MAX_MODE_LIST))
 				{
 					modelist[nummodes].type = MS_FULLDIB;
@@ -1801,7 +1801,7 @@ void	VID_Init (unsigned char *palette)
 		vid.conheight = 200;
 
 	/* Set up basic video stuff */
-	vid.maxwarpwidth = WARP_WIDTH;
+	vid.maxwarpwidth = WARP_WIDTH; /* Where are these used? */
 	vid.maxwarpheight = WARP_HEIGHT;
 	vid.colormap = host_colormap;
 	vid.fullbright = 256 - LittleLong (*((int *)vid.colormap + 2048));
@@ -1842,7 +1842,7 @@ void	VID_Init (unsigned char *palette)
 	vid_menudrawfn = VID_MenuDraw;
 	vid_menukeyfn = VID_MenuKey;
 
-	strcpy (badmode.modedesc, "Bad mode");
+	strcpy (badmode.modedesc, "Bad mode"); /* badmode is used to indicate user chose a mode that doesn't exis */
 	vid_canalttab = true;
 
 	if (COM_CheckParm("-fullsbar"))
