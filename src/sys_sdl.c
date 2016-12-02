@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "winquake.h"
 #include "sdlquake.h"
 #include "errno.h"
-#include "resource.h"
+#include "../resources/resource.h"
 #include "conproc.h"
 
 #define MINIMUM_WIN_MEMORY		0x0880000
@@ -742,6 +742,7 @@ int main(int argc, char* argv[])
 
 	if (!isDedicated)
 	{
+		/* Create "loading quake" dialog */
 		hwnd_dialog = CreateDialog(hInstance, MAKEINTRESOURCE(IDD_DIALOG1), NULL, NULL);
 
 		if (hwnd_dialog)
