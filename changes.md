@@ -15,13 +15,18 @@
 - Removed WinQuake Build.
 
 ## [Unreleased]
-## Changes
+### Changes
 - Fixed level 1 warnings.
 
 ## [0.0.3]
-## Changes
+### Changes
 - Fixed level 2 warnings.
 - Fixed level 3 warnings.
 
 ## [0.1.0] - 2016-11-29
+### Changes
 - Organized source files
+
+## [Unreleased] - 2016-12-1
+### Changes
+- Added basic SDL support
