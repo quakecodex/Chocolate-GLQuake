@@ -1370,11 +1370,14 @@ void VID_InitFullDIB (HINSTANCE hInstance)
 	int		i, modenum, originalnummodes, existingmode, numlowresmodes;
 	int		j, bpp, done;
 	BOOL	stat;
+	SDL_Rect**		modes; /* Hold list of SDL supported modes */
+	SDL_PixelFormat pf; /* BPP of modes to check for */
 
 // enumerate >8 bpp modes
 	originalnummodes = nummodes;
 	modenum = 0;
-
+	
+	/*
 	do
 	{
 		stat = EnumDisplaySettings (NULL, modenum, &devmode);
@@ -1500,6 +1503,59 @@ void VID_InitFullDIB (HINSTANCE hInstance)
 				break;
 		}
 	} while (!done);
+	*/
+
+	/* Get 16-bit Modes */
+	pf.BitsPerPixel = 16;
+	modes = SDL_ListModes(&pf, SDL_OPENGL | SDL_FULLSCREEN);
+	if (modes != (SDL_Rect **)0){
+		for (i = 0; modes[i]; i++) {
+			if (i >= MAX_MODE_LIST) 
+				break;
+			if ((modes[i]->w > MAXWIDTH) || (modes[i]->h > MAXHEIGHT)) {
+				continue;
+			}
+			modelist[nummodes].type = MS_FULLDIB;
+			modelist[nummodes].width = modes[i]->w;
+			modelist[nummodes].height = modes[i]->h;
+			modelist[nummodes].modenum = 0;
+			modelist[nummodes].halfscreen = 0;
+			modelist[nummodes].dib = 1;
+			modelist[nummodes].fullscreen = 1;
+			modelist[nummodes].bpp = 16;
+			sprintf (modelist[nummodes].modedesc, "%dx%dx%d",
+					 modes[i]->w, modes[i]->h,
+					 16);
+			nummodes++;
+		}
+		
+	}
+
+	/* Get 32-bit Modes */
+	pf.BitsPerPixel = 32;
+	modes = SDL_ListModes(&pf, SDL_OPENGL | SDL_FULLSCREEN);
+	if (modes != (SDL_Rect **)0){
+		for (i = 0; modes[i]; i++) {
+			if (i >= MAX_MODE_LIST) 
+				break;
+			if ((modes[i]->w > MAXWIDTH) || (modes[i]->h > MAXHEIGHT)) {
+				continue;
+			}
+			modelist[nummodes].type = MS_FULLDIB;
+			modelist[nummodes].width = modes[i]->w;
+			modelist[nummodes].height = modes[i]->h;
+			modelist[nummodes].modenum = 0;
+			modelist[nummodes].halfscreen = 0;
+			modelist[nummodes].dib = 1;
+			modelist[nummodes].fullscreen = 1;
+			modelist[nummodes].bpp = 32;
+			sprintf (modelist[nummodes].modedesc, "%dx%dx%d",
+					 modes[i]->w, modes[i]->h,
+					 32);
+			nummodes++;
+		}
+		
+	}
 
 	if (nummodes == originalnummodes)
 		Con_SafePrintf ("No fullscreen DIB modes found\n");
