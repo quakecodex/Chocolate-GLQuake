@@ -21,6 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "quakedef.h"
 #include "winquake.h"
+#include "sdlquake.h"
 #include "../resources/resource.h"
 
 #include <commctrl.h>
@@ -808,6 +809,9 @@ void	VID_Shutdown (void)
 
 		AppActivate(false, false);
 	}
+
+	/* Shutdown SDL */
+	SDL_Quit();
 }
 
 
@@ -1601,6 +1605,12 @@ void	VID_Init (unsigned char *palette)
 	Cmd_AddCommand ("vid_describecurrentmode", VID_DescribeCurrentMode_f);
 	Cmd_AddCommand ("vid_describemode", VID_DescribeMode_f);
 	Cmd_AddCommand ("vid_describemodes", VID_DescribeModes_f);
+
+	/* Initialize SDL */
+	if ((SDL_Init(SDL_INIT_VIDEO) == -1)) { 
+        Sys_Error("Unable to initialize SDL.\n");
+		return;
+    }
 
 	/* Load the quake icon */
 	hIcon = LoadIcon (global_hInstance, MAKEINTRESOURCE (IDI_ICON2));
