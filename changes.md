@@ -30,3 +30,7 @@
 ## [Unreleased] - 2016-12-1
 ### Changes
 - Added basic SDL support
+
+## [Unreleased] - 2016-12-3
+### Changes
+- Got OpenGL rendering into SDL window.
