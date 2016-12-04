@@ -410,12 +410,12 @@ int VID_SetMode (int modenum, unsigned char *palette)
 		{
 			IN_DeactivateMouse ();
 			IN_ShowMouse ();
-			stat = VID_SetWindowedMode(modenum);
+			//stat = VID_SetWindowedMode(modenum);
 		}
 	}
 	else if (modelist[modenum].type == MS_FULLDIB)
 	{
-		stat = VID_SetFullDIBMode(modenum);
+		//stat = VID_SetFullDIBMode(modenum);
 		IN_ActivateMouse ();
 		IN_HideMouse ();
 	}
@@ -430,7 +430,7 @@ int VID_SetMode (int modenum, unsigned char *palette)
 
 	CDAudio_Resume ();
 	scr_disabled_for_loading = temp;
-
+	stat = 1;
 	if (!stat)
 	{
 		Sys_Error ("Couldn't set video mode");
@@ -442,24 +442,26 @@ int VID_SetMode (int modenum, unsigned char *palette)
 // to let messages finish bouncing around the system, then we put
 // ourselves at the top of the z order, then grab the foreground again,
 // Who knows if it helps, but it probably doesn't hurt
-	SetForegroundWindow (mainwindow);
+	//SetForegroundWindow (mainwindow);
 	VID_SetPalette (palette);
 	vid_modenum = modenum;
 	Cvar_SetValue ("vid_mode", (float)vid_modenum);
 
+	/*
 	while (PeekMessage (&msg, NULL, 0, 0, PM_REMOVE))
 	{
       	TranslateMessage (&msg);
       	DispatchMessage (&msg);
-	}
+	}*/
 
 	Sleep (100);
-
+	/*
 	SetWindowPos (mainwindow, HWND_TOP, 0, 0, 0, 0,
 				  SWP_DRAWFRAME | SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW |
 				  SWP_NOCOPYBITS);
 
 	SetForegroundWindow (mainwindow);
+	*/
 
 // fix the leftover Alt from any Alt-Tab or the like that switched us away
 	ClearAllStates ();
