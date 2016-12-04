@@ -402,7 +402,7 @@ int VID_SetMode (int modenum, unsigned char *palette)
 	{
 		if (_windowed_mouse.value && key_dest == key_game)
 		{
-			stat = VID_SetWindowedMode(modenum);
+			//stat = VID_SetWindowedMode(modenum);
 			IN_ActivateMouse ();
 			IN_HideMouse ();
 		}
@@ -417,7 +417,8 @@ int VID_SetMode (int modenum, unsigned char *palette)
 	{
 		//stat = VID_SetFullDIBMode(modenum);
 		IN_ActivateMouse ();
-		IN_HideMouse ();
+		//IN_HideMouse ();
+		IN_ShowMouse ();
 	}
 	else
 	{
@@ -1925,7 +1926,7 @@ void	VID_Init (unsigned char *palette)
 	if (modelist[vid_default].fullscreen) {
 		sdlFlags |= SDL_FULLSCREEN;
 	}
-	pBackbuffer = SDL_SetVideoMode(modelist[vid_default].width, modelist[vid_default].height, 32, sdlFlags);
+	pBackbuffer = SDL_SetVideoMode(1920, 1080, 32, sdlFlags);
     if (pBackbuffer == NULL) {
         Sys_Error("Unable to set video mode.");
     }

@@ -651,6 +651,7 @@ void Sys_Sleep (void)
 /**
  * Captures mouse and keyboard events 
  */
+/* Move to in_win.c? */
 void Sys_SendKeyEvents(void)
 {
     SDL_Event event;
@@ -758,12 +759,15 @@ void Sys_SendKeyEvents(void)
                      (event.motion.y != (vid.height/2)) ) {
                     mouse_x = event.motion.xrel*10;
                     mouse_y = event.motion.yrel*10;
+					/*
+					// Force mouse to center
                     if ( (event.motion.x < ((vid.width/2)-(vid.width/4))) ||
                          (event.motion.x > ((vid.width/2)+(vid.width/4))) ||
                          (event.motion.y < ((vid.height/2)-(vid.height/4))) ||
                          (event.motion.y > ((vid.height/2)+(vid.height/4))) ) {
                         SDL_WarpMouse(vid.width/2, vid.height/2);
                     }
+					*/
                 }
                 break;
 
