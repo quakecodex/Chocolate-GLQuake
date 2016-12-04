@@ -1701,12 +1701,6 @@ void	VID_Init (unsigned char *palette)
 		return;
     }
 
-	/* Load the quake icon */
-	hIcon = LoadIcon (global_hInstance, MAKEINTRESOURCE (IDI_ICON2));
-
-	/* Windows crap */
-	InitCommonControls();
-
 	/* Get list of windowed video modes */
 	VID_InitDIB (global_hInstance);
 	basenummodes = nummodes = 1;
@@ -1717,17 +1711,7 @@ void	VID_Init (unsigned char *palette)
 	/* Check if user specified video mode at the command line */
 	if (COM_CheckParm("-window"))
 	{
-		hdc = GetDC (NULL);
-
-		if (GetDeviceCaps(hdc, RASTERCAPS) & RC_PALETTE)
-		{
-			Sys_Error ("Can't run in non-RGB mode");
-		}
-
-		ReleaseDC (NULL, hdc);
-
 		windowed = true;
-
 		vid_default = MODE_WINDOWED;
 	}
 	else
