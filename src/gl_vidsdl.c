@@ -681,8 +681,10 @@ void GL_BeginRendering (int *x, int *y, int *width, int *height)
 
 void GL_EndRendering (void)
 {
-	if (!scr_skipupdate || block_drawing)
-		SwapBuffers(maindc);
+	if (!scr_skipupdate || block_drawing) {
+		/* SwapBuffers(maindc); */
+		SDL_GL_SwapBuffers();
+	}
 
 // handle the mouse state when windowed if that's changed
 	if (modestate == MS_WINDOWED)
@@ -1505,6 +1507,32 @@ void VID_InitFullDIB (HINSTANCE hInstance)
 	} while (!done);
 	*/
 
+	/* Get 8-bit Modes */
+	pf.BitsPerPixel = 8;
+	modes = SDL_ListModes(&pf, SDL_OPENGL | SDL_FULLSCREEN);
+	if (modes != (SDL_Rect **)0){
+		for (i = 0; modes[i]; i++) {
+			if (i >= MAX_MODE_LIST) 
+				break;
+			if ((modes[i]->w > MAXWIDTH) || (modes[i]->h > MAXHEIGHT)) {
+				continue;
+			}
+			modelist[nummodes].type = MS_FULLDIB;
+			modelist[nummodes].width = modes[i]->w;
+			modelist[nummodes].height = modes[i]->h;
+			modelist[nummodes].modenum = 0;
+			modelist[nummodes].halfscreen = 0;
+			modelist[nummodes].dib = 1;
+			modelist[nummodes].fullscreen = 1;
+			modelist[nummodes].bpp = 8;
+			sprintf (modelist[nummodes].modedesc, "%dx%dx%d",
+					 modes[i]->w, modes[i]->h,
+					 8);
+			nummodes++;
+		}
+		
+	}
+
 	/* Get 16-bit Modes */
 	pf.BitsPerPixel = 16;
 	modes = SDL_ListModes(&pf, SDL_OPENGL | SDL_FULLSCREEN);
@@ -1640,6 +1668,9 @@ void	VID_Init (unsigned char *palette)
 	char	gldir[MAX_OSPATH]; /* Directory in ID1 to store converted textures for OpenGL */
 	HDC		hdc; /* Handle to the window's device context */
 	DEVMODE	devmode; /* Holds Monitor's capabilities?  */
+
+	SDL_Surface* pBackbuffer = NULL; /* SDL backbuffer */
+	Uint32 sdlFlags = 0; /* Video mode settings */
 
 	/* Clear the devmode struct */
 	memset(&devmode, 0, sizeof(devmode));
@@ -1876,21 +1907,38 @@ void	VID_Init (unsigned char *palette)
 	DestroyWindow (hwnd_dialog);
 
 	/* Set up the palette */
-	Check_Gamma(palette);
-	VID_SetPalette (palette);
+	//Check_Gamma(palette);
+	//VID_SetPalette (palette);
 
 	/* Create window at specified mode */
 	VID_SetMode (vid_default, palette);
 
-	/* Set up OpenGL Context */
-    maindc = GetDC(mainwindow);
-	bSetupPixelFormat(maindc);
+	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
+	sdlFlags = SDL_OPENGL;
+	if (modelist[vid_default].fullscreen) {
+		sdlFlags |= SDL_FULLSCREEN;
+	}
+	pBackbuffer = SDL_SetVideoMode(modelist[vid_default].width, modelist[vid_default].height, 32, sdlFlags);
+    if (pBackbuffer == NULL) {
+        Sys_Error("Unable to set video mode.");
+    }
+
+	/* Set up OpenGL Context */
+    //maindc = GetDC(mainwindow);
+	/* bSetupPixelFormat(maindc); */
+	
+	/*
     baseRC = wglCreateContext( maindc );
 	if (!baseRC)
 		Sys_Error ("Could not initialize GL (wglCreateContext failed).\n\nMake sure you in are 65535 color mode, and try running -window.");
     if (!wglMakeCurrent( maindc, baseRC ))
 		Sys_Error ("wglMakeCurrent failed");
+		*/
 
 	/* Initialize OpenGL */
 	GL_Init ();
