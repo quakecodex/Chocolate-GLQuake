@@ -1905,9 +1905,6 @@ void	VID_Init (unsigned char *palette)
 	vid.colormap = host_colormap;
 	vid.fullbright = 256 - LittleLong (*((int *)vid.colormap + 2048));
 
-	/* Close "Loading Quake" dialog */
-	DestroyWindow (hwnd_dialog);
-
 	/* Set up the palette */
 	//Check_Gamma(palette);
 	//VID_SetPalette (palette);
