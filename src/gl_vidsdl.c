@@ -657,80 +657,15 @@ void VID_SetDefaultMode (void)
 
 void	VID_Shutdown (void)
 {
-   	HGLRC hRC;
-   	HDC	  hDC;
-
 	if (vid_initialized)
 	{
-		vid_canalttab = false;
-		hRC = wglGetCurrentContext();
-    	hDC = wglGetCurrentDC();
-
-    	wglMakeCurrent(NULL, NULL);
-
-    	if (hRC)
-    	    wglDeleteContext(hRC);
-
-		if (hDC && dibwindow)
-			ReleaseDC(dibwindow, hDC);
-
-		if (modestate == MS_FULLDIB)
-			ChangeDisplaySettings (NULL, 0);
-
-		if (maindc && dibwindow)
-			ReleaseDC (dibwindow, maindc);
-
 		AppActivate(false, false);
 	}
+
 
 	/* Shutdown SDL */
 	SDL_Quit();
 }
-
-
-//==========================================================================
-
-
-BOOL bSetupPixelFormat(HDC hDC)
-{
-    static PIXELFORMATDESCRIPTOR pfd = {
-	sizeof(PIXELFORMATDESCRIPTOR),	// size of this pfd
-	1,				// version number
-	PFD_DRAW_TO_WINDOW 		// support window
-	|  PFD_SUPPORT_OPENGL 	// support OpenGL
-	|  PFD_DOUBLEBUFFER ,	// double buffered
-	PFD_TYPE_RGBA,			// RGBA type
-	24,				// 24-bit color depth
-	0, 0, 0, 0, 0, 0,		// color bits ignored
-	0,				// no alpha buffer
-	0,				// shift bit ignored
-	0,				// no accumulation buffer
-	0, 0, 0, 0, 			// accum bits ignored
-	32,				// 32-bit z-buffer	
-	0,				// no stencil buffer
-	0,				// no auxiliary buffer
-	PFD_MAIN_PLANE,			// main layer
-	0,				// reserved
-	0, 0, 0				// layer masks ignored
-    };
-    int pixelformat;
-
-    if ( (pixelformat = ChoosePixelFormat(hDC, &pfd)) == 0 )
-    {
-        MessageBox(NULL, "ChoosePixelFormat failed", "Error", MB_OK);
-        return FALSE;
-    }
-
-    if (SetPixelFormat(hDC, pixelformat, &pfd) == FALSE)
-    {
-        MessageBox(NULL, "SetPixelFormat failed", "Error", MB_OK);
-        return FALSE;
-    }
-
-    return TRUE;
-}
-
-
 
 byte        scantokey[128] = 
 					{ 
