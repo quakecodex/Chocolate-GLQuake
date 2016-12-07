@@ -80,7 +80,6 @@ extern qboolean	mouseinitialized;
 extern HANDLE	hinput, houtput;
 
 void IN_UpdateClipCursor (void);
-void CenterWindow(HWND hWndCenter, int width, int height, BOOL lefttopjustify);
 
 void S_BlockSound (void);
 void S_UnblockSound (void);
