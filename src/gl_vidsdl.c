@@ -199,7 +199,6 @@ qboolean VID_SetWindowedMode (int modenum)
 	DIBHeight = modelist[modenum].height;
 	width = DIBWidth;
 	height = DIBHeight;
-;
 
 	modestate = MS_WINDOWED;
 
@@ -253,11 +252,6 @@ qboolean VID_SetFullDIBMode (int modenum)
 // needed because we're not getting WM_MOVE messages fullscreen on NT
 	window_x = 0;
 	window_y = 0;
-
-	mainwindow = dibwindow;
-
-	SendMessage (mainwindow, WM_SETICON, (WPARAM)TRUE, (LPARAM)hIcon);
-	SendMessage (mainwindow, WM_SETICON, (WPARAM)FALSE, (LPARAM)hIcon);
 
 	return true;
 }
@@ -895,133 +889,6 @@ void AppActivate(BOOL fActive, BOOL minimize)
 }
 
 
-/* main window procedure */
-LONG WINAPI MainWndProc (
-    HWND    hWnd,
-    UINT    uMsg,
-    WPARAM  wParam,
-    LPARAM  lParam)
-{
-    LONG    lRet = 1;
-	int		fActive, fMinimized, temp;
-	extern unsigned int uiWheelMessage;
-
-	if ( uMsg == uiWheelMessage )
-		uMsg = WM_MOUSEWHEEL;
-
-    switch (uMsg)
-    {
-		case WM_KILLFOCUS:
-			if (modestate == MS_FULLDIB)
-				ShowWindow(mainwindow, SW_SHOWMINNOACTIVE);
-			break;
-
-		case WM_CREATE:
-			break;
-
-		case WM_MOVE:
-			window_x = (int) LOWORD(lParam);
-			window_y = (int) HIWORD(lParam);
-			VID_UpdateWindowStatus ();
-			break;
-
-		case WM_KEYDOWN:
-		case WM_SYSKEYDOWN:
-			Key_Event (MapKey(lParam), true);
-			break;
-			
-		case WM_KEYUP:
-		case WM_SYSKEYUP:
-			Key_Event (MapKey(lParam), false);
-			break;
-
-		case WM_SYSCHAR:
-		// keep Alt-Space from happening
-			break;
-
-	// this is complicated because Win32 seems to pack multiple mouse events into
-	// one update sometimes, so we always check all states and look for events
-		case WM_LBUTTONDOWN:
-		case WM_LBUTTONUP:
-		case WM_RBUTTONDOWN:
-		case WM_RBUTTONUP:
-		case WM_MBUTTONDOWN:
-		case WM_MBUTTONUP:
-		case WM_MOUSEMOVE:
-			temp = 0;
-
-			if (wParam & MK_LBUTTON)
-				temp |= 1;
-
-			if (wParam & MK_RBUTTON)
-				temp |= 2;
-
-			if (wParam & MK_MBUTTON)
-				temp |= 4;
-
-			IN_MouseEvent (temp);
-
-			break;
-
-		// JACK: This is the mouse wheel with the Intellimouse
-		// Its delta is either positive or neg, and we generate the proper
-		// Event.
-		case WM_MOUSEWHEEL: 
-			if ((short) HIWORD(wParam) > 0) {
-				Key_Event(K_MWHEELUP, true);
-				Key_Event(K_MWHEELUP, false);
-			} else {
-				Key_Event(K_MWHEELDOWN, true);
-				Key_Event(K_MWHEELDOWN, false);
-			}
-			break;
-
-    	case WM_SIZE:
-            break;
-
-   	    case WM_CLOSE:
-			if (MessageBox (mainwindow, "Are you sure you want to quit?", "Confirm Exit",
-						MB_YESNO | MB_SETFOREGROUND | MB_ICONQUESTION) == IDYES)
-			{
-				Sys_Quit ();
-			}
-
-	        break;
-
-		case WM_ACTIVATE:
-			fActive = LOWORD(wParam);
-			fMinimized = (BOOL) HIWORD(wParam);
-			AppActivate(!(fActive == WA_INACTIVE), fMinimized);
-
-		// fix the leftover Alt from any Alt-Tab or the like that switched us away
-			ClearAllStates ();
-
-			break;
-
-   	    case WM_DESTROY:
-        {
-			if (dibwindow)
-				DestroyWindow (dibwindow);
-
-            PostQuitMessage (0);
-        }
-        break;
-
-		case MM_MCINOTIFY:
-            lRet = CDAudio_MessageHandler (hWnd, uMsg, wParam, lParam);
-			break;
-
-    	default:
-            /* pass all unhandled messages to DefWindowProc */
-            lRet = DefWindowProc (hWnd, uMsg, wParam, lParam);
-        break;
-    }
-
-    /* return 1 if handled message, 0 if not */
-    return lRet;
-}
-
-
 /*
 =================
 VID_NumModes
@@ -1606,6 +1473,8 @@ void	VID_Init (unsigned char *palette)
         Sys_Error("Unable to set video mode.");
     }
 
+	/* Get the window handle for the other systems, input, etc */
+	/* TODO: Remove */
 	mainwindow = GetActiveWindow();
 
 	/* Initialize OpenGL */
