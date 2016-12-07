@@ -34,3 +34,8 @@
 ## [Unreleased] - 2016-12-3
 ### Changes
 - Got OpenGL rendering into SDL window.
+
+## [Unreleased] - 2016-12-6
+### Changes
+- Removed win32 code from _gl_vidsdl.c_.
+- Fixed windowed video rendering.
