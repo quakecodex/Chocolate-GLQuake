@@ -547,15 +547,12 @@ GL_BeginRendering
 void GL_BeginRendering (int *x, int *y, int *width, int *height)
 {
 	extern cvar_t gl_clear;
-
-	//*x = *y = 0;
-	//*width = WindowRect.right - WindowRect.left;
-	//*height = WindowRect.bottom - WindowRect.top;
-
-//    if (!wglMakeCurrent( maindc, baseRC ))
-//		Sys_Error ("wglMakeCurrent failed");
-
-//	glViewport (*x, *y, *width, *height);
+	
+	// Set rendering target size
+	*x = 0;
+	*y = 0;
+	*width = vid.width;
+	*height = vid.height;
 }
 
 
@@ -1610,17 +1607,6 @@ void	VID_Init (unsigned char *palette)
     }
 
 	mainwindow = GetActiveWindow();
-	/* Set up OpenGL Context */
-    //maindc = GetDC(mainwindow);
-	/* bSetupPixelFormat(maindc); */
-	
-	/*
-    baseRC = wglCreateContext( maindc );
-	if (!baseRC)
-		Sys_Error ("Could not initialize GL (wglCreateContext failed).\n\nMake sure you in are 65535 color mode, and try running -window.");
-    if (!wglMakeCurrent( maindc, baseRC ))
-		Sys_Error ("wglMakeCurrent failed");
-		*/
 
 	/* Initialize OpenGL */
 	GL_Init ();
@@ -1630,9 +1616,6 @@ void	VID_Init (unsigned char *palette)
 	Sys_mkdir (gldir);
 
 	vid_realmode = vid_modenum;
-
-	// Check for 3DFX Extensions and initialize them.
-	VID_Init8bitPalette();
 
 	/* Final checks and cleanup? */
 	vid_menudrawfn = VID_MenuDraw;
