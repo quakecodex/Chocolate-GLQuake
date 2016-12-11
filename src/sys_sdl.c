@@ -656,6 +656,7 @@ void Sys_SendKeyEvents(void)
     SDL_Event event;
     int sym, state;
      int modstate;
+	 int temp;
 
     while (SDL_PollEvent(&event))
     {
@@ -770,6 +771,23 @@ void Sys_SendKeyEvents(void)
 				*/
                 break;
 
+			case SDL_MOUSEBUTTONDOWN:
+			case SDL_MOUSEBUTTONUP:
+	
+					temp = 0;
+
+					if (event.button.button == SDL_BUTTON_LEFT)
+						Key_Event (K_MOUSE1, (event.button.state == SDL_PRESSED));
+
+					if (event.button.button == SDL_BUTTON_MIDDLE)
+						Key_Event (K_MOUSE3, (event.button.state == SDL_PRESSED));;
+
+					if (event.button.button == SDL_BUTTON_RIGHT)
+						Key_Event (K_MOUSE2, (event.button.state == SDL_PRESSED));
+					
+					// TODO: Should call in_mouseevent()
+			
+				break;
             case SDL_QUIT:
                 CL_Disconnect ();
                 Host_ShutdownServer(false);        
