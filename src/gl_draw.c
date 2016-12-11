@@ -1206,6 +1206,10 @@ static	unsigned	trans[640*480];		// FIXME, temporary
 		}
 	}
 
+ 	if (VID_Is8bit() && !alpha && (data!=scrap_texels[0])) {
+ 		GL_Upload8_EXT (data, width, height, mipmap, alpha);
+ 		return;
+	}
 	GL_Upload32 (trans, width, height, mipmap, alpha);
 }
 

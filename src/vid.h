@@ -59,6 +59,12 @@ extern	unsigned	d_8to24table[256];
 extern void (*vid_menudrawfn)(void);
 extern void (*vid_menukeyfn)(int key);
 
+void	VID_SetPalette (unsigned char *palette);
+// called at startup and after any gamma correction
+
+void	VID_ShiftPalette (unsigned char *palette);
+// called for bonus and pain flashes, and for underwater color changes
+
 void	VID_Init (unsigned char *palette);
 // Called at startup to set up translation tables, takes 256 8 bit RGB values
 // the palette data will go away after the call, so it must be copied off if
@@ -73,4 +79,7 @@ void	VID_Update (vrect_t *rects);
 int VID_SetMode (int modenum, unsigned char *palette);
 // sets the mode; only used by the Quake engine for resetting to mode 0 (the
 // base mode) on memory allocation failures
+
+qboolean VID_Is8bit();
+// Returns true when video is 8-bit only
 
