@@ -176,7 +176,7 @@ void IN_UpdateClipCursor (void)
 
 	if (mouseinitialized && mouseactive && !dinput)
 	{
-		ClipCursor (NULL);
+		ClipCursor (&window_rect);
 	}
 }
 
@@ -245,9 +245,9 @@ void IN_ActivateMouse (void)
 			if (mouseparmsvalid)
 				restore_spi = SystemParametersInfo (SPI_SETMOUSE, 0, newmouseparms, 0);
 
-			SetCursorPos (vid.width / 2, vid.height / 2);
+			SetCursorPos (window_center_x, window_center_y);
 			SetCapture (mainwindow);
-			ClipCursor (NULL);
+			ClipCursor (&window_rect);
 		}
 
 		mouseactive = true;
@@ -668,8 +668,8 @@ void IN_MouseMove (usercmd_t *cmd)
 	else
 	{
 		GetCursorPos (&current_pos);
-		mx = current_pos.x - vid.width / 2 + mx_accum;
-		my = current_pos.y - vid.height / 2 + my_accum;
+		mx = current_pos.x - window_center_x + mx_accum;
+		my = current_pos.y - window_center_y + my_accum;
 		mx_accum = 0;
 		my_accum = 0;
 	}
@@ -722,7 +722,7 @@ void IN_MouseMove (usercmd_t *cmd)
 // if the mouse has moved, force it to the center, so there's room to move
 	if (mx || my)
 	{
-		SetCursorPos (vid.width / 2 , vid.height / 2);
+		SetCursorPos (window_center_x, window_center_y);
 	}
 }
 
@@ -756,11 +756,11 @@ void IN_Accumulate (void)
 		{
 			GetCursorPos (&current_pos);
 
-			mx_accum += current_pos.x - vid.width;
-			my_accum += current_pos.y - vid.height;
+			mx_accum += current_pos.x - window_center_x;
+			my_accum += current_pos.y - window_center_y;
 
 		// force the mouse to the center, so there's room to move
-			SetCursorPos (vid.width / 2, vid.height / 2);
+			SetCursorPos (window_center_x, window_center_y);
 		}
 	}
 }
