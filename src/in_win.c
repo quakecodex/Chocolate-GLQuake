@@ -23,7 +23,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <dinput.h>
 #include "quakedef.h"
 #include "winquake.h"
-#include "sdlquake.h"
 #include "dosisms.h"
 
 #define DINPUT_BUFFERSIZE           16
@@ -235,7 +234,6 @@ void IN_ActivateMouse (void)
 					IDirectInputDevice_Acquire(g_pMouse);
 					dinput_acquired = true;
 				}
-				SDL_WM_GrabInput(SDL_GRAB_ON);
 			}
 			else
 			{
@@ -248,9 +246,7 @@ void IN_ActivateMouse (void)
 				restore_spi = SystemParametersInfo (SPI_SETMOUSE, 0, newmouseparms, 0);
 
 			SetCursorPos (window_center_x, window_center_y);
-			//SetCapture (mainwindow);
-			// TODO: Fix windowed mouse input
-			SDL_WM_GrabInput(SDL_GRAB_ON);
+			SetCapture (mainwindow);
 			ClipCursor (&window_rect);
 		}
 

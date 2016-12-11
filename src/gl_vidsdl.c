@@ -1418,6 +1418,7 @@ void	VID_Init (unsigned char *palette)
 	/* Get the window handle for the other systems, input, etc */
 	/* TODO: Remove */
 	mainwindow = GetActiveWindow();
+	AppActivate(TRUE, FALSE);
 
 	/* Initialize OpenGL */
 	GL_Init ();
