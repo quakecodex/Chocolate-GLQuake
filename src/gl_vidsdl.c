@@ -105,8 +105,6 @@ glvert_t glv;
 
 cvar_t	gl_ztrick = {"gl_ztrick","1"};
 
-HWND WINAPI InitializeWindow (HINSTANCE hInstance, int nCmdShow);
-
 viddef_t	vid;				// global video state
 
 unsigned short	d_8to16table[256];
@@ -120,7 +118,6 @@ modestate_t	modestate = MS_UNINIT;
 void VID_MenuDraw (void);
 void VID_MenuKey (int key);
 
-LONG WINAPI MainWndProc (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 void AppActivate(BOOL fActive, BOOL minimize);
 char *VID_GetModeDescription (int mode);
 void ClearAllStates (void);
