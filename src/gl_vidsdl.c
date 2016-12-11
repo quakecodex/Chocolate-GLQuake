@@ -1045,7 +1045,7 @@ void VID_InitFullDIB (HINSTANCE hInstance)
 		for (i = 0; modes[i]; i++) {
 			if (i >= MAX_MODE_LIST) 
 				break;
-			if ((modes[i]->w > MAXWIDTH) || (modes[i]->h > MAXHEIGHT)) {
+			if ((modes[i]->w < BASEWIDTH) || (modes[i]->w > MAXWIDTH) || (modes[i]->h > MAXHEIGHT) || (modes[i]->h < BASEHEIGHT)) {
 				continue;
 			}
 			modelist[nummodes].type = MS_FULLDIB;
@@ -1071,7 +1071,7 @@ void VID_InitFullDIB (HINSTANCE hInstance)
 		for (i = 0; modes[i]; i++) {
 			if (i >= MAX_MODE_LIST) 
 				break;
-			if ((modes[i]->w > MAXWIDTH) || (modes[i]->h > MAXHEIGHT)) {
+			if ((modes[i]->w < BASEWIDTH) || (modes[i]->w > MAXWIDTH) || (modes[i]->h > MAXHEIGHT) || (modes[i]->h < BASEHEIGHT)) {
 				continue;
 			}
 			modelist[nummodes].type = MS_FULLDIB;
