@@ -202,12 +202,16 @@ qboolean VID_SetWindowedMode (int modenum)
 
 	modestate = MS_WINDOWED;
 
+	vid.width = modelist[modenum].width;
+	vid.height = modelist[modenum].height;
+
 	if (vid.conheight > (unsigned int)modelist[modenum].height)
 		vid.conheight = (unsigned int)modelist[modenum].height;
 	if (vid.conwidth > (unsigned int)modelist[modenum].width)
 		vid.conwidth = (unsigned int)modelist[modenum].width;
-	vid.width = vid.conwidth;
-	vid.height = vid.conheight;
+	vid.conwidth = modelist[modenum].width & 0xfff8;
+	vid.conheight = vid.conwidth * vid.height / vid.width;
+	
 
 	vid.numpages = 2;
 	
@@ -240,12 +244,15 @@ qboolean VID_SetFullDIBMode (int modenum)
 	DIBWidth = modelist[modenum].width;
 	DIBHeight = modelist[modenum].height;
 
+	vid.width = modelist[modenum].width;
+	vid.height = modelist[modenum].height;
+
 	if (vid.conheight > (unsigned int)modelist[modenum].height)
 		vid.conheight = (unsigned int)modelist[modenum].height;
 	if (vid.conwidth > (unsigned int)modelist[modenum].width)
 		vid.conwidth = (unsigned int)modelist[modenum].width;
-	vid.width = vid.conwidth;
-	vid.height = vid.conheight;
+	vid.conwidth = modelist[modenum].width & 0xfff8;
+	vid.conheight = vid.conwidth * vid.height / vid.width;
 
 	vid.numpages = 2;
 
