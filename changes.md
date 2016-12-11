@@ -40,7 +40,7 @@
 - Removed win32 code from _gl_vidsdl.c_.
 - Fixed windowed video rendering.
 
-## [Unreleased] - 2016-12-6
+## [Unreleased] - 2016-12-11
 ### Changes
 - Fixed fullscreen video rendering.
 - Restored mouse input.
