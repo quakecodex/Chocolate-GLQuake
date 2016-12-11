@@ -80,6 +80,3 @@ int VID_SetMode (int modenum, unsigned char *palette);
 // sets the mode; only used by the Quake engine for resetting to mode 0 (the
 // base mode) on memory allocation failures
 
-qboolean VID_Is8bit();
-// Returns true when video is 8-bit only
-
