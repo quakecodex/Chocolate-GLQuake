@@ -1055,10 +1055,10 @@ void VID_InitFullDIB (HINSTANCE hInstance)
 			modelist[nummodes].halfscreen = 0;
 			modelist[nummodes].dib = 1;
 			modelist[nummodes].fullscreen = 1;
-			modelist[nummodes].bpp = 16;
+			modelist[nummodes].bpp = pf.BitsPerPixel;
 			sprintf (modelist[nummodes].modedesc, "%dx%dx%d",
 					 modes[i]->w, modes[i]->h,
-					 16);
+					 pf.BitsPerPixel);
 			nummodes++;
 		}
 		
@@ -1081,10 +1081,10 @@ void VID_InitFullDIB (HINSTANCE hInstance)
 			modelist[nummodes].halfscreen = 0;
 			modelist[nummodes].dib = 1;
 			modelist[nummodes].fullscreen = 1;
-			modelist[nummodes].bpp = 32;
+			modelist[nummodes].bpp = pf.BitsPerPixel;
 			sprintf (modelist[nummodes].modedesc, "%dx%dx%d",
 					 modes[i]->w, modes[i]->h,
-					 32);
+					 pf.BitsPerPixel);
 			nummodes++;
 		}
 		

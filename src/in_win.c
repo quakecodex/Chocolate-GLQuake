@@ -23,6 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <dinput.h>
 #include "quakedef.h"
 #include "winquake.h"
+#include "sdlquake.h"
 #include "dosisms.h"
 
 #define DINPUT_BUFFERSIZE           16
@@ -246,8 +247,9 @@ void IN_ActivateMouse (void)
 				restore_spi = SystemParametersInfo (SPI_SETMOUSE, 0, newmouseparms, 0);
 
 			SetCursorPos (window_center_x, window_center_y);
-			SetCapture (mainwindow);
-			ClipCursor (&window_rect);
+			//SetCapture (mainwindow);
+			//ClipCursor (&window_rect);
+			SDL_WM_GrabInput(SDL_GRAB_ON);
 		}
 
 		mouseactive = true;
@@ -571,11 +573,56 @@ void IN_MouseEvent (int mstate)
 }
 
 
+void IN_MouseMove(usercmd_t *cmd) {
+		int dmx,  dmy;
+
+		dmx = mouse_x * sensitivity.value * 10;
+		dmy = mouse_y * sensitivity.value * 10;
+		//printf("dmxy %d, %d\n", dmx, dmy);
+// add mouse X/Y movement to cmd
+	if ( (in_strafe.state & 1) || (lookstrafe.value && (in_mlook.state & 1) ))
+		cmd->sidemove += m_side.value * dmx;
+	else
+		cl.viewangles[YAW] -= m_yaw.value * dmx;
+
+	if (in_mlook.state & 1)
+		V_StopPitchDrift ();
+		
+	if ( (in_mlook.state & 1) && !(in_strafe.state & 1))
+	{
+		cl.viewangles[PITCH] += m_pitch.value * dmy;
+		if (cl.viewangles[PITCH] > 80)
+			cl.viewangles[PITCH] = 80;
+		if (cl.viewangles[PITCH] < -70)
+			cl.viewangles[PITCH] = -70;
+	}
+	else
+	{
+		if ((in_strafe.state & 1) && noclip_anglehack)
+			cmd->upmove -= m_forward.value * dmy;
+		else
+			cmd->forwardmove -= m_forward.value * dmy;
+	}
+	
+	SDL_GetMouseState(&mouse_x, &mouse_y);
+	if ((mouse_x < vid.width * 0.1) || (mouse_x > vid.width * 0.9) ||
+		(mouse_y < vid.height * 0.1) || (mouse_y > vid.height * 0.9)) {
+		SDL_WarpMouse(vid.width / 2, vid.height / 2);
+	}
+	mouse_x = 0;
+	mouse_y = 0;
+
+	 
+
+}
+
 /*
 ===========
 IN_MouseMove
 ===========
 */
+
+/*
 void IN_MouseMove (usercmd_t *cmd)
 {
 	int					mx, my;
@@ -606,13 +653,13 @@ void IN_MouseMove (usercmd_t *cmd)
 				break;
 			}
 
-			/* Unable to read data or no data available */
+			// Unable to read data or no data available 
 			if (FAILED(hr) || dwElements == 0)
 			{
 				break;
 			}
 
-			/* Look at the element to see what happened */
+			// Look at the element to see what happened 
 
 			switch (od.dwOfs)
 			{
@@ -668,6 +715,7 @@ void IN_MouseMove (usercmd_t *cmd)
 	else
 	{
 		GetCursorPos (&current_pos);
+		//SDL_GetMouseState(&current_pos.x, &current_pos.y);
 		mx = current_pos.x - window_center_x + mx_accum;
 		my = current_pos.y - window_center_y + my_accum;
 		mx_accum = 0;
@@ -687,9 +735,8 @@ void IN_MouseMove (usercmd_t *cmd)
 		mouse_x = mx;
 		mouse_y = my;
 	}
-
-	old_mouse_x = mx;
-	old_mouse_y = my;
+	old_mouse_x = mouse_x;
+	old_mouse_y = mouse_y;
 
 	mouse_x *= sensitivity.value;
 	mouse_y *= sensitivity.value;
@@ -725,7 +772,7 @@ void IN_MouseMove (usercmd_t *cmd)
 		SetCursorPos (window_center_x, window_center_y);
 	}
 }
-
+*/
 
 /*
 ===========
@@ -1231,4 +1278,9 @@ void IN_JoyMove (usercmd_t *cmd)
 		cl.viewangles[PITCH] = 80.0;
 	if (cl.viewangles[PITCH] < -70.0)
 		cl.viewangles[PITCH] = -70.0;
+}
+
+void IN_MouseMotion(int mx, int my) {
+	mouse_x += mx;
+	mouse_y += my;
 }

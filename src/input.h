@@ -37,3 +37,5 @@ void IN_Accumulate (void);
 // Windows Specific? 
 #endif
 
+void IN_MouseMotion(int mx, int my);
+

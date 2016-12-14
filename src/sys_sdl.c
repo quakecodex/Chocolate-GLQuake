@@ -67,8 +67,8 @@ extern int VID_ForceUnlockedAndReturnState (void);
 extern void VID_ForceLockState (int lk);
 
 /* Defined in in_win.c */
-extern int mdx;
-extern int mdy;
+extern int mouse_x;
+extern int mouse_y;
 
 
 /*
@@ -755,20 +755,8 @@ void Sys_SendKeyEvents(void)
                 break;
 
             case SDL_MOUSEMOTION:
-				/*
-                if ((event.motion.x != (vid.width/2)) ||
-                    (event.motion.y != (vid.height/2))) {
-                    mdx = event.motion.x;
-                    mdy = event.motion.y;
-					
-                    if ((event.motion.x < ((vid.width/2)-(vid.width/4))) ||
-                        (event.motion.x > ((vid.width/2)+(vid.width/4))) ||
-                        (event.motion.y < ((vid.height/2)-(vid.height/4))) ||
-                        (event.motion.y > ((vid.height/2)+(vid.height/4)))) {
-                        SDL_WarpMouse(vid.width/2, vid.height/2);
-                    }
-                }
-				*/
+				
+				IN_MouseMotion(event.motion.xrel, event.motion.yrel);
                 break;
 
 			case SDL_MOUSEBUTTONDOWN:
