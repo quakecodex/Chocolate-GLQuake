@@ -177,7 +177,7 @@ void IN_UpdateClipCursor (void)
 
 	if (mouseinitialized && mouseactive && !dinput)
 	{
-		ClipCursor (&window_rect);
+		//ClipCursor (&window_rect);
 	}
 }
 
@@ -192,7 +192,7 @@ void IN_ShowMouse (void)
 
 	if (!mouseshowtoggle)
 	{
-		ShowCursor (TRUE);
+		SDL_ShowCursor(SDL_ENABLE);
 		mouseshowtoggle = 1;
 	}
 }
@@ -208,7 +208,7 @@ void IN_HideMouse (void)
 
 	if (mouseshowtoggle)
 	{
-		ShowCursor (FALSE);
+		SDL_ShowCursor(SDL_DISABLE);
 		mouseshowtoggle = 0;
 	}
 }
@@ -246,7 +246,7 @@ void IN_ActivateMouse (void)
 			if (mouseparmsvalid)
 				restore_spi = SystemParametersInfo (SPI_SETMOUSE, 0, newmouseparms, 0);
 
-			SetCursorPos (window_center_x, window_center_y);
+			SDL_WarpMouse(window_center_x, window_center_y);
 			//SetCapture (mainwindow);
 			//ClipCursor (&window_rect);
 			SDL_WM_GrabInput(SDL_GRAB_ON);
@@ -297,8 +297,9 @@ void IN_DeactivateMouse (void)
 			if (restore_spi)
 				SystemParametersInfo (SPI_SETMOUSE, 0, originalmouseparms, 0);
 
-			ClipCursor (NULL);
-			ReleaseCapture ();
+			//ClipCursor (NULL);
+			//ReleaseCapture ();
+			SDL_WM_GrabInput(SDL_GRAB_OFF);
 		}
 
 		mouseactive = false;
@@ -321,8 +322,8 @@ void IN_RestoreOriginalMouseState (void)
 
 // try to redraw the cursor so it gets reinitialized, because sometimes it
 // has garbage after the mode switch
-	ShowCursor (TRUE);
-	ShowCursor (FALSE);
+	SDL_ShowCursor(SDL_ENABLE);
+	SDL_ShowCursor(SDL_DISABLE);
 }
 
 
@@ -576,10 +577,10 @@ void IN_MouseEvent (int mstate)
 void IN_MouseMove(usercmd_t *cmd) {
 		int dmx,  dmy;
 
-		dmx = mouse_x * sensitivity.value * 10;
-		dmy = mouse_y * sensitivity.value * 10;
+		dmx = mouse_x * sensitivity.value;
+		dmy = mouse_y * sensitivity.value;
 		//printf("dmxy %d, %d\n", dmx, dmy);
-// add mouse X/Y movement to cmd
+
 	if ( (in_strafe.state & 1) || (lookstrafe.value && (in_mlook.state & 1) ))
 		cmd->sidemove += m_side.value * dmx;
 	else
@@ -604,11 +605,15 @@ void IN_MouseMove(usercmd_t *cmd) {
 			cmd->forwardmove -= m_forward.value * dmy;
 	}
 	
+	/*
 	SDL_GetMouseState(&mouse_x, &mouse_y);
-	if ((mouse_x < vid.width * 0.1) || (mouse_x > vid.width * 0.9) ||
-		(mouse_y < vid.height * 0.1) || (mouse_y > vid.height * 0.9)) {
-		SDL_WarpMouse(vid.width / 2, vid.height / 2);
-	}
+	if ( (mouse_x < ((vid.width/2)-(vid.width/4))) ||
+                         (mouse_x > ((vid.width/2)+(vid.width/4))) ||
+                         (mouse_y < ((vid.height/2)-(vid.height/4))) ||
+                         (mouse_y > ((vid.height/2)+(vid.height/4))) ) {
+                        SDL_WarpMouse(vid.width/2, vid.height/2);
+                    }
+					*/
 	mouse_x = 0;
 	mouse_y = 0;
 
@@ -797,6 +802,7 @@ IN_Accumulate
 */
 void IN_Accumulate (void)
 {
+	return;
 	if (mouseactive)
 	{
 		if (!dinput)
