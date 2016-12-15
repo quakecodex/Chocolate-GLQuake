@@ -573,7 +573,10 @@ void IN_MouseEvent (int mstate)
 	}
 }
 
-
+/**
+ * Takes mouse input and applies it to the player character.
+ * @param	cmd	usercmd_t
+ */
 void IN_MouseMove(usercmd_t *cmd) {
 		int dmx,  dmy;
 
@@ -1286,6 +1289,11 @@ void IN_JoyMove (usercmd_t *cmd)
 		cl.viewangles[PITCH] = -70.0;
 }
 
+/**
+ * Get's the relative mouse position for the input system.
+ * @param	mx	Distance moved since last update on the x axis.
+ * @param	my	Distance moved since last update on the t axis.
+ */
 void IN_MouseMotion(int mx, int my) {
 	mouse_x += mx;
 	mouse_y += my;
