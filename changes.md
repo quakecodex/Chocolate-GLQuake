@@ -46,4 +46,8 @@
 - Restored mouse input.
 - Removed 8-bit video modes and code in _gl_vidsdl.c_.
 
+## [Unreleased] - 2016-12-14
+### Changes
+ - Ported mouse input to SDL
+
 
