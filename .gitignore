@@ -38,8 +38,6 @@
 *.suo
 *.manifest
 *.pdb
-*.htm
-*.html
 *.ilk
 *.dep
 *.idb
