@@ -207,8 +207,9 @@ qboolean VID_SetWindowedMode (int modenum)
 	vid.conheight = vid.conwidth * vid.height / vid.width;
 	
 
-	vid.numpages = 2;
+	vid.numpages = 2;  /* Backbuffer? */
 	
+	/* For compatability until SDL is fully implemented */
     mainwindow = GetActiveWindow();
 
 	return true;
@@ -1094,6 +1095,35 @@ void VID_InitFullDIB (HINSTANCE hInstance)
 		Con_SafePrintf ("No fullscreen DIB modes found\n");
 }
 
+static void Check_Gamma (unsigned char *pal)
+{
+	float	f, inf;
+	unsigned char	palette[768];
+	int		i;
+
+	if ((i = COM_CheckParm("-gamma")) == 0) {
+		if ((gl_renderer && strstr(gl_renderer, "Voodoo")) ||
+			(gl_vendor && strstr(gl_vendor, "3Dfx")))
+			vid_gamma = 1;
+		else
+			vid_gamma = 0.7f; // default to 0.7 on non-3dfx hardware
+	} else
+		vid_gamma = Q_atof(com_argv[i+1]);
+
+	for (i=0 ; i<768 ; i++)
+	{
+		f = pow ( (pal[i]+1)/256.0 , vid_gamma );
+		inf = f*255 + 0.5;
+		if (inf < 0)
+			inf = 0;
+		if (inf > 255)
+			inf = 255;
+		palette[i] = inf;
+	}
+
+	memcpy (pal, palette, sizeof(palette));
+}
+
 /**
  * Initializes the video system. Creates a window and initializes OpenGL. 
  * @ param	palette	Pointer to an array of 256 RGB triplets (unsigned byte) specifying the current palette
@@ -1322,9 +1352,14 @@ void	VID_Init (unsigned char *palette)
 	vid.maxwarpheight = WARP_HEIGHT;
 	vid.colormap = host_colormap;
 	vid.fullbright = 256 - LittleLong (*((int *)vid.colormap + 2048));
-
+	
+	/* Make sure colors display properly */
+	Check_Gamma(palette);
+	VID_SetPalette (palette);
+	
 	/* Create window at specified mode */
 	VID_SetMode (vid_default, palette);
+
 
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
