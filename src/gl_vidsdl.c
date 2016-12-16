@@ -152,7 +152,6 @@ cvar_t		_windowed_mouse = {"_windowed_mouse","1", true};
 int			window_center_x, window_center_y, window_x, window_y, window_width, window_height;
 RECT		window_rect;
 
-// direct draw software compatability stuff
 
 void VID_HandlePause (qboolean pause)
 {
@@ -183,75 +182,97 @@ void D_EndDirectRect (int x, int y, int width, int height)
 {
 }
 
+/**
+ * Sets up a windowed video mode.
+ * @param	modenum		Index into modelist array for which video mode to set. Must be 0.
+ * @return	true (1) if the mode is set up.
+ */
 qboolean VID_SetWindowedMode (int modenum)
 {
-	int				lastmodestate, width, height;
+	int	lastmodestate, width, height;
 
+	/* Save the current video mode type. Windowed, fullscreen etc. */
 	lastmodestate = modestate;
 
+	/* Set up the window's size */
 	DIBWidth = modelist[modenum].width;
 	DIBHeight = modelist[modenum].height;
 	width = DIBWidth;
 	height = DIBHeight;
 
+	/* Set up the mode's type */
 	modestate = MS_WINDOWED;
 
+	/* Save window size into the global video mode struct */
 	vid.width = modelist[modenum].width;
 	vid.height = modelist[modenum].height;
 
+	/* Set up the console size */
 	if (vid.conheight > (unsigned int)modelist[modenum].height)
 		vid.conheight = (unsigned int)modelist[modenum].height;
 	if (vid.conwidth > (unsigned int)modelist[modenum].width)
 		vid.conwidth = (unsigned int)modelist[modenum].width;
-	vid.conwidth = modelist[modenum].width & 0xfff8;
+	vid.conwidth = modelist[modenum].width & 0xfff8; /* Must be a power of 8 */
 	vid.conheight = vid.conwidth * vid.height / vid.width;
 	
 
 	vid.numpages = 2;  /* Backbuffer? */
 	
-	/* For compatability until SDL is fully implemented */
+	/* Get a handle to the window. For compatability until SDL is fully implemented */
     mainwindow = GetActiveWindow();
 
 	return true;
 }
 
-
+/**
+ * Sets up a fullscreen video mode.
+ * @param	modenum		Index into modelist array for which video mode to set.
+ * @return	true (1) if the mode is set up.
+ */
 qboolean VID_SetFullDIBMode (int modenum)
 {
 	int	lastmodestate;
+	int result;
 
+	/* Make sure video mode is supported */
 	if (!leavecurrentmode)
 	{
-		gdevmode.dmFields = DM_BITSPERPEL | DM_PELSWIDTH | DM_PELSHEIGHT;
-		gdevmode.dmBitsPerPel = modelist[modenum].bpp;
-		gdevmode.dmPelsWidth = modelist[modenum].width <<
-							   modelist[modenum].halfscreen;
-		gdevmode.dmPelsHeight = modelist[modenum].height;
-		gdevmode.dmSize = sizeof (gdevmode);
+		result = SDL_VideoModeOK(modelist[modenum].width, 
+								 modelist[modenum].height,
+								 modelist[modenum].bpp, 
+								 SDL_OPENGL | SDL_FULLSCREEN);
 
-		if (ChangeDisplaySettings (&gdevmode, CDS_FULLSCREEN) != DISP_CHANGE_SUCCESSFUL)
+		if (!result) {
 			Sys_Error ("Couldn't set fullscreen DIB mode");
+			exit(-1);
+		}
 	}
 
+	/* Save the current video mode type. Windowed, fullscreen etc. */
 	lastmodestate = modestate;
+
+	/* Set fullscreen mode */
 	modestate = MS_FULLDIB;
 
+	/* Set the window size */
 	DIBWidth = modelist[modenum].width;
 	DIBHeight = modelist[modenum].height;
 
+	/* Save size to global video mode struct */
 	vid.width = modelist[modenum].width;
 	vid.height = modelist[modenum].height;
 
+	/* Calculate console size */
 	if (vid.conheight > (unsigned int)modelist[modenum].height)
 		vid.conheight = (unsigned int)modelist[modenum].height;
 	if (vid.conwidth > (unsigned int)modelist[modenum].width)
 		vid.conwidth = (unsigned int)modelist[modenum].width;
-	vid.conwidth = modelist[modenum].width & 0xfff8;
+	vid.conwidth = modelist[modenum].width & 0xfff8; /* Must be multiple of 8 */
 	vid.conheight = vid.conwidth * vid.height / vid.width;
 
-	vid.numpages = 2;
+	vid.numpages = 2; /* Double buffered */
 
-// needed because we're not getting WM_MOVE messages fullscreen on NT
+	/* Set window's top-left corner coords -- Needed? */
 	window_x = 0;
 	window_y = 0;
 
@@ -259,14 +280,19 @@ qboolean VID_SetFullDIBMode (int modenum)
 }
 
 
-/** 
- * Sets the video mode 
+/**
+ * Sets up the video mode.
+ * @param	modenum		Index into modelist array for which video mode to set.
+ * @param	palette		Array of RGB triplets specifying the video palette. 
+ * Should be gamma corrected.
+ * @return	true (1) if the mode is set up.
  */
 int VID_SetMode (int modenum, unsigned char *palette)
 {
 	int				original_mode, temp;
 	qboolean		stat;
 
+	/* Make sure correct mode is being asked for the type. (windowed or fullscreen.) */
 	if ((windowed && (modenum != 0)) ||
 		(!windowed && (modenum < 1)) ||
 		(!windowed && (modenum >= nummodes)))
@@ -274,12 +300,14 @@ int VID_SetMode (int modenum, unsigned char *palette)
 		Sys_Error ("Bad video mode\n");
 	}
 
-// so Con_Printfs don't mess us up by forcing vid and snd updates
+	/* Disable screen? Console? */
+    /* so Con_Printfs don't mess us up by forcing vid and snd updates */
 	temp = scr_disabled_for_loading;
 	scr_disabled_for_loading = true;
 
 	CDAudio_Pause ();
 
+	/* Set default mode if none has been specified */
 	if (vid_modenum == NO_MODE)
 		original_mode = windowed_default;
 	else
@@ -290,12 +318,14 @@ int VID_SetMode (int modenum, unsigned char *palette)
 	{
 		if (_windowed_mouse.value && key_dest == key_game)
 		{
+			/* Windowed mode with mouse support */
 			stat = VID_SetWindowedMode(modenum);
 			IN_ActivateMouse ();
 			IN_HideMouse ();
 		}
 		else
 		{
+			/* Windowed mode without mouse */
 			IN_DeactivateMouse ();
 			IN_ShowMouse ();
 			stat = VID_SetWindowedMode(modenum);
@@ -303,6 +333,7 @@ int VID_SetMode (int modenum, unsigned char *palette)
 	}
 	else if (modelist[modenum].type == MS_FULLDIB)
 	{
+		/* Fullscreen mode */
 		stat = VID_SetFullDIBMode(modenum);
 		IN_ActivateMouse ();
 		IN_HideMouse ();
@@ -312,6 +343,7 @@ int VID_SetMode (int modenum, unsigned char *palette)
 		Sys_Error ("VID_SetMode: Bad mode type in modelist");
 	}
 
+	/* Save size to global size vars */
 	window_width = DIBWidth;
 	window_height = DIBHeight;
 	VID_UpdateWindowStatus ();
@@ -324,20 +356,13 @@ int VID_SetMode (int modenum, unsigned char *palette)
 		Sys_Error ("Couldn't set video mode");
 	}
 
-// now we try to make sure we get the focus on the mode switch, because
-// sometimes in some systems we don't.  We grab the foreground, then
-// finish setting up, pump all our messages, and sleep for a little while
-// to let messages finish bouncing around the system, then we put
-// ourselves at the top of the z order, then grab the foreground again,
-// Who knows if it helps, but it probably doesn't hurt
-	//SetForegroundWindow (mainwindow);
-	VID_SetPalette (palette);
+	/* Save the modenum to globar var and set the cvar */
 	vid_modenum = modenum;
 	Cvar_SetValue ("vid_mode", (float)vid_modenum);
 
 	Sleep (100);
 
-// fix the leftover Alt from any Alt-Tab or the like that switched us away
+	// fix the leftover Alt from any Alt-Tab or the like that switched us away
 	ClearAllStates ();
 
 	if (!msg_suppress_1)
@@ -345,38 +370,33 @@ int VID_SetMode (int modenum, unsigned char *palette)
 
 	VID_SetPalette (palette);
 
-	vid.recalc_refdef = 1;
+	vid.recalc_refdef = 1; /* Tell renderer to calculate new size for render target? */
 
 	return true;
 }
 
 
-/*
-================
-VID_UpdateWindowStatus
-================
-*/
+/**
+ * Calculate the window's size rect and saves it to a global window_rect struct.
+ * Used by the renderer to calculate render target size.
+ */
 void VID_UpdateWindowStatus (void)
 {
-
 	window_rect.left = window_x;
 	window_rect.top = window_y;
 	window_rect.right = window_x + window_width;
 	window_rect.bottom = window_y + window_height;
 	window_center_x = (window_rect.left + window_rect.right) / 2;
 	window_center_y = (window_rect.top + window_rect.bottom) / 2;
-
-	IN_UpdateClipCursor ();
 }
-
-
-//====================================
 
 BINDTEXFUNCPTR bindTexFunc;
 
 #define TEXTURE_EXT_STRING "GL_EXT_texture_object"
 
-
+/**
+ * Checks to see if glBindTexture function is available.
+ */
 void CheckTextureExtensions (void)
 {
 	char		*tmp;
@@ -407,7 +427,7 @@ void CheckTextureExtensions (void)
 		return;
 	}
 
-/* load library and get procedure adresses for texture extension API */
+	/* load library and get procedure adresses for texture extension API */
 	if ((bindTexFunc = (BINDTEXFUNCPTR)
 		wglGetProcAddress((LPCSTR) "glBindTextureEXT")) == NULL)
 	{
@@ -416,43 +436,13 @@ void CheckTextureExtensions (void)
 	}
 }
 
-void CheckArrayExtensions (void)
-{
-	char		*tmp;
-
-	/* check for texture extension */
-	tmp = (unsigned char *)glGetString(GL_EXTENSIONS);
-	while (*tmp)
-	{
-		if (strncmp((const char*)tmp, "GL_EXT_vertex_array", strlen("GL_EXT_vertex_array")) == 0)
-		{
-			if (
-((glArrayElementEXT = wglGetProcAddress("glArrayElementEXT")) == NULL) ||
-((glColorPointerEXT = wglGetProcAddress("glColorPointerEXT")) == NULL) ||
-((glTexCoordPointerEXT = wglGetProcAddress("glTexCoordPointerEXT")) == NULL) ||
-((glVertexPointerEXT = wglGetProcAddress("glVertexPointerEXT")) == NULL) )
-			{
-				Sys_Error ("GetProcAddress for vertex extension failed");
-				return;
-			}
-			return;
-		}
-		tmp++;
-	}
-
-	Sys_Error ("Vertex array extension not present");
-}
-
-//int		texture_mode = GL_NEAREST;
-//int		texture_mode = GL_NEAREST_MIPMAP_NEAREST;
-//int		texture_mode = GL_NEAREST_MIPMAP_LINEAR;
-int		texture_mode = GL_LINEAR;
-//int		texture_mode = GL_LINEAR_MIPMAP_NEAREST;
-//int		texture_mode = GL_LINEAR_MIPMAP_LINEAR;
-
-int		texture_extension_number = 1;
+int	texture_mode = GL_LINEAR;
+int	texture_extension_number = 1;
 
 #ifdef _WIN32
+/**
+ * Check if OpenGL multitexture functions are available
+ */
 void CheckMultiTextureExtensions(void) 
 {
 	if (strstr(gl_extensions, "GL_SGIS_multitexture ") && !COM_CheckParm("-nomtex")) {
@@ -465,19 +455,19 @@ void CheckMultiTextureExtensions(void)
 #else
 void CheckMultiTextureExtensions(void) 
 {
-		gl_mtexable = true;
+	gl_mtexable = true;
 }
 #endif
 
-/*
-===============
-GL_Init
-===============
-*/
+/**
+ * Initializes OpenGL. Get's vender, version and renderer strings. Checks extension
+ * support and sets initial shading, texture blending and filtering modes.
+ */
 void GL_Init (void)
 {
 	char ext[2048];
 
+	/* See what type of setup the system has and print it to the console */
 	gl_vendor = glGetString (GL_VENDOR);
 	Con_Printf ("GL_VENDOR: %s\n", gl_vendor);
 	gl_renderer = glGetString (GL_RENDERER);
@@ -493,16 +483,19 @@ void GL_Init (void)
 	Con_Printf ("GL_EXTENSIONS: %s\n", ext);
 
 //	Con_Printf ("%s %s\n", gl_renderer, gl_version);
-
+	
+	/* Set propertys based on specific vendors. Remove? */
     if (_strnicmp(gl_renderer,"PowerVR",7)==0)
          fullsbardraw = true;
 
     if (_strnicmp(gl_renderer,"Permedia",8)==0)
          isPermedia = true;
 
+	/* Check for extensions */
 	CheckTextureExtensions ();
 	CheckMultiTextureExtensions ();
 
+	/* Set up basic OpenGL filtering and shading settings */
 	glClearColor (1,0,0,0);
 	glCullFace(GL_FRONT);
 	glEnable(GL_TEXTURE_2D);
@@ -522,24 +515,15 @@ void GL_Init (void)
 
 //	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-
-#if 0
-	CheckArrayExtensions ();
-
-	glEnable (GL_VERTEX_ARRAY_EXT);
-	glEnable (GL_TEXTURE_COORD_ARRAY_EXT);
-	glVertexPointerEXT (3, GL_FLOAT, 0, 0, &glv.x);
-	glTexCoordPointerEXT (2, GL_FLOAT, 0, 0, &glv.s);
-	glColorPointerEXT (3, GL_FLOAT, 0, 0, &glv.r);
-#endif
 }
 
-/*
-=================
-GL_BeginRendering
-
-=================
-*/
+/** 
+ * Start rendering process. This is just used to tell the renderer the size of the window.
+ * @param	x		Gets set to the top-left corner of the rendering window.
+ * @param	y		Gets set to the top-left corner of the rendering window.
+ * @param	width	Gets set to the width of the rendering window. 
+ * @param	height	Gets set to the height corner of the rendering window.
+ */
 void GL_BeginRendering (int *x, int *y, int *width, int *height)
 {
 	extern cvar_t gl_clear;
@@ -555,11 +539,10 @@ void GL_BeginRendering (int *x, int *y, int *width, int *height)
 void GL_EndRendering (void)
 {
 	if (!scr_skipupdate || block_drawing) {
-		/* SwapBuffers(maindc); */
 		SDL_GL_SwapBuffers();
 	}
 
-// handle the mouse state when windowed if that's changed
+	// handle the mouse state when windowed if that's changed
 	if (modestate == MS_WINDOWED)
 	{
 		if (!_windowed_mouse.value) {

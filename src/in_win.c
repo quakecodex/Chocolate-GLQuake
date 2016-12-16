@@ -172,6 +172,7 @@ void Force_CenterView_f (void)
 IN_UpdateClipCursor
 ===========
 */
+/** Remove */
 void IN_UpdateClipCursor (void)
 {
 
