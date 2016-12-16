@@ -618,9 +618,7 @@ void IN_MouseMove(usercmd_t *cmd) {
                     }
 					*/
 	mouse_x = 0;
-	mouse_y = 0;
-
-	 
+	mouse_y = 0; 
 
 }
 
