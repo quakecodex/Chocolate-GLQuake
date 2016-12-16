@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.12"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Chocolate GL Quake: src/gl_vidsdl.c File Reference</title>
+<title>Chocolate GL Quake: gl_vidsdl.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -58,10 +58,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
-</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
@@ -161,8 +157,6 @@ Functions</h2></td></tr>
 <tr class="separator:a944dc4a3aa999d8398cab20629923a67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa04952e0713843be11dac52622fb9db3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#aa04952e0713843be11dac52622fb9db3">CheckTextureExtensions</a> (void)</td></tr>
 <tr class="separator:aa04952e0713843be11dac52622fb9db3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a305f9d0da177204b520081774ebef732"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a305f9d0da177204b520081774ebef732">CheckArrayExtensions</a> (void)</td></tr>
-<tr class="separator:a305f9d0da177204b520081774ebef732"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5549d9a8fcc080bc53b79ce82a63894"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#aa5549d9a8fcc080bc53b79ce82a63894">CheckMultiTextureExtensions</a> (void)</td></tr>
 <tr class="separator:aa5549d9a8fcc080bc53b79ce82a63894"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7c70f668a8a4d06c55991b19c6c2164"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#aa7c70f668a8a4d06c55991b19c6c2164">GL_BeginRendering</a> (<a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a> *x, <a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a> *y, <a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a> *width, <a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a> *height)</td></tr>
@@ -339,6 +333,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Minimum window height </p>
 
 </div>
 </div>
@@ -353,6 +348,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Minimum window width </p>
 
 </div>
 </div>
@@ -381,6 +377,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Functions to initialize an OpenGL window. Maximum number of video modes supported by Quake. </p>
 
 </div>
 </div>
@@ -607,24 +604,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a305f9d0da177204b520081774ebef732"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a305f9d0da177204b520081774ebef732">&sect;&nbsp;</a></span>CheckArrayExtensions()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void CheckArrayExtensions </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="aa5549d9a8fcc080bc53b79ce82a63894"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa5549d9a8fcc080bc53b79ce82a63894">&sect;&nbsp;</a></span>CheckMultiTextureExtensions()</h2>
 
@@ -658,6 +637,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Checks to see if glBindTexture function is available. </p>
 
 </div>
 </div>
@@ -802,6 +782,15 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Start rendering process. This is just used to tell the renderer the size of the window. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Gets set to the top-left corner of the rendering window. </td></tr>
+    <tr><td class="paramname">y</td><td>Gets set to the top-left corner of the rendering window. </td></tr>
+    <tr><td class="paramname">width</td><td>Gets set to the width of the rendering window. </td></tr>
+    <tr><td class="paramname">height</td><td>Gets set to the height corner of the rendering window. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -838,6 +827,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Initializes OpenGL. Get's vender, version and renderer strings. Checks extension support and sets initial shading, texture blending and filtering modes. </p>
 
 </div>
 </div>
@@ -1387,6 +1377,13 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets up a fullscreen video mode. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">modenum</td><td>Index into modelist array for which video mode to set. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true (1) if the mode is set up. </dd></dl>
 
 </div>
 </div>
@@ -1415,7 +1412,14 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets the video mode </p>
+<p>Sets up the video mode. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">modenum</td><td>Index into modelist array for which video mode to set. </td></tr>
+    <tr><td class="paramname">palette</td><td>Array of RGB triplets specifying the video palette. Should be gamma corrected. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true (1) if the mode is set up. </dd></dl>
 
 </div>
 </div>
@@ -1452,6 +1456,13 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets up a windowed video mode. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">modenum</td><td>Index into modelist array for which video mode to set. Must be 0. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true (1) if the mode is set up. </dd></dl>
 
 </div>
 </div>
@@ -1524,6 +1535,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Calculate the window's size rect and saves it to a global window_rect struct. Used by the renderer to calculate render target size. </p>
 
 </div>
 </div>

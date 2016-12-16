@@ -17,7 +17,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
-// gl_vidnt.c -- NT GL vid component
+
+/** Functions to initialize an OpenGL window. */
 
 #include "quakedef.h"
 #include "winquake.h"
@@ -26,14 +27,17 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <commctrl.h>
 
-#define MAX_MODE_LIST	30
+/** Maximum number of video modes supported by Quake. */
+#define MAX_MODE_LIST	30 
 #define VID_ROW_SIZE	3
 #define WARP_WIDTH		320
 #define WARP_HEIGHT		200
 #define MAXWIDTH		10000
 #define MAXHEIGHT		10000
-#define BASEWIDTH		320
-#define BASEHEIGHT		200
+/** Minimum window width */
+#define BASEWIDTH		320 
+/** Minimum window height */
+#define BASEHEIGHT		200 
 
 #define MODE_WINDOWED			0
 #define NO_MODE					(MODE_WINDOWED - 1)

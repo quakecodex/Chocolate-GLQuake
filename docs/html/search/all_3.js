@@ -99,7 +99,6 @@ var searchData=
   ['chase_5fup',['chase_up',['../chase_8c.html#afac67254b11a8d9340590ac0773281ae',1,'chase.c']]],
   ['chase_5fupdate',['Chase_Update',['../chase_8c.html#a029a2e8d2c631e25f5e82f7ec51e1a84',1,'Chase_Update(void):&#160;chase.c'],['../quakedef_8h.html#a029a2e8d2c631e25f5e82f7ec51e1a84',1,'Chase_Update(void):&#160;chase.c']]],
   ['chat_5fbuffer',['chat_buffer',['../keys_8c.html#a5e19d9eb388c5d74079395c7b604eb72',1,'keys.c']]],
-  ['checkarrayextensions',['CheckArrayExtensions',['../gl__vidsdl_8c.html#a305f9d0da177204b520081774ebef732',1,'gl_vidsdl.c']]],
   ['checkmultitextureextensions',['CheckMultiTextureExtensions',['../gl__vidsdl_8c.html#aa5549d9a8fcc080bc53b79ce82a63894',1,'gl_vidsdl.c']]],
   ['checknewconnections',['CheckNewConnections',['../structnet__landriver__t.html#a6e196b5149f50676cfa919967d0c5afb',1,'net_landriver_t::CheckNewConnections()'],['../structnet__driver__t.html#a69facdbf3b4c41f63c798dabfec19835',1,'net_driver_t::CheckNewConnections()']]],
   ['checkpvs',['checkpvs',['../pr__cmds_8c.html#a3cdf9c6ba1f4e95d912534c750eedb14',1,'pr_cmds.c']]],

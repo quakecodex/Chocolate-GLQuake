@@ -33,7 +33,6 @@ var searchData=
   ['chase_5finit',['Chase_Init',['../chase_8c.html#aadf396066a21d32cff01869e88aea8ad',1,'Chase_Init(void):&#160;chase.c'],['../quakedef_8h.html#aadf396066a21d32cff01869e88aea8ad',1,'Chase_Init(void):&#160;chase.c']]],
   ['chase_5freset',['Chase_Reset',['../chase_8c.html#afe2256a4848758e335222b57342d4a38',1,'Chase_Reset(void):&#160;chase.c'],['../quakedef_8h.html#afe2256a4848758e335222b57342d4a38',1,'Chase_Reset(void):&#160;chase.c']]],
   ['chase_5fupdate',['Chase_Update',['../chase_8c.html#a029a2e8d2c631e25f5e82f7ec51e1a84',1,'Chase_Update(void):&#160;chase.c'],['../quakedef_8h.html#a029a2e8d2c631e25f5e82f7ec51e1a84',1,'Chase_Update(void):&#160;chase.c']]],
-  ['checkarrayextensions',['CheckArrayExtensions',['../gl__vidsdl_8c.html#a305f9d0da177204b520081774ebef732',1,'gl_vidsdl.c']]],
   ['checkmultitextureextensions',['CheckMultiTextureExtensions',['../gl__vidsdl_8c.html#aa5549d9a8fcc080bc53b79ce82a63894',1,'gl_vidsdl.c']]],
   ['checktextureextensions',['CheckTextureExtensions',['../gl__vidsdl_8c.html#aa04952e0713843be11dac52622fb9db3',1,'gl_vidsdl.c']]],
   ['cl_5fadjustangles',['CL_AdjustAngles',['../cl__input_8c.html#a29606c9b0141958a43b58a6218f2ee42',1,'cl_input.c']]],
