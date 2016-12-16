@@ -1327,7 +1327,7 @@ void	VID_Init (unsigned char *palette)
 		vid.conwidth = 320;
 
 	// pick a conheight that matches with correct aspect
-	vid.conheight = vid.conwidth*3 / 4;
+	vid.conheight = vid.conwidth * 3 / 4;
 
 	if ((i = COM_CheckParm("-conheight")) != 0)
 		vid.conheight = Q_atoi(com_argv[i+1]);
@@ -1362,6 +1362,8 @@ void	VID_Init (unsigned char *palette)
     if (pBackbuffer == NULL) {
         Sys_Error("Unable to set video mode.");
     }
+
+	SDL_WM_SetCaption("Chocolate GL Quake", "CGLQuake");
 
 	/* Get the window handle for the other systems, input, etc */
 	/* TODO: Remove */
