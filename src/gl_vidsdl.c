@@ -18,7 +18,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-/** Functions to initialize an OpenGL window. */
+/** 
+ * \file gl_vidsdl.c
+ * Functions to create and manage an OpenGL window. 
+ * 
+ * @author: James Johnson
+ * @version: 0.1.0 2016-12-16
+ */
 
 #include "quakedef.h"
 #include "winquake.h"
@@ -27,32 +33,33 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <commctrl.h>
 
-/** Maximum number of video modes supported by Quake. */
-#define MAX_MODE_LIST	30 
+
+#define MAX_MODE_LIST	30 /**< Maximum number of video modes supported by Quake. */
 #define VID_ROW_SIZE	3
 #define WARP_WIDTH		320
 #define WARP_HEIGHT		200
 #define MAXWIDTH		10000
 #define MAXHEIGHT		10000
-/** Minimum window width */
-#define BASEWIDTH		320 
-/** Minimum window height */
-#define BASEHEIGHT		200 
+#define BASEWIDTH		320 /**< Minimum window width */
+#define BASEHEIGHT		200 /**< Minimum window height */
 
 #define MODE_WINDOWED			0
 #define NO_MODE					(MODE_WINDOWED - 1)
 #define MODE_FULLSCREEN_DEFAULT	(MODE_WINDOWED + 1)
 
+/**
+ * Defines a video mode.
+ */
 typedef struct {
-	modestate_t	type;
-	int			width;
-	int			height;
-	int			modenum;
-	int			dib;
-	int			fullscreen;
-	int			bpp;
-	int			halfscreen;
-	char		modedesc[17];
+	modestate_t	type; /**< Type of video mode this is. MS_WINDOWED or MS_FULLSCREEN. */
+	int			width; /**< Width of video mode. */
+	int			height; /**< Height of video mode. */
+	int			modenum; /**< Index into modelist where this mode is defined. */
+	int			dib; /**< Whether or not this is a Win32 dib window. 1 = true, 0 = false.*/
+	int			fullscreen; /**< Whether or not this is a fullscreen mode. 1 = true, 0 = false.*/
+	int			bpp; /**< Bitdepth if this mode 16, 24 or 32. */
+	int			halfscreen; /**< Half screen mode? */
+	char		modedesc[17]; /**< Human readable description of the mode. */
 } vmode_t;
 
 typedef struct {
@@ -1346,7 +1353,6 @@ void	VID_Init (unsigned char *palette)
 	
 	/* Create window at specified mode */
 	VID_SetMode (vid_default, palette);
-
 
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
