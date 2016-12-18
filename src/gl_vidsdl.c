@@ -62,30 +62,17 @@ typedef struct {
 	char		modedesc[17]; /**< Human readable description of the mode. */
 } vmode_t;
 
-typedef struct {
-	int			width;
-	int			height;
-} lmode_t;
+const char *gl_vendor; /**< GPU Vendor. */
+const char *gl_renderer; /**< OpenGL renderer. */
+const char *gl_version; /**< OpenGL version. */
+const char *gl_extensions; /**< List of available OpenGL extensions. */
 
-lmode_t	lowresmodes[] = {
-	{320, 200},
-	{320, 240},
-	{400, 300},
-	{512, 384},
-};
+qboolean		DDActive; /**< DirectDraw active? */
+qboolean		scr_skipupdate; /**< Set to true to skip a backbuffer swap during rendering. */
 
-const char *gl_vendor;
-const char *gl_renderer;
-const char *gl_version;
-const char *gl_extensions;
-
-qboolean		DDActive;
-qboolean		scr_skipupdate;
-
-static vmode_t	modelist[MAX_MODE_LIST];
-static int		nummodes;
-static vmode_t	*pcurrentmode;
-static vmode_t	badmode;
+static vmode_t	modelist[MAX_MODE_LIST]; /**< List of available video modes. */
+static int		nummodes; /**< Number of modes in modelist. */
+static vmode_t	badmode; /**< Represents a bad video mode. */
 
 static DEVMODE	gdevmode;
 static qboolean	vid_initialized = false;
