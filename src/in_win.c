@@ -49,6 +49,8 @@ qboolean		mouseinitialized;
 static qboolean	mouseparmsvalid, mouseactivatetoggle;
 static qboolean	mouseshowtoggle = 1;
 static qboolean	dinput_acquired;
+static qboolean sdl_joystick = false; /* true idf SDL Joystick available */
+SDL_Joystick *pJoystick; /* 1st valid joystick */
 
 static unsigned int		mstate_di;
 
@@ -154,6 +156,7 @@ static DIDATAFORMAT	df = {
 void IN_StartupJoystick (void);
 void Joy_AdvancedUpdate_f (void);
 void IN_JoyMove (usercmd_t *cmd);
+void IN_DeactivateJoystick(void);
 
 
 /*
@@ -514,6 +517,12 @@ void IN_Init (void)
 
 	uiWheelMessage = RegisterWindowMessage ( "MSWHEEL_ROLLMSG" );
 
+	/* Initialize SDL Joystick subsystem */
+	if (SDL_InitSubSystem(SDL_INIT_JOYSTICK) < 0) {
+		sdl_joystick = false;
+		Con_Printf("Unable to initialize SDL Joystick.\n\n");
+	}
+	sdl_joystick = true;
 	IN_StartupMouse ();
 	IN_StartupJoystick ();
 }
@@ -528,6 +537,7 @@ void IN_Shutdown (void)
 
 	IN_DeactivateMouse ();
 	IN_ShowMouse ();
+	IN_DeactivateJoystick();
 
     if (g_pMouse)
 	{
@@ -539,6 +549,11 @@ void IN_Shutdown (void)
 	{
 		IDirectInput_Release(g_pdi);
 		g_pdi = NULL;
+	}
+
+	if (sdl_joystick) {
+		SDL_QuitSubSystem(SDL_INIT_JOYSTICK);
+		sdl_joystick = false;
 	}
 }
 
@@ -843,6 +858,57 @@ void IN_ClearStates (void)
 IN_StartupJoystick 
 =============== 
 */  
+
+void IN_StartupJoystick (void) 
+{ 
+	int			numdevs;
+ 
+ 	// assume no joystick
+	joy_avail = false; 
+
+	// abort startup if user requests no joystick
+	if ( COM_CheckParm ("-nojoy") ) 
+		return; 
+
+	/* Abort if SDL Joystick subsystem is not available. */
+	if (!sdl_joystick) {
+		return;
+	}
+ 
+	// verify joystick driver is present
+	if ((numdevs = SDL_NumJoysticks()) == 0)
+	{
+		Con_Printf ("\njoystick not found -- driver not present\n\n");
+		return;
+	}
+
+	/* Initialize first joystick */
+    SDL_JoystickEventState(SDL_ENABLE);
+    pJoystick = SDL_JoystickOpen(0);
+
+	// abort startup if we didn't find a valid joystick
+	if (pJoystick == NULL)
+	{
+		Con_Printf ("\njoystick not found -- no valid joysticks\n\n");
+		return;
+	}
+
+	// save the joystick's number of buttons
+	joy_numbuttons = SDL_JoystickNumButtons(pJoystick);
+
+	// old button and POV states default to no buttons pressed
+	joy_oldbuttonstate = joy_oldpovstate = 0;
+
+	// mark the joystick as available and advanced initialization not completed
+	// this is needed as cvars are not available during initialization
+
+	joy_avail = true; 
+	joy_advancedinit = false;
+
+	Con_Printf ("\njoystick detected\n\n"); 
+}
+
+/*
 void IN_StartupJoystick (void) 
 { 
 	int			numdevs;
@@ -905,7 +971,7 @@ void IN_StartupJoystick (void)
 
 	Con_Printf ("\njoystick detected\n\n"); 
 }
-
+*/
 
 /*
 ===========
@@ -1296,4 +1362,19 @@ void IN_JoyMove (usercmd_t *cmd)
 void IN_MouseMotion(int mx, int my) {
 	mouse_x += mx;
 	mouse_y += my;
+}
+/**
+ * Deactivates the active joystick.
+ */
+void IN_DeactivateJoystick(void) {
+	int state;
+
+	state = SDL_JoystickEventState(SDL_QUERY);
+	if (state == SDL_ENABLE) {
+		SDL_JoystickEventState(SDL_IGNORE);
+	}
+	if (pJoystick) {
+		SDL_JoystickClose(pJoystick);
+		pJoystick = NULL;
+	}
 }
