@@ -834,7 +834,6 @@ int main(int argc, char* argv[])
 	MEMORYSTATUS	lpBuffer;
 	static	char	cwd[1024];
 	int				t;
-	RECT			rect;
 	/* TODO: Remove win32 leftovers */
 	int				nCmdShow = -1;
 	HINSTANCE		hInstance;

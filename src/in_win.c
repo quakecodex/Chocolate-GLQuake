@@ -51,6 +51,8 @@ static qboolean	mouseshowtoggle = 1;
 static qboolean	dinput_acquired;
 static qboolean sdl_joystick = false; /* true idf SDL Joystick available */
 SDL_Joystick *pJoystick; /* 1st valid joystick */
+static int sdl_numJoyAxes = 0;
+
 
 static unsigned int		mstate_di;
 
@@ -59,12 +61,16 @@ static unsigned int		mstate_di;
 #define JOY_ABSOLUTE_AXIS	0x00000000		// control like a joystick
 #define JOY_RELATIVE_AXIS	0x00000010		// control like a mouse, spinner, trackball
 #define	JOY_MAX_AXES		6				// X, Y, Z, R, U, V
+#define JOY_MAX_BUTTONS		32
 #define JOY_AXIS_X			0
 #define JOY_AXIS_Y			1
 #define JOY_AXIS_Z			2
 #define JOY_AXIS_R			3
 #define JOY_AXIS_U			4
 #define JOY_AXIS_V			5
+
+static int sdl_joyAxes[JOY_MAX_AXES];
+static int sdl_joyButtons[JOY_MAX_BUTTONS];
 
 enum _ControlList
 {
@@ -895,6 +901,8 @@ void IN_StartupJoystick (void)
 
 	// save the joystick's number of buttons
 	joy_numbuttons = SDL_JoystickNumButtons(pJoystick);
+	if (joy_numbuttons > JOY_MAX_BUTTONS)
+		joy_numbuttons = JOY_MAX_BUTTONS;
 
 	// old button and POV states default to no buttons pressed
 	joy_oldbuttonstate = joy_oldpovstate = 0;
@@ -1004,6 +1012,58 @@ PDWORD RawValuePointer (int axis)
 Joy_AdvancedUpdate_f
 ===========
 */
+
+void Joy_AdvancedUpdate_f (void)
+{
+
+	// called once by IN_ReadJoystick and by user whenever an update is needed
+	// cvars are now available
+	int	i;
+	int numAxes = 0;
+	const char* joyName;
+
+	/* Get the joystick name */
+	joyName = SDL_JoystickName(0);
+	//Q_strcpy(joy_name.string, joyName);
+
+	/* Get the number of joystick axes */
+	numAxes = SDL_JoystickNumAxes(pJoystick);
+	if (numAxes > JOY_MAX_AXES)
+		numAxes = JOY_MAX_AXES;
+
+	sdl_numJoyAxes = numAxes;
+
+	// initialize all the maps
+	for (i = 0; i < numAxes; i++)
+	{
+		dwAxisMap[i] = AxisNada;
+		//dwControlMap[i] = JOY_ABSOLUTE_AXIS;
+		//pdwRawValue[i] = RawValuePointer(i);
+	}
+
+	if( joy_advanced.value == 0.0)
+	{
+		// default joystick initialization
+		// 2 axes only with joystick control
+		dwAxisMap[JOY_AXIS_X] = AxisTurn;
+		// dwControlMap[JOY_AXIS_X] = JOY_ABSOLUTE_AXIS;
+		dwAxisMap[JOY_AXIS_Y] = AxisForward;
+		// dwControlMap[JOY_AXIS_Y] = JOY_ABSOLUTE_AXIS;
+	}
+	else
+	{
+		if (Q_strcmp (joy_name.string, "joystick") != 0)
+		{
+			// notify user of advanced controller
+			Con_Printf ("\n%s configured\n\n", joy_name.string);
+		}
+	}
+
+	// compute the axes to collect from DirectInput
+	joy_flags = JOY_RETURNCENTERED | JOY_RETURNBUTTONS | JOY_RETURNPOV;
+}
+
+/*
 void Joy_AdvancedUpdate_f (void)
 {
 
@@ -1068,7 +1128,7 @@ void Joy_AdvancedUpdate_f (void)
 			joy_flags |= dwAxisFlags[i];
 		}
 	}
-}
+}*/
 
 
 /*
@@ -1092,13 +1152,13 @@ void IN_Commands (void)
 	buttonstate = ji.dwButtons;
 	for (i=0 ; i < (int)joy_numbuttons ; i++)
 	{
-		if ( (buttonstate & (1<<i)) && !(joy_oldbuttonstate & (1<<i)) )
+		if ( sdl_joyButtons[i] )
 		{
 			key_index = (i < 4) ? K_JOY1 : K_AUX1;
 			Key_Event (key_index + i, true);
 		}
 
-		if ( !(buttonstate & (1<<i)) && (joy_oldbuttonstate & (1<<i)) )
+		if ( !sdl_joyButtons[i] )
 		{
 			key_index = (i < 4) ? K_JOY1 : K_AUX1;
 			Key_Event (key_index + i, false);
@@ -1148,6 +1208,29 @@ IN_ReadJoystick
 */  
 qboolean IN_ReadJoystick (void)
 {
+	int i;
+	int temp;
+
+	SDL_JoystickUpdate();
+
+	for (i = 0; i < sdl_numJoyAxes; i++) {
+		 temp = SDL_JoystickGetAxis(pJoystick, i);
+		 sdl_joyAxes[i] = 0;
+		if ( ( temp < -3200 ) || (temp > 3200 ) ) 
+		{
+		  sdl_joyAxes[i] = temp;
+		}
+	}
+
+	for (i = 0; i < joy_numbuttons; i++) {
+		temp = SDL_JoystickGetButton(pJoystick, i);
+		sdl_joyButtons[i] = temp;
+	}
+	return true;
+}
+/*
+qboolean IN_ReadJoystick (void)
+{
 
 	memset (&ji, 0, sizeof(ji));
 	ji.dwSize = sizeof(ji);
@@ -1173,7 +1256,7 @@ qboolean IN_ReadJoystick (void)
 		// joy_avail = false;
 		return false;
 	}
-}
+}*/
 
 
 /*
@@ -1217,9 +1300,9 @@ void IN_JoyMove (usercmd_t *cmd)
 	for (i = 0; i < JOY_MAX_AXES; i++)
 	{
 		// get the floating point zero-centered, potentially-inverted data for the current axis
-		fAxisValue = (float) *pdwRawValue[i];
+		fAxisValue = (float) sdl_joyAxes[i];
 		// move centerpoint to zero
-		fAxisValue -= 32768.0;
+		//fAxisValue -= 32768.0;
 
 		if (joy_wwhack2.value != 0.0)
 		{
