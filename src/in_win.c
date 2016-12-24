@@ -45,13 +45,14 @@ static int		originalmouseparms[3], newmouseparms[3] = {0, 0, 1};
 
 unsigned int uiWheelMessage;
 qboolean	mouseactive;
-qboolean		mouseinitialized;
+qboolean	mouseinitialized;
 static qboolean	mouseparmsvalid, mouseactivatetoggle;
 static qboolean	mouseshowtoggle = 1;
 static qboolean	dinput_acquired;
 static qboolean sdl_joystick = false; /* true idf SDL Joystick available */
 SDL_Joystick *pJoystick; /* 1st valid joystick */
 static int sdl_numJoyAxes = 0;
+static int sdl_numJoyHats = 0;
 
 
 static unsigned int		mstate_di;
@@ -61,6 +62,7 @@ static unsigned int		mstate_di;
 #define JOY_ABSOLUTE_AXIS	0x00000000		// control like a joystick
 #define JOY_RELATIVE_AXIS	0x00000010		// control like a mouse, spinner, trackball
 #define	JOY_MAX_AXES		6				// X, Y, Z, R, U, V
+#define	JOY_MAX_HATS		6	
 #define JOY_MAX_BUTTONS		32
 #define JOY_AXIS_X			0
 #define JOY_AXIS_Y			1
@@ -71,6 +73,7 @@ static unsigned int		mstate_di;
 
 static int sdl_joyAxes[JOY_MAX_AXES];
 static int sdl_joyButtons[JOY_MAX_BUTTONS];
+static int sdl_joyHats[JOY_MAX_HATS];
 
 enum _ControlList
 {
@@ -1020,18 +1023,30 @@ void Joy_AdvancedUpdate_f (void)
 	// cvars are now available
 	int	i;
 	int numAxes = 0;
-	const char* joyName;
+	char* joyName;
 
 	/* Get the joystick name */
-	joyName = SDL_JoystickName(0);
+	joyName = (char*)SDL_JoystickName(0);
+	joy_name.string = joyName;
 	//Q_strcpy(joy_name.string, joyName);
 
 	/* Get the number of joystick axes */
 	numAxes = SDL_JoystickNumAxes(pJoystick);
 	if (numAxes > JOY_MAX_AXES)
 		numAxes = JOY_MAX_AXES;
-
 	sdl_numJoyAxes = numAxes;
+
+	/* Get number of Hats */
+	sdl_numJoyHats = SDL_JoystickNumHats(pJoystick);
+	if (sdl_numJoyHats  > JOY_MAX_HATS)
+		sdl_numJoyHats = JOY_MAX_HATS;
+
+	joy_haspov = false;
+	if (sdl_numJoyHats > 0) {
+		joy_haspov = true;
+	}
+
+	
 
 	// initialize all the maps
 	for (i = 0; i < numAxes; i++)
@@ -1140,6 +1155,7 @@ void IN_Commands (void)
 {
 	int		i, key_index;
 	DWORD	buttonstate, povstate;
+	int hatState;
 
 	if (!joy_avail)
 	{
@@ -1172,17 +1188,19 @@ void IN_Commands (void)
 		// this avoids any potential problems related to moving from one
 		// direction to another without going through the center position
 		povstate = 0;
-		if(ji.dwPOV != JOY_POVCENTERED)
+		hatState =  SDL_JoystickGetHat(pJoystick, 0);
+		if(hatState != JOY_POVCENTERED)
 		{
-			if (ji.dwPOV == JOY_POVFORWARD)
+			if (hatState == SDL_HAT_UP)
 				povstate |= 0x01;
-			if (ji.dwPOV == JOY_POVRIGHT)
+			if (hatState == SDL_HAT_RIGHT)
 				povstate |= 0x02;
-			if (ji.dwPOV == JOY_POVBACKWARD)
+			if (hatState == SDL_HAT_DOWN)
 				povstate |= 0x04;
-			if (ji.dwPOV == JOY_POVLEFT)
+			if (hatState == SDL_HAT_LEFT)
 				povstate |= 0x08;
 		}
+
 		// determine which bits have changed and key an auxillary event for each change
 		for (i=0 ; i < 4 ; i++)
 		{
@@ -1208,12 +1226,12 @@ IN_ReadJoystick
 */  
 qboolean IN_ReadJoystick (void)
 {
-	int i;
+	DWORD i;
 	int temp;
 
 	SDL_JoystickUpdate();
 
-	for (i = 0; i < sdl_numJoyAxes; i++) {
+	for (i = 0; i < (DWORD)sdl_numJoyAxes; i++) {
 		 temp = SDL_JoystickGetAxis(pJoystick, i);
 		 sdl_joyAxes[i] = 0;
 		if ( ( temp < -3200 ) || (temp > 3200 ) ) 
