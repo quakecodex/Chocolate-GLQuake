@@ -49,5 +49,9 @@
 ## [Unreleased] - 2016-12-14
 ### Changes
  - Ported mouse input to SDL
+ 
+## [Unreleased] - 2016-12-23
+### Changes
+ - Ported joystick input to SDL
 
 
