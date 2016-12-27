@@ -292,7 +292,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\in_win.c"
+				RelativePath=".\src\in_sdl.c"
 				>
 			</File>
 			<File

@@ -146,36 +146,6 @@ cvar_t		_windowed_mouse = {"_windowed_mouse","1", true};
 int			window_center_x, window_center_y, window_x, window_y, window_width, window_height;
 RECT		window_rect;
 
-
-void VID_HandlePause (qboolean pause)
-{
-}
-
-void VID_ForceLockState (int lk)
-{
-}
-
-void VID_LockBuffer (void)
-{
-}
-
-void VID_UnlockBuffer (void)
-{
-}
-
-int VID_ForceUnlockedAndReturnState (void)
-{
-	return 0;
-}
-
-void D_BeginDirectRect (int x, int y, byte *pbitmap, int width, int height)
-{
-}
-
-void D_EndDirectRect (int x, int y, int width, int height)
-{
-}
-
 /**
  * Sets up a windowed video mode.
  * @param	modenum		Index into modelist array for which video mode to set. Must be 0.
