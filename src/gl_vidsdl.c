@@ -34,7 +34,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <commctrl.h>
 
 
-#define MAX_MODE_LIST	30 /**< Maximum number of video modes supported by Quake. */
+#define MAX_MODE_LIST	128 /**< Maximum number of video modes supported by Quake. */
 #define VID_ROW_SIZE	3
 #define WARP_WIDTH		320
 #define WARP_HEIGHT		200
@@ -1163,7 +1163,7 @@ void	VID_Init (unsigned char *palette)
 				}
 				else
 				{
-					bpp = 15;
+					bpp = 32;// Was 15
 					findbpp = 1;
 				}
 
@@ -1245,12 +1245,13 @@ void	VID_Init (unsigned char *palette)
 								bpp = 16;
 								break;
 							case 16:
-								bpp = 32;
+								bpp = 15;
 								break;
 							case 32:
-								bpp = 24;
+								bpp = 32;
 								break;
 							case 24:
+								bpp = 32;
 								done = 1;
 								break;
 							}
@@ -1264,6 +1265,7 @@ void	VID_Init (unsigned char *palette)
 
 				if (!vid_default)
 				{
+					printf("Size: %d, %d\n", width, height);
 					Sys_Error ("Specified video mode not available");
 				}
 			}
