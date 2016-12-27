@@ -866,6 +866,7 @@ void R_SetupGL (void)
 	//
 	glMatrixMode(GL_PROJECTION);
     glLoadIdentity ();
+
 	x = r_refdef.vrect.x * glwidth/vid.width;
 	x2 = (r_refdef.vrect.x + r_refdef.vrect.width) * glwidth/vid.width;
 	y = (vid.height-r_refdef.vrect.y) * glheight/vid.height;
@@ -890,6 +891,10 @@ void R_SetupGL (void)
 		w = h = 256;
 	}
 
+	/* HACK: This should reference above code */
+	//w = r_refdef.vrect.width;
+	//h = r_refdef.vrect.height;
+	//glViewport (0, 0, w, h);
 	glViewport (glx + x, gly + y2, w, h);
     screenaspect = (float)r_refdef.vrect.width/r_refdef.vrect.height;
 //	yfov = 2*atan((float)r_refdef.vrect.height/r_refdef.vrect.width)*180/M_PI;
