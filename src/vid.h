@@ -59,23 +59,47 @@ extern	unsigned	d_8to24table[256];
 extern void (*vid_menudrawfn)(void);
 extern void (*vid_menukeyfn)(int key);
 
+/**
+ * Set the palette quake will use for rendering. Used to convert textures to full color for OpenGL.
+ * @param	palette		Array of 256 RGB triplets defining the palette.
+ */
 void	VID_SetPalette (unsigned char *palette);
 // called at startup and after any gamma correction
 
+/**
+ * Shifts the pallete towards a color. (Red or white.) Not used in GL Quake
+ * @param	palette		Array of 256 RGB triplets defining the palette.
+ */
 void	VID_ShiftPalette (unsigned char *palette);
 // called for bonus and pain flashes, and for underwater color changes
 
+/**
+ * Initializes the video system. Creates a window and initializes OpenGL. 
+ * @param	palette	Pointer to an array of 256 RGB triplets (unsigned byte) specifying the current palette
+ */
 void	VID_Init (unsigned char *palette);
 // Called at startup to set up translation tables, takes 256 8 bit RGB values
 // the palette data will go away after the call, so it must be copied off if
 // the video driver will need it again
 
+/**
+ * Exits the current video mode. Shuts down the app window and SDL.
+ */
 void	VID_Shutdown (void);
 // Called at shutdown
 
+/**
+ * Updates the video mode? Not used in GL Quake */
 void	VID_Update (vrect_t *rects);
 // flushes the given rectangles from the view buffer to the screen
 
+/**
+ * Sets up the video mode.
+ * @param	modenum		Index into modelist array for which video mode to set.
+ * @param	palette		Array of RGB triplets specifying the video palette. 
+ * Should be gamma corrected.
+ * @return	true (1) if the mode is set up.
+ */
 int VID_SetMode (int modenum, unsigned char *palette);
 // sets the mode; only used by the Quake engine for resetting to mode 0 (the
 // base mode) on memory allocation failures
