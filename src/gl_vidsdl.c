@@ -74,7 +74,6 @@ static vmode_t	modelist[MAX_MODE_LIST]; /**< List of available video modes. */
 static int		nummodes; /**< Number of modes in modelist. */
 static vmode_t	badmode; /**< Represents a bad video mode. */
 
-static DEVMODE	gdevmode;
 static qboolean	vid_initialized = false;
 static qboolean	windowed, leavecurrentmode;
 static qboolean vid_canalttab = false;
@@ -96,7 +95,6 @@ static qboolean fullsbardraw = false;
 
 static float vid_gamma = 1.0;
 
-HGLRC	baseRC;
 HDC		maindc;
 
 glvert_t glv;
@@ -109,7 +107,7 @@ unsigned short	d_8to16table[256];
 unsigned	d_8to24table[256];
 unsigned char d_15to8table[65536];
 
-float		gldepthmin, gldepthmax;
+float		gldepthmin, gldepthmax; // Move? gl_rmain?
 
 modestate_t	modestate = MS_UNINIT;
 
@@ -129,8 +127,6 @@ PROC glVertexPointerEXT;
 
 qboolean isPermedia = false;
 qboolean gl_mtexable = false;
-
-extern LONG CDAudio_MessageHandler(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 //====================================
 
@@ -776,8 +772,6 @@ void AppActivate(BOOL fActive, BOOL minimize)
 			IN_HideMouse ();
 			if (vid_canalttab && vid_wassuspended) {
 				vid_wassuspended = false;
-				ChangeDisplaySettings (&gdevmode, CDS_FULLSCREEN);
-				ShowWindow(mainwindow, SW_SHOWNORMAL);
 			}
 		}
 		else if ((modestate == MS_WINDOWED) && _windowed_mouse.value && key_dest == key_game)
