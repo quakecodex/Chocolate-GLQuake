@@ -142,6 +142,11 @@ cvar_t		_windowed_mouse = {"_windowed_mouse","1", true};
 int			window_center_x, window_center_y, window_x, window_y, window_width, window_height;
 RECT		window_rect;
 
+SDL_Surface *quakeicon; /** Quake icon for window title bar */
+
+int VID_LoadQuakeIcon(void);
+void VID_FreeQuakeIcon(void);
+
 /**
  * Sets up a windowed video mode.
  * @param	modenum		Index into modelist array for which video mode to set. Must be 0.
@@ -593,6 +598,7 @@ void	VID_Shutdown (void)
 	}
 
 	/* Shutdown SDL */
+	VID_FreeQuakeIcon();
 	SDL_Quit();
 }
 
@@ -1293,6 +1299,8 @@ void	VID_Init (unsigned char *palette)
         Sys_Error("Unable to set video mode.");
 
 	SDL_WM_SetCaption("Chocolate GL Quake", "CGLQuake");
+	if (VID_LoadQuakeIcon() == 0) 
+		SDL_WM_SetIcon(quakeicon, NULL);
 
 	/* Get the window handle for the other systems, input, etc */
 	/* TODO: Remove */
@@ -1429,5 +1437,55 @@ void VID_MenuKey (int key)
 
 	default:
 		break;
+	}
+}
+
+/**
+ * Loads in the Quake icon for the title bar. Icon must be named "quake.bmp"
+ * and be located in same directory as chocolate-glquake.exe. Use magenta
+ * as the transparent color key (R:266, G:0, B:255).
+ * @return	0 on success, -1 on error 
+ */
+int VID_LoadQuakeIcon(void) 
+{
+	SDL_Surface* pimage = NULL;
+	SDL_Surface* ptemp = SDL_LoadBMP(".\\quake.bmp");
+
+	quakeicon = NULL;
+
+	if (!ptemp) 
+	{
+		Con_Printf("Unable to load title bar icon.\n");
+		return -1;
+	}
+
+	if (ptemp) 
+	{
+		pimage = SDL_DisplayFormat(ptemp);
+        SDL_FreeSurface(ptemp);
+
+        /* Remove background color key */
+		if (pimage != NULL) 
+		{
+			Uint32 colorKey = SDL_MapRGB(pimage->format, 255, 0, 255);
+			SDL_SetColorKey(pimage, SDL_SRCCOLORKEY, colorKey);
+		} else {
+			Con_Printf("Unable to process title bar icon.\n");
+			return -1;
+		}
+	}
+	quakeicon = pimage;
+	return 0;
+}
+
+/** 
+ * Frees the resources taken by the Quake titlebar icon.
+ */
+void VID_FreeQuakeIcon(void) 
+{
+	if (quakeicon) 
+	{
+		SDL_FreeSurface(quakeicon);
+		quakeicon = NULL;
 	}
 }
