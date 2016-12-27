@@ -31,21 +31,19 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "sdlquake.h"
 #include "../resources/resource.h"
 
-#include <commctrl.h>
-
 
 #define MAX_MODE_LIST	128 /**< Maximum number of video modes supported by Quake. */
 #define VID_ROW_SIZE	3
 #define WARP_WIDTH		320
 #define WARP_HEIGHT		200
-#define MAXWIDTH		10000
-#define MAXHEIGHT		10000
+#define MAXWIDTH		10000 /**< Maximum window width */
+#define MAXHEIGHT		10000 /**< Maximum window height */
 #define BASEWIDTH		320 /**< Minimum window width */
 #define BASEHEIGHT		200 /**< Minimum window height */
 
-#define MODE_WINDOWED			0
-#define NO_MODE					(MODE_WINDOWED - 1)
-#define MODE_FULLSCREEN_DEFAULT	(MODE_WINDOWED + 1)
+#define MODE_WINDOWED			0	/**< Indicates a windowed video mode */
+#define NO_MODE					(MODE_WINDOWED - 1) /**< Invalid or unset video mode */
+#define MODE_FULLSCREEN_DEFAULT	(MODE_WINDOWED + 1) /**< Fullscreen video mode */
 
 /**
  * Defines a video mode.
@@ -62,10 +60,10 @@ typedef struct {
 	char		modedesc[17]; /**< Human readable description of the mode. */
 } vmode_t;
 
-const char *gl_vendor; /**< GPU Vendor. */
-const char *gl_renderer; /**< OpenGL renderer. */
-const char *gl_version; /**< OpenGL version. */
-const char *gl_extensions; /**< List of available OpenGL extensions. */
+const char		*gl_vendor; /**< GPU Vendor. */
+const char		*gl_renderer; /**< OpenGL renderer. */
+const char		*gl_version; /**< OpenGL version. */
+const char		*gl_extensions; /**< List of available OpenGL extensions. */
 
 qboolean		DDActive; /**< DirectDraw active? */
 qboolean		scr_skipupdate; /**< Set to true to skip a backbuffer swap during rendering. */
@@ -74,7 +72,7 @@ static vmode_t	modelist[MAX_MODE_LIST]; /**< List of available video modes. */
 static int		nummodes; /**< Number of modes in modelist. */
 static vmode_t	badmode; /**< Represents a bad video mode. */
 
-static qboolean	vid_initialized = false;
+static qboolean	vid_initialized = false; /** Indicate if video sytem is initialized. */
 static qboolean	windowed, leavecurrentmode;
 static qboolean vid_canalttab = false;
 static qboolean vid_wassuspended = false;
@@ -82,34 +80,32 @@ static int		windowed_mouse;
 extern qboolean	mouseactive;  // from in_win.c
 static HICON	hIcon;
 
-int			DIBWidth, DIBHeight;
+int				DIBWidth, DIBHeight;
 
-HWND	mainwindow, dibwindow;
+HWND			mainwindow, dibwindow;
 
-int			vid_modenum = NO_MODE;
-int			vid_realmode;
-int			vid_default = MODE_WINDOWED;
-static int	windowed_default;
+int				vid_modenum = NO_MODE;
+int				vid_realmode;
+int				vid_default = MODE_WINDOWED;
+static int		windowed_default;
 unsigned char	vid_curpal[256*3];
 static qboolean fullsbardraw = false;
 
-static float vid_gamma = 1.0;
+static float	vid_gamma = 1.0;
 
-HDC		maindc;
+glvert_t		glv;
 
-glvert_t glv;
+cvar_t			gl_ztrick = {"gl_ztrick","1"};
 
-cvar_t	gl_ztrick = {"gl_ztrick","1"};
-
-viddef_t	vid;				// global video state
+viddef_t		vid;				// global video state
 
 unsigned short	d_8to16table[256];
-unsigned	d_8to24table[256];
-unsigned char d_15to8table[65536];
+unsigned		d_8to24table[256];
+unsigned char	d_15to8table[65536];
 
-float		gldepthmin, gldepthmax; // Move? gl_rmain?
+float			gldepthmin, gldepthmax; // Move? gl_rmain?
 
-modestate_t	modestate = MS_UNINIT;
+modestate_t		modestate = MS_UNINIT;
 
 void VID_MenuDraw (void);
 void VID_MenuKey (int key);
@@ -155,35 +151,30 @@ qboolean VID_SetWindowedMode (int modenum)
 {
 	int	lastmodestate, width, height;
 
-	/* Save the current video mode type. Windowed, fullscreen etc. */
 	lastmodestate = modestate;
-
-	/* Set up the window's size */
+ 
 	DIBWidth = modelist[modenum].width;
 	DIBHeight = modelist[modenum].height;
 	width = DIBWidth;
 	height = DIBHeight;
 
-	/* Set up the mode's type */
 	modestate = MS_WINDOWED;
 
-	/* Save window size into the global video mode struct */
 	vid.width = modelist[modenum].width;
 	vid.height = modelist[modenum].height;
 
-	/* Set up the console size */
 	if (vid.conheight > (unsigned int)modelist[modenum].height)
 		vid.conheight = (unsigned int)modelist[modenum].height;
 	if (vid.conwidth > (unsigned int)modelist[modenum].width)
 		vid.conwidth = (unsigned int)modelist[modenum].width;
-	vid.conwidth = modelist[modenum].width & 0xfff8; /* Must be a power of 8 */
+	vid.conwidth = modelist[modenum].width & 0xfff8; // Must be a multiple of 8 
 	vid.conheight = vid.conwidth * vid.height / vid.width;
 	
 
-	vid.numpages = 2;  /* Backbuffer? */
+	vid.numpages = 2; 
 	
-	/* Get a handle to the window. For compatability until SDL is fully implemented */
-    mainwindow = GetActiveWindow();
+	// Get a handle to the window. For compatability until SDL is fully implemented 
+    mainwindow = GetActiveWindow(); // REMOVE
 
 	return true;
 }
@@ -198,7 +189,6 @@ qboolean VID_SetFullDIBMode (int modenum)
 	int	lastmodestate;
 	int result;
 
-	/* Make sure video mode is supported */
 	if (!leavecurrentmode)
 	{
 		result = SDL_VideoModeOK(modelist[modenum].width, 
@@ -212,21 +202,15 @@ qboolean VID_SetFullDIBMode (int modenum)
 		}
 	}
 
-	/* Save the current video mode type. Windowed, fullscreen etc. */
 	lastmodestate = modestate;
-
-	/* Set fullscreen mode */
 	modestate = MS_FULLDIB;
 
-	/* Set the window size */
 	DIBWidth = modelist[modenum].width;
 	DIBHeight = modelist[modenum].height;
 
-	/* Save size to global video mode struct */
 	vid.width = modelist[modenum].width;
 	vid.height = modelist[modenum].height;
 
-	/* Calculate console size */
 	if (vid.conheight > (unsigned int)modelist[modenum].height)
 		vid.conheight = (unsigned int)modelist[modenum].height;
 	if (vid.conwidth > (unsigned int)modelist[modenum].width)
@@ -234,9 +218,8 @@ qboolean VID_SetFullDIBMode (int modenum)
 	vid.conwidth = modelist[modenum].width & 0xfff8; /* Must be multiple of 8 */
 	vid.conheight = vid.conwidth * vid.height / vid.width;
 
-	vid.numpages = 2; /* Double buffered */
+	vid.numpages = 2; 
 
-	/* Set window's top-left corner coords -- Needed? */
 	window_x = 0;
 	window_y = 0;
 
@@ -256,7 +239,6 @@ int VID_SetMode (int modenum, unsigned char *palette)
 	int				original_mode, temp;
 	qboolean		stat;
 
-	/* Make sure correct mode is being asked for the type. (windowed or fullscreen.) */
 	if ((windowed && (modenum != 0)) ||
 		(!windowed && (modenum < 1)) ||
 		(!windowed && (modenum >= nummodes)))
@@ -264,32 +246,26 @@ int VID_SetMode (int modenum, unsigned char *palette)
 		Sys_Error ("Bad video mode\n");
 	}
 
-	/* Disable screen? Console? */
-    /* so Con_Printfs don't mess us up by forcing vid and snd updates */
 	temp = scr_disabled_for_loading;
 	scr_disabled_for_loading = true;
 
 	CDAudio_Pause ();
 
-	/* Set default mode if none has been specified */
 	if (vid_modenum == NO_MODE)
 		original_mode = windowed_default;
 	else
 		original_mode = vid_modenum;
 
-	// Set either the fullscreen or windowed mode
 	if (modelist[modenum].type == MS_WINDOWED)
 	{
 		if (_windowed_mouse.value && key_dest == key_game)
 		{
-			/* Windowed mode with mouse support */
 			stat = VID_SetWindowedMode(modenum);
 			IN_ActivateMouse ();
 			IN_HideMouse ();
 		}
 		else
 		{
-			/* Windowed mode without mouse */
 			IN_DeactivateMouse ();
 			IN_ShowMouse ();
 			stat = VID_SetWindowedMode(modenum);
@@ -297,7 +273,6 @@ int VID_SetMode (int modenum, unsigned char *palette)
 	}
 	else if (modelist[modenum].type == MS_FULLDIB)
 	{
-		/* Fullscreen mode */
 		stat = VID_SetFullDIBMode(modenum);
 		IN_ActivateMouse ();
 		IN_HideMouse ();
@@ -307,7 +282,6 @@ int VID_SetMode (int modenum, unsigned char *palette)
 		Sys_Error ("VID_SetMode: Bad mode type in modelist");
 	}
 
-	/* Save size to global size vars */
 	window_width = DIBWidth;
 	window_height = DIBHeight;
 	VID_UpdateWindowStatus ();
@@ -320,13 +294,11 @@ int VID_SetMode (int modenum, unsigned char *palette)
 		Sys_Error ("Couldn't set video mode");
 	}
 
-	/* Save the modenum to globar var and set the cvar */
 	vid_modenum = modenum;
 	Cvar_SetValue ("vid_mode", (float)vid_modenum);
 
 	Sleep (100);
 
-	// fix the leftover Alt from any Alt-Tab or the like that switched us away
 	ClearAllStates ();
 
 	if (!msg_suppress_1)
@@ -334,7 +306,7 @@ int VID_SetMode (int modenum, unsigned char *palette)
 
 	VID_SetPalette (palette);
 
-	vid.recalc_refdef = 1; /* Tell renderer to calculate new size for render target? */
+	vid.recalc_refdef = 1;
 
 	return true;
 }
@@ -368,7 +340,6 @@ void CheckTextureExtensions (void)
 	HINSTANCE	hInstGL;
 
 	texture_ext = FALSE;
-	/* check for texture extension */
 	tmp = (unsigned char *)glGetString(GL_EXTENSIONS);
 	while (*tmp)
 	{
@@ -391,7 +362,6 @@ void CheckTextureExtensions (void)
 		return;
 	}
 
-	/* load library and get procedure adresses for texture extension API */
 	if ((bindTexFunc = (BINDTEXFUNCPTR)
 		wglGetProcAddress((LPCSTR) "glBindTextureEXT")) == NULL)
 	{
@@ -417,6 +387,9 @@ void CheckMultiTextureExtensions(void)
 	}
 }
 #else
+/**
+ * Check if OpenGL multitexture functions are available
+ */
 void CheckMultiTextureExtensions(void) 
 {
 	gl_mtexable = true;
@@ -431,7 +404,6 @@ void GL_Init (void)
 {
 	char ext[2048];
 
-	/* See what type of setup the system has and print it to the console */
 	gl_vendor = glGetString (GL_VENDOR);
 	Con_Printf ("GL_VENDOR: %s\n", gl_vendor);
 	gl_renderer = glGetString (GL_RENDERER);
@@ -448,18 +420,15 @@ void GL_Init (void)
 
 //	Con_Printf ("%s %s\n", gl_renderer, gl_version);
 	
-	/* Set propertys based on specific vendors. Remove? */
     if (_strnicmp(gl_renderer,"PowerVR",7)==0)
          fullsbardraw = true;
 
     if (_strnicmp(gl_renderer,"Permedia",8)==0)
          isPermedia = true;
 
-	/* Check for extensions */
 	CheckTextureExtensions ();
 	CheckMultiTextureExtensions ();
 
-	/* Set up basic OpenGL filtering and shading settings */
 	glClearColor (1,0,0,0);
 	glCullFace(GL_FRONT);
 	glEnable(GL_TEXTURE_2D);
@@ -477,7 +446,6 @@ void GL_Init (void)
 
 	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-//	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 }
 
@@ -499,7 +467,9 @@ void GL_BeginRendering (int *x, int *y, int *width, int *height)
 	*height = vid.height;
 }
 
-
+/** 
+ * Ends a rendering pass.
+ */
 void GL_EndRendering (void)
 {
 	if (!scr_skipupdate || block_drawing) {
@@ -530,6 +500,10 @@ void GL_EndRendering (void)
 		Sbar_Changed();
 }
 
+/**
+ * Set the palette quake will use for rendering. Used to convert textures to full color for OpenGL.
+ * @param	palette		Array of 256 RGB triplets defining the palette.
+ */
 void	VID_SetPalette (unsigned char *palette)
 {
 	byte	*pal;
@@ -588,6 +562,9 @@ void	VID_SetPalette (unsigned char *palette)
 
 BOOL	gammaworks;
 
+/**
+ * Does nothing?
+ */
 void	VID_ShiftPalette (unsigned char *palette)
 {
 	extern	byte ramps[3][256];
@@ -597,13 +574,17 @@ void	VID_ShiftPalette (unsigned char *palette)
 //	gammaworks = SetDeviceGammaRamp (maindc, ramps);
 }
 
-
+/** 
+ * Deactivates the mouse for the default windowed video mode.
+ */
 void VID_SetDefaultMode (void)
 {
 	IN_DeactivateMouse ();
 }
 
-
+/**
+ * Exits the current video mode. Shuts down the app window and SDL.
+ */
 void	VID_Shutdown (void)
 {
 	if (vid_initialized)
@@ -611,11 +592,11 @@ void	VID_Shutdown (void)
 		AppActivate(false, false);
 	}
 
-
 	/* Shutdown SDL */
 	SDL_Quit();
 }
 
+/** Lookup table for scan code to Quake key conversion */
 byte        scantokey[128] = 
 					{ 
 //  0           1       2       3       4       5       6       7 
@@ -638,6 +619,7 @@ byte        scantokey[128] =
 	0  ,    0  ,    0  ,    0  ,    0  ,    0  ,    0  ,    0         // 7 
 					}; 
 
+/** Lookup table for scan code to Quake key conversion while holding shift key */
 byte        shiftscantokey[128] = 
 					{ 
 //  0           1       2       3       4       5       6       7 
@@ -661,13 +643,11 @@ byte        shiftscantokey[128] =
 					}; 
 
 
-/*
-=======
-MapKey
-
-Map from windows to quake keynums
-=======
-*/
+/**
+ * Maps a key from windows scan codes to Quake key codes.
+ * @param	key	Scan code to map.
+ * @return	The Quake key code.
+ */
 int MapKey (int key)
 {
 	key = (key>>16)&255;
@@ -678,19 +658,9 @@ int MapKey (int key)
 	return scantokey[key];
 }
 
-/*
-===================================================================
-
-MAIN WINDOW
-
-===================================================================
-*/
-
-/*
-================
-ClearAllStates
-================
-*/
+/**
+ * Clears all current input from the queue
+ */
 void ClearAllStates (void)
 {
 	int		i;
@@ -705,17 +675,15 @@ void ClearAllStates (void)
 	IN_ClearStates ();
 }
 
+/**
+ * Activates Quake's window so it's ready to run.
+ * If the application is activating, then swap the system
+ * into SYSPAL_NOSTATIC mode so that our palettes will display
+ * correctly.
+ * @param	fActive		True if the app window is activating.
+ * @param	minimize	True if the window is minimized.
+ */
 void AppActivate(BOOL fActive, BOOL minimize)
-/****************************************************************************
-*
-* Function:     AppActivate
-* Parameters:   fActive - True if app is activating
-*
-* Description:  If the application is activating, then swap the system
-*               into SYSPAL_NOSTATIC mode so that our palettes will display
-*               correctly.
-*
-****************************************************************************/
 {
 	static BOOL	sound_active;
 
@@ -771,22 +739,22 @@ void AppActivate(BOOL fActive, BOOL minimize)
 }
 
 
-/*
-=================
-VID_NumModes
-=================
-*/
+/**
+ * Gets the number of video modes available for rendering.
+ * @return Number of available video modes.
+ */
 int VID_NumModes (void)
 {
 	return nummodes;
 }
 
 	
-/*
-=================
-VID_GetModePtr
-=================
-*/
+/**
+ * Returns a pointer to a modestate_t struct describing a video mode.
+ * @param	modenum		Index into modelist array.
+ * @return	modestate_t struct describing the video mode, or badmode if 
+ * the video mode is invalide.
+ */
 vmode_t *VID_GetModePtr (int modenum)
 {
 
@@ -797,11 +765,11 @@ vmode_t *VID_GetModePtr (int modenum)
 }
 
 
-/*
-=================
-VID_GetModeDescription
-=================
-*/
+/**
+ * Returns a human readable description of a video mode.
+ * @param	mode	Index into Index into modelist array.
+ * @return	A string containing the video mode description.
+ */
 char *VID_GetModeDescription (int mode)
 {
 	char		*pinfo;
@@ -828,8 +796,13 @@ char *VID_GetModeDescription (int mode)
 }
 
 
+/**
+ * Returns a human readable description of a video mode including 
+ * the driver name description.
+ * @param	mode	Index into Index into modelist array.
+ * @return	A string containing the video mode description.
+ */
 // KJB: Added this to return the mode driver name in description for console
-
 char *VID_GetExtModeDescription (int mode)
 {
 	static char	pinfo[40];
@@ -864,22 +837,18 @@ char *VID_GetExtModeDescription (int mode)
 }
 
 
-/*
-=================
-VID_DescribeCurrentMode_f
-=================
-*/
+/**
+ * Prints the current video mode description to the console.
+ */
 void VID_DescribeCurrentMode_f (void)
 {
 	Con_Printf ("%s\n", VID_GetExtModeDescription (vid_modenum));
 }
 
 
-/*
-=================
-VID_NumModes_f
-=================
-*/
+/**
+ * Prints number of video modes available to the console.
+ */
 void VID_NumModes_f (void)
 {
 
@@ -890,11 +859,9 @@ void VID_NumModes_f (void)
 }
 
 
-/*
-=================
-VID_DescribeMode_f
-=================
-*/
+/**
+ * Prints the current video mode description to the console.
+ */
 void VID_DescribeMode_f (void)
 {
 	int		t, modenum;
@@ -910,11 +877,9 @@ void VID_DescribeMode_f (void)
 }
 
 
-/*
-=================
-VID_DescribeModes_f
-=================
-*/
+/**
+ * Prints the current video mode description to the console.
+ */
 void VID_DescribeModes_f (void)
 {
 	int			i, lnummodes, t;
@@ -936,8 +901,10 @@ void VID_DescribeModes_f (void)
 	leavecurrentmode = t;
 }
 
-
-void VID_InitDIB (HINSTANCE hInstance)
+/**
+ * Sets up the windowed video mode. (Mode 0) Adds it to modelist.
+ */
+void VID_InitDIB (void)
 {
 	modelist[0].type = MS_WINDOWED;
 
@@ -950,7 +917,7 @@ void VID_InitDIB (HINSTANCE hInstance)
 		modelist[0].width = 320;
 
 	if (COM_CheckParm("-height"))
-		modelist[0].height= Q_atoi(com_argv[COM_CheckParm("-height")+1]);
+		modelist[0].height = Q_atoi(com_argv[COM_CheckParm("-height")+1]);
 	else
 		modelist[0].height = modelist[0].width * 240/320;
 
@@ -970,28 +937,27 @@ void VID_InitDIB (HINSTANCE hInstance)
 }
 
 
-/*
-=================
-VID_InitFullDIB
-=================
-*/
-void VID_InitFullDIB (HINSTANCE hInstance)
+/** 
+ * Gets a list of fullscreen video modes and adds them to modelist.
+ */
+void VID_InitFullDIB (void)
 {
 	int		i, modenum, originalnummodes;
-	SDL_Rect**		modes; /* Hold list of SDL supported modes */
-	SDL_PixelFormat pf; /* BPP of modes to check for */
+	SDL_Rect** modes;
+	SDL_PixelFormat pf; 
 
 	originalnummodes = nummodes;
 	modenum = 0;
 
-	/* Get 16-bit Modes */
-	pf.BitsPerPixel = 16;
+	// Get 32-bit Modes 
+	pf.BitsPerPixel = 32;
 	modes = SDL_ListModes(&pf, SDL_OPENGL | SDL_FULLSCREEN);
 	if (modes != (SDL_Rect **)0){
 		for (i = 0; modes[i]; i++) {
 			if (i >= MAX_MODE_LIST) 
 				break;
-			if ((modes[i]->w < BASEWIDTH) || (modes[i]->w > MAXWIDTH) || (modes[i]->h > MAXHEIGHT) || (modes[i]->h < BASEHEIGHT)) {
+			if ((modes[i]->w < BASEWIDTH) || (modes[i]->w > MAXWIDTH) || 
+				(modes[i]->h < BASEHEIGHT) || (modes[i]->h > MAXHEIGHT)) {
 				continue;
 			}
 			modelist[nummodes].type = MS_FULLDIB;
@@ -1010,14 +976,15 @@ void VID_InitFullDIB (HINSTANCE hInstance)
 		
 	}
 
-	/* Get 32-bit Modes */
-	pf.BitsPerPixel = 32;
+	// Get 16-bit Modes 
+	pf.BitsPerPixel = 16;
 	modes = SDL_ListModes(&pf, SDL_OPENGL | SDL_FULLSCREEN);
 	if (modes != (SDL_Rect **)0){
 		for (i = 0; modes[i]; i++) {
 			if (i >= MAX_MODE_LIST) 
 				break;
-			if ((modes[i]->w < BASEWIDTH) || (modes[i]->w > MAXWIDTH) || (modes[i]->h > MAXHEIGHT) || (modes[i]->h < BASEHEIGHT)) {
+			if ((modes[i]->w < BASEWIDTH) || (modes[i]->w > MAXWIDTH) || 
+				(modes[i]->h < BASEHEIGHT) || (modes[i]->h > MAXHEIGHT)) {
 				continue;
 			}
 			modelist[nummodes].type = MS_FULLDIB;
@@ -1040,6 +1007,10 @@ void VID_InitFullDIB (HINSTANCE hInstance)
 		Con_SafePrintf ("No fullscreen DIB modes found\n");
 }
 
+/**
+ * Adjusts the palette to match monitor gamma. (Gamma 1.0 by default.)
+ * @param	pal		Arry of RGB triplets specifying the palette.
+ */
 static void Check_Gamma (unsigned char *pal)
 {
 	float	f, inf;
@@ -1105,17 +1076,18 @@ void	VID_Init (unsigned char *palette)
 	Cmd_AddCommand ("vid_describemodes", VID_DescribeModes_f);
 
 	/* Initialize SDL */
-	if ((SDL_Init(SDL_INIT_VIDEO) == -1)) { 
+	if ((SDL_Init(SDL_INIT_VIDEO) == -1)) 
+	{
         Sys_Error("Unable to initialize SDL.\n");
 		return;
     }
 
 	/* Get list of windowed video modes */
-	VID_InitDIB (global_hInstance);
+	VID_InitDIB ();
 	basenummodes = nummodes = 1;
 
 	/* Get list of fullscreen video modes */
-	VID_InitFullDIB (global_hInstance);
+	VID_InitFullDIB ();
 
 	/* Check if user specified video mode at the command line */
 	if (COM_CheckParm("-window"))
@@ -1245,7 +1217,7 @@ void	VID_Init (unsigned char *palette)
 								bpp = 16;
 								break;
 							case 16:
-								bpp = 15;
+								bpp = 16;
 								break;
 							case 32:
 								bpp = 32;
@@ -1314,13 +1286,11 @@ void	VID_Init (unsigned char *palette)
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
 	sdlFlags = SDL_OPENGL;
-	if (modelist[vid_default].fullscreen) {
+	if (modelist[vid_default].fullscreen)
 		sdlFlags |= SDL_FULLSCREEN;
-	}
 	pBackbuffer = SDL_SetVideoMode(modelist[vid_default].width, modelist[vid_default].height, 32, sdlFlags);
-    if (pBackbuffer == NULL) {
+    if (pBackbuffer == NULL) 
         Sys_Error("Unable to set video mode.");
-    }
 
 	SDL_WM_SetCaption("Chocolate GL Quake", "CGLQuake");
 
@@ -1376,11 +1346,9 @@ typedef struct
 
 static modedesc_t	modedescs[MAX_MODEDESCS];
 
-/*
-================
-VID_MenuDraw
-================
-*/
+/** 
+ * Draws the video menu.
+ */
 void VID_MenuDraw (void)
 {
 	qpic_t		*p;
@@ -1447,11 +1415,9 @@ void VID_MenuDraw (void)
 }
 
 
-/*
-================
-VID_MenuKey
-================
-*/
+/** 
+ * Handles video menu input. Currently only allows going back. (Pressing ESC.)
+ */
 void VID_MenuKey (int key)
 {
 	switch (key)
