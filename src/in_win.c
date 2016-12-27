@@ -26,12 +26,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "sdlquake.h"
 #include "dosisms.h"
 
-#define DINPUT_BUFFERSIZE           16
-#define iDirectInputCreate(a,b,c,d)	pDirectInputCreate(a,b,c,d)
-
-HRESULT (WINAPI *pDirectInputCreate)(HINSTANCE hinst, DWORD dwVersion,
-	LPDIRECTINPUT * lplpDirectInput, LPUNKNOWN punkOuter);
-
 // mouse variables
 cvar_t	m_filter = {"m_filter","0"};
 
@@ -53,9 +47,6 @@ static qboolean sdl_joystick = false; /* true idf SDL Joystick available */
 SDL_Joystick *pJoystick; /* 1st valid joystick */
 static int sdl_numJoyAxes = 0;
 static int sdl_numJoyHats = 0;
-
-
-static unsigned int		mstate_di;
 
 // joystick defines and variables
 // where should defines be moved?
@@ -87,7 +78,6 @@ DWORD	dwAxisFlags[JOY_MAX_AXES] =
 
 DWORD	dwAxisMap[JOY_MAX_AXES];
 DWORD	dwControlMap[JOY_MAX_AXES];
-PDWORD	pdwRawValue[JOY_MAX_AXES];
 
 // none of these cvars are saved over a session
 // this means that advanced controller configuration needs to be executed
@@ -120,13 +110,6 @@ DWORD		joy_oldbuttonstate, joy_oldpovstate;
 int			joy_id;
 DWORD		joy_flags;
 DWORD		joy_numbuttons;
-
-static LPDIRECTINPUT		g_pdi;
-static LPDIRECTINPUTDEVICE	g_pMouse;
-
-static JOYINFOEX	ji;
-
-static HINSTANCE hInstDI;
 
 static qboolean	dinput;
 
@@ -239,31 +222,13 @@ void IN_ActivateMouse (void)
 
 	if (mouseinitialized)
 	{
-		if (dinput)
-		{
-			if (g_pMouse)
-			{
-				if (!dinput_acquired)
-				{
-					IDirectInputDevice_Acquire(g_pMouse);
-					dinput_acquired = true;
-				}
-			}
-			else
-			{
-				return;
-			}
-		}
-		else
-		{
-			if (mouseparmsvalid)
-				restore_spi = SystemParametersInfo (SPI_SETMOUSE, 0, newmouseparms, 0);
+		if (mouseparmsvalid)
+			restore_spi = SystemParametersInfo (SPI_SETMOUSE, 0, newmouseparms, 0);
 
-			SDL_WarpMouse(window_center_x, window_center_y);
-			//SetCapture (mainwindow);
-			//ClipCursor (&window_rect);
-			SDL_WM_GrabInput(SDL_GRAB_ON);
-		}
+		SDL_WarpMouse(window_center_x, window_center_y);
+		//SetCapture (mainwindow);
+		//ClipCursor (&window_rect);
+		SDL_WM_GrabInput(SDL_GRAB_ON);
 
 		mouseactive = true;
 	}
@@ -294,26 +259,10 @@ void IN_DeactivateMouse (void)
 
 	if (mouseinitialized)
 	{
-		if (dinput)
-		{
-			if (g_pMouse)
-			{
-				if (dinput_acquired)
-				{
-					IDirectInputDevice_Unacquire(g_pMouse);
-					dinput_acquired = false;
-				}
-			}
-		}
-		else
-		{
-			if (restore_spi)
-				SystemParametersInfo (SPI_SETMOUSE, 0, originalmouseparms, 0);
+		if (restore_spi)
+			SystemParametersInfo (SPI_SETMOUSE, 0, originalmouseparms, 0);
 
-			//ClipCursor (NULL);
-			//ReleaseCapture ();
-			SDL_WM_GrabInput(SDL_GRAB_OFF);
-		}
+		SDL_WM_GrabInput(SDL_GRAB_OFF);
 
 		mouseactive = false;
 	}
@@ -457,18 +406,6 @@ void IN_Shutdown (void)
 	IN_DeactivateMouse ();
 	IN_ShowMouse ();
 	IN_DeactivateJoystick();
-
-    if (g_pMouse)
-	{
-		IDirectInputDevice_Release(g_pMouse);
-		g_pMouse = NULL;
-	}
-
-    if (g_pdi)
-	{
-		IDirectInput_Release(g_pdi);
-		g_pdi = NULL;
-	}
 
 	if (sdl_joystick) {
 		SDL_QuitSubSystem(SDL_INIT_JOYSTICK);
@@ -714,8 +651,7 @@ void Joy_AdvancedUpdate_f (void)
 	for (i = 0; i < numAxes; i++)
 	{
 		dwAxisMap[i] = AxisNada;
-		//dwControlMap[i] = JOY_ABSOLUTE_AXIS;
-		//pdwRawValue[i] = RawValuePointer(i);
+		dwControlMap[i] = JOY_ABSOLUTE_AXIS;
 	}
 
 	if( joy_advanced.value == 0.0)
@@ -749,7 +685,7 @@ IN_Commands
 void IN_Commands (void)
 {
 	int		i, key_index;
-	DWORD	buttonstate, povstate;
+	DWORD	povstate;
 	int hatState;
 
 	if (!joy_avail)
@@ -760,7 +696,6 @@ void IN_Commands (void)
 	
 	// loop through the joystick buttons
 	// key a joystick event or auxillary event for higher number buttons for each state change
-	buttonstate = ji.dwButtons;
 	for (i=0 ; i < (int)joy_numbuttons ; i++)
 	{
 		if ( sdl_joyButtons[i] )
@@ -775,7 +710,6 @@ void IN_Commands (void)
 			Key_Event (key_index + i, false);
 		}
 	}
-	joy_oldbuttonstate = buttonstate;
 
 	if (joy_haspov)
 	{
@@ -784,6 +718,7 @@ void IN_Commands (void)
 		// direction to another without going through the center position
 		povstate = 0;
 		hatState =  SDL_JoystickGetHat(pJoystick, 0);
+		/* TODO: Clean this shit up */
 		if(hatState != JOY_POVCENTERED)
 		{
 			if (hatState == SDL_HAT_UP)
