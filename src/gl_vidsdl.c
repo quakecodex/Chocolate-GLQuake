@@ -1448,7 +1448,7 @@ void VID_MenuKey (int key)
  */
 int VID_LoadQuakeIcon(void) 
 {
-	SDL_Surface* pimage = NULL;
+	SDL_Surface* picon = NULL;
 	SDL_Surface* ptemp = SDL_LoadBMP(".\\quake.bmp");
 
 	quakeicon = NULL;
@@ -1461,20 +1461,20 @@ int VID_LoadQuakeIcon(void)
 
 	if (ptemp) 
 	{
-		pimage = SDL_DisplayFormat(ptemp);
+		picon = SDL_DisplayFormat(ptemp);
         SDL_FreeSurface(ptemp);
 
-        /* Remove background color key */
-		if (pimage != NULL) 
+        // Remove background color key
+		if (picon != NULL) 
 		{
-			Uint32 colorKey = SDL_MapRGB(pimage->format, 255, 0, 255);
-			SDL_SetColorKey(pimage, SDL_SRCCOLORKEY, colorKey);
+			Uint32 colorKey = SDL_MapRGB(picon->format, 255, 0, 255);
+			SDL_SetColorKey(picon, SDL_SRCCOLORKEY, colorKey);
 		} else {
 			Con_Printf("Unable to process title bar icon.\n");
 			return -1;
 		}
 	}
-	quakeicon = pimage;
+	quakeicon = picon;
 	return 0;
 }
 
