@@ -23,6 +23,5 @@ var searchData=
   ['msurface_5fs',['msurface_s',['../structmsurface__s.html',1,'']]],
   ['mtexinfo_5ft',['mtexinfo_t',['../structmtexinfo__t.html',1,'']]],
   ['mtriangle_5fs',['mtriangle_s',['../structmtriangle__s.html',1,'']]],
-  ['mvertex_5ft',['mvertex_t',['../structmvertex__t.html',1,'']]],
-  ['mydata',['MYDATA',['../struct_m_y_d_a_t_a.html',1,'']]]
+  ['mvertex_5ft',['mvertex_t',['../structmvertex__t.html',1,'']]]
 ];

@@ -96,7 +96,6 @@ var searchData=
   ['num_5flanconfig_5fcmds',['NUM_LANCONFIG_CMDS',['../menu_8c.html#aad5b3b609890ccc72636bb8fb9828626',1,'menu.c']]],
   ['num_5fleafs',['num_leafs',['../structedict__s.html#a67a9e68156bc630cca4b6762f82d3128',1,'edict_s']]],
   ['num_5fmodemconfig_5fcmds',['NUM_MODEMCONFIG_CMDS',['../menu_8c.html#a31ddf13a4e16e7b81696571308740c72',1,'menu.c']]],
-  ['num_5fobjects',['NUM_OBJECTS',['../in__win_8c.html#a3f1fbfc4d441dd67eefc62ed0bdcc79d',1,'in_win.c']]],
   ['num_5fping_5ftimes',['NUM_PING_TIMES',['../server_8h.html#ae4f88c904268909afe23ec1fc52bd942',1,'server.h']]],
   ['num_5fpings',['num_pings',['../structclient__s.html#afcc9c1fb679a4c67dc697a8c74159e75',1,'client_s']]],
   ['num_5fsafe_5fargvs',['NUM_SAFE_ARGVS',['../common_8c.html#a3ddeea6956e6de63471b1ee5969e8047',1,'common.c']]],

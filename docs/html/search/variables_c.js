@@ -81,22 +81,17 @@ var searchData=
   ['looping',['looping',['../structchannel__t.html#a70b565fc050d83223f18367655fc80b3',1,'channel_t']]],
   ['loopstart',['loopstart',['../structsfxcache__t.html#ab21b7f1cecaf5570afef991d1d2d28e9',1,'sfxcache_t::loopstart()'],['../structwavinfo__t.html#ab21b7f1cecaf5570afef991d1d2d28e9',1,'wavinfo_t::loopstart()']]],
   ['looptrack',['looptrack',['../structclient__state__t.html#ae8f8f6fc0cf8bd3eedce82a583f23c35',1,'client_state_t']]],
-  ['lowresmodes',['lowresmodes',['../gl__vidsdl_8c.html#ae4a66b5ab104293b56e520d2a0ced461',1,'gl_vidsdl.c']]],
   ['lpbackbuffer',['lpBackBuffer',['../winquake_8h.html#aef736b106e1f23349646bf74bb3b0840',1,'winquake.h']]],
   ['lpdata',['lpData',['../snd__win_8c.html#ad89992597c500090f35b1f6c5ca80bbc',1,'snd_win.c']]],
   ['lpdata2',['lpData2',['../snd__win_8c.html#ae38211fd694725f3bd1309af14977284',1,'snd_win.c']]],
   ['lpdd',['lpDD',['../winquake_8h.html#a385500831a9f2cb9cf20f02898dc5980',1,'winquake.h']]],
   ['lpddpal',['lpDDPal',['../winquake_8h.html#aa86f0a5afb1f832127f3e5c6d453f67e',1,'winquake.h']]],
   ['lpfrontbuffer',['lpFrontBuffer',['../winquake_8h.html#aa7f0f5a11742ca3722e29142d35c898a',1,'winquake.h']]],
-  ['lplpdirectinput',['lplpDirectInput',['../in__win_8c.html#ac547f4a691a85bcb4ba7bb646a2a3e38',1,'in_win.c']]],
   ['lplpds',['lplpDS',['../snd__win_8c.html#a08a011bff25d33ad6de588edc88f21cd',1,'snd_win.c']]],
   ['lpprimary',['lpPrimary',['../winquake_8h.html#a406114e750a5762a853365695b877d2c',1,'winquake.h']]],
   ['lpwavehdr',['lpWaveHdr',['../snd__win_8c.html#a62faccf8014040d6d246c85da1d0331f',1,'snd_win.c']]],
   ['lpwsadata',['lpWSAData',['../net__wins_8c.html#a87eeb824dab85d062a21abfe13144aec',1,'lpWSAData():&#160;net_wins.c'],['../winquake_8h.html#a87eeb824dab85d062a21abfe13144aec',1,'lpWSAData():&#160;winquake.h']]],
   ['lru_5fnext',['lru_next',['../structcache__system__s.html#a3205dc2eda47a2c44acec96fde190d9b',1,'cache_system_s']]],
   ['lru_5fprev',['lru_prev',['../structcache__system__s.html#a1e26246d01911eb26fa75a1ad9eb19b2',1,'cache_system_s']]],
-  ['lumps',['lumps',['../structdheader__t.html#a6f78d60886e88993e814ee8037d52f02',1,'dheader_t']]],
-  ['lx',['lX',['../struct_m_y_d_a_t_a.html#a5caab2f62348491c05eb56720be4ed99',1,'MYDATA']]],
-  ['ly',['lY',['../struct_m_y_d_a_t_a.html#ae174db734839eb185acdb0cd79b9ba24',1,'MYDATA']]],
-  ['lz',['lZ',['../struct_m_y_d_a_t_a.html#a7dd7142cab803f67cdcda10d1eb720fd',1,'MYDATA']]]
+  ['lumps',['lumps',['../structdheader__t.html#a6f78d60886e88993e814ee8037d52f02',1,'dheader_t']]]
 ];

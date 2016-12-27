@@ -18,7 +18,7 @@ var searchData=
   ['u_5fskin',['U_SKIN',['../protocol_8h.html#ad9adc3c27c5f4b0a9d65d70f3e62b987',1,'protocol.h']]],
   ['u_5fstep',['u_step',['../structedge__s.html#a256215fdf8374c8f4e002b7c7787f92a',1,'edge_s']]],
   ['ubasestep',['ubasestep',['../r__local_8h.html#adc7c87c239965db012e6e4a439863e95',1,'ubasestep():&#160;r_local.h'],['../r__shared_8h.html#adc7c87c239965db012e6e4a439863e95',1,'ubasestep():&#160;r_shared.h']]],
-  ['uiwheelmessage',['uiWheelMessage',['../in__win_8c.html#ae4b780e6a66320ebaf2c216bbfdf4702',1,'in_win.c']]],
+  ['uiwheelmessage',['uiWheelMessage',['../in__sdl_8c.html#ae4b780e6a66320ebaf2c216bbfdf4702',1,'in_sdl.c']]],
   ['unaligned_5fok',['UNALIGNED_OK',['../quakedef_8h.html#ad63472639f39002287d19cd93afb03c8',1,'quakedef.h']]],
   ['unparseentities',['UnparseEntities',['../bspfile_8h.html#aeadcd542a74bef39fc3e642c273e3d2a',1,'bspfile.h']]],
   ['unreliablemessagesreceived',['unreliableMessagesReceived',['../net_8h.html#a5919ca0ea193ee20a848ea530dd60ff3',1,'unreliableMessagesReceived():&#160;net_main.c'],['../net__main_8c.html#a5919ca0ea193ee20a848ea530dd60ff3',1,'unreliableMessagesReceived():&#160;net_main.c']]],

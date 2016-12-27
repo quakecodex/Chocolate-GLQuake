@@ -73,20 +73,17 @@ $(function() {
 <code>#include &quot;<a class="el" href="winquake_8h_source.html">winquake.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="sdlquake_8h_source.html">sdlquake.h</a>&quot;</code><br />
 <code>#include &quot;../resources/resource.h&quot;</code><br />
-<code>#include &lt;commctrl.h&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structvmode__t.html">vmode_t</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlmode__t.html">lmode_t</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmodedesc__t.html">modedesc_t</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:ac026ff5990c506a9b4d89671801a527d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#ac026ff5990c506a9b4d89671801a527d">MAX_MODE_LIST</a>&#160;&#160;&#160;30</td></tr>
+<tr class="memitem:ac026ff5990c506a9b4d89671801a527d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#ac026ff5990c506a9b4d89671801a527d">MAX_MODE_LIST</a>&#160;&#160;&#160;128</td></tr>
 <tr class="separator:ac026ff5990c506a9b4d89671801a527d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae91972cdc0c1724f210a628be0243177"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#ae91972cdc0c1724f210a628be0243177">VID_ROW_SIZE</a>&#160;&#160;&#160;3</td></tr>
 <tr class="separator:ae91972cdc0c1724f210a628be0243177"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,22 +130,6 @@ Functions</h2></td></tr>
 <tr class="separator:a438d552ea5b94e61e76f357d34e09023"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e2cee8538d5cb976e8ea74736bd50b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a3e2cee8538d5cb976e8ea74736bd50b3">GL_Init</a> (void)</td></tr>
 <tr class="separator:a3e2cee8538d5cb976e8ea74736bd50b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8851b31c4bd0de73d7b8b41bc2bd5b4"><td class="memItemLeft" align="right" valign="top">LONG&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#ac8851b31c4bd0de73d7b8b41bc2bd5b4">CDAudio_MessageHandler</a> (HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)</td></tr>
-<tr class="separator:ac8851b31c4bd0de73d7b8b41bc2bd5b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af40cb182ff7c184e7651af6a57456b2b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#af40cb182ff7c184e7651af6a57456b2b">VID_HandlePause</a> (<a class="el" href="common_8h.html#a110846a9664bbd925f955266e60e9136">qboolean</a> pause)</td></tr>
-<tr class="separator:af40cb182ff7c184e7651af6a57456b2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe68a17ec2db3c16ede68ce95a63defd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#afe68a17ec2db3c16ede68ce95a63defd">VID_ForceLockState</a> (<a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a> lk)</td></tr>
-<tr class="separator:afe68a17ec2db3c16ede68ce95a63defd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55bf324502249a34743f79ed27af0096"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a55bf324502249a34743f79ed27af0096">VID_LockBuffer</a> (void)</td></tr>
-<tr class="separator:a55bf324502249a34743f79ed27af0096"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a789c4279024b89dc5bac09a81f0ec26d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a789c4279024b89dc5bac09a81f0ec26d">VID_UnlockBuffer</a> (void)</td></tr>
-<tr class="separator:a789c4279024b89dc5bac09a81f0ec26d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d2c991371c72c02ed65514676306f35"><td class="memItemLeft" align="right" valign="top"><a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a3d2c991371c72c02ed65514676306f35">VID_ForceUnlockedAndReturnState</a> (void)</td></tr>
-<tr class="separator:a3d2c991371c72c02ed65514676306f35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55319a9b354c2be479eced96c7ae7c3b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a55319a9b354c2be479eced96c7ae7c3b">D_BeginDirectRect</a> (<a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a> x, <a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a> y, <a class="el" href="common_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a> *pbitmap, <a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a> width, <a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a> height)</td></tr>
-<tr class="separator:a55319a9b354c2be479eced96c7ae7c3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e3b66311bc5f0c10b0b6e168e760d4e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a9e3b66311bc5f0c10b0b6e168e760d4e">D_EndDirectRect</a> (<a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a> x, <a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a> y, <a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a> width, <a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a> height)</td></tr>
-<tr class="separator:a9e3b66311bc5f0c10b0b6e168e760d4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2bf325d47e1e5aaee03d837f2314f86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="common_8h.html#a110846a9664bbd925f955266e60e9136">qboolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#af2bf325d47e1e5aaee03d837f2314f86">VID_SetWindowedMode</a> (<a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a> modenum)</td></tr>
 <tr class="separator:af2bf325d47e1e5aaee03d837f2314f86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae3d8c20c795de388c530e2181873acc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="common_8h.html#a110846a9664bbd925f955266e60e9136">qboolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#aae3d8c20c795de388c530e2181873acc">VID_SetFullDIBMode</a> (<a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a> modenum)</td></tr>
@@ -187,10 +168,10 @@ Functions</h2></td></tr>
 <tr class="separator:ad106536d802d53896b39511493ac14d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc9315c2db4841cb361cc95cc4f79026"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#afc9315c2db4841cb361cc95cc4f79026">VID_DescribeModes_f</a> (void)</td></tr>
 <tr class="separator:afc9315c2db4841cb361cc95cc4f79026"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a887d3d6560b24428ce2ae534088a8205"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a887d3d6560b24428ce2ae534088a8205">VID_InitDIB</a> (HINSTANCE hInstance)</td></tr>
-<tr class="separator:a887d3d6560b24428ce2ae534088a8205"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0859929211386db7e182f2cf271cf29a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a0859929211386db7e182f2cf271cf29a">VID_InitFullDIB</a> (HINSTANCE hInstance)</td></tr>
-<tr class="separator:a0859929211386db7e182f2cf271cf29a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a123cda5c2ccd55c4e2d849c3b01e11c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a123cda5c2ccd55c4e2d849c3b01e11c7">VID_InitDIB</a> (void)</td></tr>
+<tr class="separator:a123cda5c2ccd55c4e2d849c3b01e11c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74293372d802fcda1f9d696acc4f53a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a74293372d802fcda1f9d696acc4f53a1">VID_InitFullDIB</a> (void)</td></tr>
+<tr class="separator:a74293372d802fcda1f9d696acc4f53a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20e78a043e113233fccfc38723c9ef89"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a20e78a043e113233fccfc38723c9ef89">VID_Init</a> (unsigned char *palette)</td></tr>
 <tr class="separator:a20e78a043e113233fccfc38723c9ef89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a796334c2f9d800a9b7ae114aa3ca5d41"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a796334c2f9d800a9b7ae114aa3ca5d41">M_Menu_Options_f</a> (void)</td></tr>
@@ -208,8 +189,6 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ae4a66b5ab104293b56e520d2a0ced461"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structlmode__t.html">lmode_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#ae4a66b5ab104293b56e520d2a0ced461">lowresmodes</a> []</td></tr>
-<tr class="separator:ae4a66b5ab104293b56e520d2a0ced461"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04bc8150d67111633f687f346ef11213"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a04bc8150d67111633f687f346ef11213">gl_vendor</a></td></tr>
 <tr class="separator:a04bc8150d67111633f687f346ef11213"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d1815b351cd8efde55a93191fb6b5d7"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a9d1815b351cd8efde55a93191fb6b5d7">gl_renderer</a></td></tr>
@@ -240,10 +219,6 @@ Variables</h2></td></tr>
 <tr class="separator:a8f7fb089f7707ca12f929b68b061ad05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a680eb28f0172e48d9dc39f540a392f68"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a680eb28f0172e48d9dc39f540a392f68">vid_curpal</a> [256 *3]</td></tr>
 <tr class="separator:a680eb28f0172e48d9dc39f540a392f68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47fb526cca73f955624f0014edde96f5"><td class="memItemLeft" align="right" valign="top">HGLRC&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a47fb526cca73f955624f0014edde96f5">baseRC</a></td></tr>
-<tr class="separator:a47fb526cca73f955624f0014edde96f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb0b8d6e66149de0980bc31ef9bdfeea"><td class="memItemLeft" align="right" valign="top">HDC&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#acb0b8d6e66149de0980bc31ef9bdfeea">maindc</a></td></tr>
-<tr class="separator:acb0b8d6e66149de0980bc31ef9bdfeea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a833b78fc6f8e0838bc3eb47a314c0996"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structglvert__t.html">glvert_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a833b78fc6f8e0838bc3eb47a314c0996">glv</a></td></tr>
 <tr class="separator:a833b78fc6f8e0838bc3eb47a314c0996"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62c8fbbf924a10be5fb048ac18cae2df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="cvar_8h.html#a9856a55ef8ebfce9cf07b755fb5bc1fb">cvar_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a62c8fbbf924a10be5fb048ac18cae2df">gl_ztrick</a> = {&quot;gl_ztrick&quot;,&quot;1&quot;}</td></tr>
@@ -377,7 +352,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define MAX_MODE_LIST&#160;&#160;&#160;30</td>
+          <td class="memname">#define MAX_MODE_LIST&#160;&#160;&#160;128</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -410,6 +385,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Maximum window height </p>
 
 </div>
 </div>
@@ -424,6 +400,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Maximum window width </p>
 
 </div>
 </div>
@@ -452,6 +429,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Fullscreen video mode </p>
 
 </div>
 </div>
@@ -466,6 +444,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Indicates a windowed video mode </p>
 
 </div>
 </div>
@@ -480,6 +459,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Invalid or unset video mode </p>
 
 </div>
 </div>
@@ -565,46 +545,13 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="ac8851b31c4bd0de73d7b8b41bc2bd5b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8851b31c4bd0de73d7b8b41bc2bd5b4">&sect;&nbsp;</a></span>CDAudio_MessageHandler()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">LONG CDAudio_MessageHandler </td>
-          <td>(</td>
-          <td class="paramtype">HWND&#160;</td>
-          <td class="paramname"><em>hWnd</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">UINT&#160;</td>
-          <td class="paramname"><em>uMsg</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">WPARAM&#160;</td>
-          <td class="paramname"><em>wParam</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">LPARAM&#160;</td>
-          <td class="paramname"><em>lParam</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Activates Quake's window so it's ready to run. If the application is activating, then swap the system into SYSPAL_NOSTATIC mode so that our palettes will display correctly. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fActive</td><td>True if the app window is activating. </td></tr>
+    <tr><td class="paramname">minimize</td><td>True if the window is minimized. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -623,6 +570,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Check if OpenGL multitexture functions are available </p>
 
 </div>
 </div>
@@ -660,92 +608,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="a55319a9b354c2be479eced96c7ae7c3b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55319a9b354c2be479eced96c7ae7c3b">&sect;&nbsp;</a></span>D_BeginDirectRect()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void D_BeginDirectRect </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a>&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a>&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="common_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a> *&#160;</td>
-          <td class="paramname"><em>pbitmap</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a>&#160;</td>
-          <td class="paramname"><em>width</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a>&#160;</td>
-          <td class="paramname"><em>height</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a9e3b66311bc5f0c10b0b6e168e760d4e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e3b66311bc5f0c10b0b6e168e760d4e">&sect;&nbsp;</a></span>D_EndDirectRect()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void D_EndDirectRect </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a>&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a>&#160;</td>
-          <td class="paramname"><em>y</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a>&#160;</td>
-          <td class="paramname"><em>width</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a>&#160;</td>
-          <td class="paramname"><em>height</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Clears all current input from the queue </p>
 
 </div>
 </div>
@@ -813,6 +676,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Ends a rendering pass. </p>
 
 </div>
 </div>
@@ -1038,6 +902,13 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Maps a key from windows scan codes to Quake key codes. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>Scan code to map. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The Quake key code. </dd></dl>
 
 </div>
 </div>
@@ -1056,6 +927,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Prints the current video mode description to the console. </p>
 
 </div>
 </div>
@@ -1074,6 +946,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Prints the current video mode description to the console. </p>
 
 </div>
 </div>
@@ -1092,42 +965,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="afe68a17ec2db3c16ede68ce95a63defd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe68a17ec2db3c16ede68ce95a63defd">&sect;&nbsp;</a></span>VID_ForceLockState()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void VID_ForceLockState </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a>&#160;</td>
-          <td class="paramname"><em>lk</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a3d2c991371c72c02ed65514676306f35"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d2c991371c72c02ed65514676306f35">&sect;&nbsp;</a></span>VID_ForceUnlockedAndReturnState()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a> VID_ForceUnlockedAndReturnState </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Prints the current video mode description to the console. </p>
 
 </div>
 </div>
@@ -1146,6 +984,13 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Returns a human readable description of a video mode including the driver name description. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mode</td><td>Index into Index into modelist array. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A string containing the video mode description. </dd></dl>
 
 </div>
 </div>
@@ -1164,6 +1009,13 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Returns a human readable description of a video mode. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mode</td><td>Index into Index into modelist array. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A string containing the video mode description. </dd></dl>
 
 </div>
 </div>
@@ -1182,24 +1034,13 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="af40cb182ff7c184e7651af6a57456b2b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af40cb182ff7c184e7651af6a57456b2b">&sect;&nbsp;</a></span>VID_HandlePause()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void VID_HandlePause </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="common_8h.html#a110846a9664bbd925f955266e60e9136">qboolean</a>&#160;</td>
-          <td class="paramname"><em>pause</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Returns a pointer to a modestate_t struct describing a video mode. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">modenum</td><td>Index into modelist array. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>modestate_t struct describing the video mode, or badmode if the video mode is invalide. </dd></dl>
 
 </div>
 </div>
@@ -1222,8 +1063,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a887d3d6560b24428ce2ae534088a8205"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a887d3d6560b24428ce2ae534088a8205">&sect;&nbsp;</a></span>VID_InitDIB()</h2>
+<a id="a123cda5c2ccd55c4e2d849c3b01e11c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a123cda5c2ccd55c4e2d849c3b01e11c7">&sect;&nbsp;</a></span>VID_InitDIB()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1231,17 +1072,18 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void VID_InitDIB </td>
           <td>(</td>
-          <td class="paramtype">HINSTANCE&#160;</td>
-          <td class="paramname"><em>hInstance</em></td><td>)</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets up the windowed video mode. (Mode 0) Adds it to modelist. </p>
 
 </div>
 </div>
-<a id="a0859929211386db7e182f2cf271cf29a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0859929211386db7e182f2cf271cf29a">&sect;&nbsp;</a></span>VID_InitFullDIB()</h2>
+<a id="a74293372d802fcda1f9d696acc4f53a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74293372d802fcda1f9d696acc4f53a1">&sect;&nbsp;</a></span>VID_InitFullDIB()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1249,30 +1091,13 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname">void VID_InitFullDIB </td>
           <td>(</td>
-          <td class="paramtype">HINSTANCE&#160;</td>
-          <td class="paramname"><em>hInstance</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a55bf324502249a34743f79ed27af0096"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55bf324502249a34743f79ed27af0096">&sect;&nbsp;</a></span>VID_LockBuffer()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void VID_LockBuffer </td>
-          <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets a list of fullscreen video modes and adds them to modelist. </p>
 
 </div>
 </div>
@@ -1291,6 +1116,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Draws the video menu. </p>
 
 </div>
 </div>
@@ -1309,6 +1135,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Handles video menu input. Currently only allows going back. (Pressing ESC.) </p>
 
 </div>
 </div>
@@ -1327,6 +1154,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gets the number of video modes available for rendering. </p><dl class="section return"><dt>Returns</dt><dd>Number of available video modes. </dd></dl>
 
 </div>
 </div>
@@ -1345,6 +1173,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Prints number of video modes available to the console. </p>
 
 </div>
 </div>
@@ -1363,6 +1192,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Deactivates the mouse for the default windowed video mode. </p>
 
 </div>
 </div>
@@ -1442,6 +1272,12 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Set the palette quake will use for rendering. Used to convert textures to full color for OpenGL. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">palette</td><td>Array of 256 RGB triplets defining the palette. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1485,6 +1321,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Does nothing? </p>
 
 </div>
 </div>
@@ -1503,24 +1340,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="a789c4279024b89dc5bac09a81f0ec26d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a789c4279024b89dc5bac09a81f0ec26d">&sect;&nbsp;</a></span>VID_UnlockBuffer()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void VID_UnlockBuffer </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Exits the current video mode. Shuts down the app window and SDL. </p>
 
 </div>
 </div>
@@ -1600,20 +1420,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a47fb526cca73f955624f0014edde96f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47fb526cca73f955624f0014edde96f5">&sect;&nbsp;</a></span>baseRC</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">HGLRC baseRC</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a17d7de78e0d9387c0376fcf56ff6e20e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a17d7de78e0d9387c0376fcf56ff6e20e">&sect;&nbsp;</a></span>bindTexFunc</h2>
 
@@ -1681,6 +1487,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>DirectDraw active? </p>
 
 </div>
 </div>
@@ -1751,6 +1558,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>List of available OpenGL extensions. </p>
 
 </div>
 </div>
@@ -1779,6 +1587,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>OpenGL renderer. </p>
 
 </div>
 </div>
@@ -1793,6 +1602,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>GPU Vendor. </p>
 
 </div>
 </div>
@@ -1807,6 +1617,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>OpenGL version. </p>
 
 </div>
 </div>
@@ -1936,34 +1747,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ae4a66b5ab104293b56e520d2a0ced461"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4a66b5ab104293b56e520d2a0ced461">&sect;&nbsp;</a></span>lowresmodes</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structlmode__t.html">lmode_t</a> lowresmodes[]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {</div><div class="line">    {320, 200},</div><div class="line">    {320, 240},</div><div class="line">    {400, 300},</div><div class="line">    {512, 384},</div><div class="line">}</div></div><!-- fragment -->
-</div>
-</div>
-<a id="acb0b8d6e66149de0980bc31ef9bdfeea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acb0b8d6e66149de0980bc31ef9bdfeea">&sect;&nbsp;</a></span>maindc</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">HDC maindc</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="afe2aa2128928870493005a66091696f3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afe2aa2128928870493005a66091696f3">&sect;&nbsp;</a></span>mainwindow</h2>
 
@@ -2044,7 +1827,8 @@ Variables</h2></td></tr>
 <div class="ttc" id="keys_8h_html_a31f48cf563eb25e579b6a67f25a0819f"><div class="ttname"><a href="keys_8h.html#a31f48cf563eb25e579b6a67f25a0819f">K_F11</a></div><div class="ttdeci">#define K_F11</div><div class="ttdef"><b>Definition:</b> keys.h:50</div></div>
 <div class="ttc" id="keys_8h_html_a44c135e656c294ffb2f4787294de53db"><div class="ttname"><a href="keys_8h.html#a44c135e656c294ffb2f4787294de53db">K_F8</a></div><div class="ttdeci">#define K_F8</div><div class="ttdef"><b>Definition:</b> keys.h:47</div></div>
 <div class="ttc" id="keys_8h_html_ad14fc82bb83dcaa808b11ba9a68bb895"><div class="ttname"><a href="keys_8h.html#ad14fc82bb83dcaa808b11ba9a68bb895">K_F5</a></div><div class="ttdeci">#define K_F5</div><div class="ttdef"><b>Definition:</b> keys.h:44</div></div>
-</div><!-- fragment -->
+</div><!-- fragment --><p>Lookup table for scan code to Quake key conversion </p>
+
 </div>
 </div>
 <a id="a5599191a299a8e2aa119607503ca2ca4"></a>
@@ -2058,6 +1842,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Set to true to skip a backbuffer swap during rendering. </p>
 
 </div>
 </div>
@@ -2099,7 +1884,8 @@ Variables</h2></td></tr>
 <div class="ttc" id="keys_8h_html_a31f48cf563eb25e579b6a67f25a0819f"><div class="ttname"><a href="keys_8h.html#a31f48cf563eb25e579b6a67f25a0819f">K_F11</a></div><div class="ttdeci">#define K_F11</div><div class="ttdef"><b>Definition:</b> keys.h:50</div></div>
 <div class="ttc" id="keys_8h_html_a44c135e656c294ffb2f4787294de53db"><div class="ttname"><a href="keys_8h.html#a44c135e656c294ffb2f4787294de53db">K_F8</a></div><div class="ttdeci">#define K_F8</div><div class="ttdef"><b>Definition:</b> keys.h:47</div></div>
 <div class="ttc" id="keys_8h_html_ad14fc82bb83dcaa808b11ba9a68bb895"><div class="ttname"><a href="keys_8h.html#ad14fc82bb83dcaa808b11ba9a68bb895">K_F5</a></div><div class="ttdeci">#define K_F5</div><div class="ttdef"><b>Definition:</b> keys.h:44</div></div>
-</div><!-- fragment -->
+</div><!-- fragment --><p>Lookup table for scan code to Quake key conversion while holding shift key </p>
+
 </div>
 </div>
 <a id="ad9e3d8fc995f264f9ff7375c2946ba3f"></a>

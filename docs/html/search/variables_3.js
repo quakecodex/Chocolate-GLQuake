@@ -169,7 +169,7 @@ var searchData=
   ['cshift_5fslime',['cshift_slime',['../view_8c.html#a23cdbd332023710cc5269ba2692447f2',1,'view.c']]],
   ['cshift_5fwater',['cshift_water',['../r__local_8h.html#aa5f41106ad033dd5979bb3282677f8ea',1,'cshift_water():&#160;view.c'],['../view_8c.html#aa5f41106ad033dd5979bb3282677f8ea',1,'cshift_water():&#160;view.c']]],
   ['cshifts',['cshifts',['../structclient__state__t.html#afab30eafe9d9f040629b2e2f1b49ed4c',1,'client_state_t']]],
-  ['current_5fpos',['current_pos',['../in__win_8c.html#ad0a272f2fc5ef3dd52ef7194a2c037fa',1,'in_win.c']]],
+  ['current_5fpos',['current_pos',['../in__sdl_8c.html#ad0a272f2fc5ef3dd52ef7194a2c037fa',1,'in_sdl.c']]],
   ['current_5fskill',['current_skill',['../host__cmd_8c.html#a901dbeaa8a6530038ccc26b5e5c42746',1,'current_skill():&#160;host_cmd.c'],['../quakedef_8h.html#a901dbeaa8a6530038ccc26b5e5c42746',1,'current_skill():&#160;host_cmd.c']]],
   ['currententity',['currententity',['../gl__rmain_8c.html#afd95d5dd7af8ffe9de820a474d1cde31',1,'currententity():&#160;gl_rmain.c'],['../glquake_8h.html#afd95d5dd7af8ffe9de820a474d1cde31',1,'currententity():&#160;gl_rmain.c'],['../r__shared_8h.html#afd95d5dd7af8ffe9de820a474d1cde31',1,'currententity():&#160;gl_rmain.c']]],
   ['currentmodel',['currentmodel',['../gl__rsurf_8c.html#a46fc5064ad42d1457b2699e1547152f0',1,'gl_rsurf.c']]],

@@ -1,7 +1,6 @@
 var searchData=
 [
   ['id386',['id386',['../quakedef_8h.html#a6c69c3063edaa05d18b56e425fa8156a',1,'quakedef.h']]],
-  ['idirectinputcreate',['iDirectInputCreate',['../in__win_8c.html#a98a2df47ab8ee8e5767422b99999ac19',1,'in_win.c']]],
   ['idirectsoundcreate',['iDirectSoundCreate',['../snd__win_8c.html#a099ccd1e8de4154b9d44f54c035c2768',1,'snd_win.c']]],
   ['idpolyheader',['IDPOLYHEADER',['../modelgen_8h.html#a9af33d744a8f6ccd5ff36f0cc913f3c6',1,'modelgen.h']]],
   ['idspriteheader',['IDSPRITEHEADER',['../spritegn_8h.html#a56a9c130def8faf34357c4637e2aaddc',1,'spritegn.h']]],

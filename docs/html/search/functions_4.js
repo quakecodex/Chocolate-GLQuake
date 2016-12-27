@@ -1,7 +1,6 @@
 var searchData=
 [
   ['d_5faff8patch',['D_Aff8Patch',['../d__iface_8h.html#ac5dea93de5ca66edd1d73b6d9cb4a339',1,'d_iface.h']]],
-  ['d_5fbegindirectrect',['D_BeginDirectRect',['../d__iface_8h.html#a55319a9b354c2be479eced96c7ae7c3b',1,'D_BeginDirectRect(int x, int y, byte *pbitmap, int width, int height):&#160;gl_vidsdl.c'],['../gl__vidsdl_8c.html#a55319a9b354c2be479eced96c7ae7c3b',1,'D_BeginDirectRect(int x, int y, byte *pbitmap, int width, int height):&#160;gl_vidsdl.c']]],
   ['d_5fdeletesurfacecache',['D_DeleteSurfaceCache',['../render_8h.html#a1692bdcad3c890fe29521925cb299e42',1,'render.h']]],
   ['d_5fdisablebackbufferaccess',['D_DisableBackBufferAccess',['../d__iface_8h.html#ae1f0fe9e92950d62cd21647806127499',1,'d_iface.h']]],
   ['d_5fdrawparticle',['D_DrawParticle',['../d__iface_8h.html#a6df1bba13f6cfb57b74c645a3f29b5f3',1,'d_iface.h']]],
@@ -11,7 +10,6 @@ var searchData=
   ['d_5fdrawsurfaces',['D_DrawSurfaces',['../d__iface_8h.html#a84f3cd57cfb312fed7c34befea9cba59',1,'D_DrawSurfaces(void):&#160;d_iface.h'],['../r__local_8h.html#a84f3cd57cfb312fed7c34befea9cba59',1,'D_DrawSurfaces(void):&#160;r_local.h']]],
   ['d_5fdrawzpoint',['D_DrawZPoint',['../d__iface_8h.html#a6c6377241ccdb62280bc52b6feaf7ac2',1,'d_iface.h']]],
   ['d_5fenablebackbufferaccess',['D_EnableBackBufferAccess',['../d__iface_8h.html#a6a0cfdb5b8bbe20a7e535ecd60b6a3cb',1,'d_iface.h']]],
-  ['d_5fenddirectrect',['D_EndDirectRect',['../d__iface_8h.html#a9e3b66311bc5f0c10b0b6e168e760d4e',1,'D_EndDirectRect(int x, int y, int width, int height):&#160;gl_vidsdl.c'],['../gl__vidsdl_8c.html#a9e3b66311bc5f0c10b0b6e168e760d4e',1,'D_EndDirectRect(int x, int y, int width, int height):&#160;gl_vidsdl.c']]],
   ['d_5fendparticles',['D_EndParticles',['../d__iface_8h.html#a9a6e18a4c998fdd184a8125d711ffbf6',1,'d_iface.h']]],
   ['d_5ffillrect',['D_FillRect',['../d__iface_8h.html#a4a38463f8b33eab017e25fa5606b27d7',1,'d_iface.h']]],
   ['d_5fflushcaches',['D_FlushCaches',['../gl__rmisc_8c.html#acdd9e482f39f08c544e1db42c32933cc',1,'D_FlushCaches(void):&#160;gl_rmisc.c'],['../render_8h.html#acdd9e482f39f08c544e1db42c32933cc',1,'D_FlushCaches(void):&#160;gl_rmisc.c']]],

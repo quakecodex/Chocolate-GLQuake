@@ -97,9 +97,9 @@ var searchData=
   ['ax',['ax',['../unionregs__t.html#aefac0f43e68315a5cac20b6cce6e3436',1,'regs_t']]],
   ['ax_5fhi',['ax_hi',['../unionregs__t.html#a969575291254f3bb73c226429ae34f25',1,'regs_t']]],
   ['axis',['axis',['../structareanode__s.html#a884869744ebf14a092b339ae65c2af37',1,'areanode_s']]],
-  ['axisforward',['AxisForward',['../in__win_8c.html#a52f2025228cd3dee8e6cc6315d4502eca0feb9e9b4e733de180e7c1361956a1e2',1,'in_win.c']]],
-  ['axislook',['AxisLook',['../in__win_8c.html#a52f2025228cd3dee8e6cc6315d4502ecaf49bafec39241de3e4fb4ef34b5f4868',1,'in_win.c']]],
-  ['axisnada',['AxisNada',['../in__win_8c.html#a52f2025228cd3dee8e6cc6315d4502ecad3a06faaf77da7a88a7b4160204943c2',1,'in_win.c']]],
-  ['axisside',['AxisSide',['../in__win_8c.html#a52f2025228cd3dee8e6cc6315d4502eca456677cf257980c03ffdc46488bda22b',1,'in_win.c']]],
-  ['axisturn',['AxisTurn',['../in__win_8c.html#a52f2025228cd3dee8e6cc6315d4502eca5bc4f7f29cd9e68c5ffe8b4d7515a109',1,'in_win.c']]]
+  ['axisforward',['AxisForward',['../in__sdl_8c.html#a52f2025228cd3dee8e6cc6315d4502eca0feb9e9b4e733de180e7c1361956a1e2',1,'in_sdl.c']]],
+  ['axislook',['AxisLook',['../in__sdl_8c.html#a52f2025228cd3dee8e6cc6315d4502ecaf49bafec39241de3e4fb4ef34b5f4868',1,'in_sdl.c']]],
+  ['axisnada',['AxisNada',['../in__sdl_8c.html#a52f2025228cd3dee8e6cc6315d4502ecad3a06faaf77da7a88a7b4160204943c2',1,'in_sdl.c']]],
+  ['axisside',['AxisSide',['../in__sdl_8c.html#a52f2025228cd3dee8e6cc6315d4502eca456677cf257980c03ffdc46488bda22b',1,'in_sdl.c']]],
+  ['axisturn',['AxisTurn',['../in__sdl_8c.html#a52f2025228cd3dee8e6cc6315d4502eca5bc4f7f29cd9e68c5ffe8b4d7515a109',1,'in_sdl.c']]]
 ];

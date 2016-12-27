@@ -25,7 +25,6 @@ var searchData=
   ['num_5fhelp_5fpages',['NUM_HELP_PAGES',['../menu_8c.html#a061c72fc4b5407385bab508f329e8334',1,'menu.c']]],
   ['num_5flanconfig_5fcmds',['NUM_LANCONFIG_CMDS',['../menu_8c.html#aad5b3b609890ccc72636bb8fb9828626',1,'menu.c']]],
   ['num_5fmodemconfig_5fcmds',['NUM_MODEMCONFIG_CMDS',['../menu_8c.html#a31ddf13a4e16e7b81696571308740c72',1,'menu.c']]],
-  ['num_5fobjects',['NUM_OBJECTS',['../in__win_8c.html#a3f1fbfc4d441dd67eefc62ed0bdcc79d',1,'in_win.c']]],
   ['num_5fping_5ftimes',['NUM_PING_TIMES',['../server_8h.html#ae4f88c904268909afe23ec1fc52bd942',1,'server.h']]],
   ['num_5fsafe_5fargvs',['NUM_SAFE_ARGVS',['../common_8c.html#a3ddeea6956e6de63471b1ee5969e8047',1,'common.c']]],
   ['num_5fserialconfig_5fcmds',['NUM_SERIALCONFIG_CMDS',['../menu_8c.html#afec5e763e1c2f56d28bf6e77498af1b6',1,'menu.c']]],

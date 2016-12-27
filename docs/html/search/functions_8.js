@@ -52,7 +52,7 @@ var searchData=
   ['host_5fviewnext_5ff',['Host_Viewnext_f',['../host__cmd_8c.html#a41dd844c0adbb3ad4fc41758b01de733',1,'host_cmd.c']]],
   ['host_5fviewprev_5ff',['Host_Viewprev_f',['../host__cmd_8c.html#a7442f25f0f7f9ed82ac5291b0db0f925',1,'host_cmd.c']]],
   ['host_5fwriteconfiguration',['Host_WriteConfiguration',['../host_8c.html#a93579e512b65a76501a844737f347403',1,'host.c']]],
-  ['hresult',['HRESULT',['../in__win_8c.html#ae2086f427c9aa1f9dd88867febdf42c2',1,'HRESULT(WINAPI *pDirectInputCreate)(HINSTANCE hinst:&#160;in_win.c'],['../snd__win_8c.html#a3fc5fb1cde2b6fe2ca0ccb2a64b2bf16',1,'HRESULT(WINAPI *pDirectSoundCreate)(GUID FAR *lpGUID:&#160;snd_win.c']]],
+  ['hresult',['HRESULT',['../snd__win_8c.html#a3fc5fb1cde2b6fe2ca0ccb2a64b2bf16',1,'snd_win.c']]],
   ['htonl',['htonl',['../net_8h.html#aa84abe62d38a480d333a0bb440c45494',1,'net.h']]],
   ['htons',['htons',['../net_8h.html#a9d2fb757bc2d8a34179504190d3de41a',1,'net.h']]],
   ['hunk_5falloc',['Hunk_Alloc',['../zone_8c.html#abb7300ff556bcfcd706f0f47d3de6620',1,'Hunk_Alloc(int size):&#160;zone.c'],['../zone_8h.html#abb7300ff556bcfcd706f0f47d3de6620',1,'Hunk_Alloc(int size):&#160;zone.c']]],

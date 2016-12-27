@@ -69,9 +69,6 @@ $(function() {
 <li>identityTable
 : <a class="el" href="menu_8c.html#ad581439dca963067117fd77e2b851211">menu.c</a>
 </li>
-<li>iDirectInputCreate
-: <a class="el" href="in__win_8c.html#a98a2df47ab8ee8e5767422b99999ac19">in_win.c</a>
-</li>
 <li>iDirectSoundCreate
 : <a class="el" href="snd__win_8c.html#a099ccd1e8de4154b9d44f54c035c2768">snd_win.c</a>
 </li>
@@ -91,10 +88,10 @@ $(function() {
 : <a class="el" href="snd__mem_8c.html#a7bf71c33fbf61700a3c1dde50f9364fa">snd_mem.c</a>
 </li>
 <li>IN_Accumulate()
-: <a class="el" href="in__win_8c.html#aa5a71c26e95d9cc14094a47aae96b8c0">in_win.c</a>
+: <a class="el" href="in__sdl_8c.html#aa5a71c26e95d9cc14094a47aae96b8c0">in_sdl.c</a>
 </li>
 <li>IN_ActivateMouse()
-: <a class="el" href="in__win_8c.html#a110f79b07f2a8e8b731d92a36107d520">in_win.c</a>
+: <a class="el" href="in__sdl_8c.html#a110f79b07f2a8e8b731d92a36107d520">in_sdl.c</a>
 , <a class="el" href="winquake_8h.html#a110f79b07f2a8e8b731d92a36107d520">winquake.h</a>
 </li>
 <li>in_attack
@@ -107,8 +104,8 @@ $(function() {
 : <a class="el" href="cl__input_8c.html#a34be54a8d5c81f188afbffd775c19431">cl_input.c</a>
 </li>
 <li>in_back
-: <a class="el" href="cl__input_8c.html#a797e8527e0cc9ef4a65fcb1f598b048b">cl_input.c</a>
-, <a class="el" href="view_8c.html#a1ecac73b638bee9f38086e102ca44b34">view.c</a>
+: <a class="el" href="view_8c.html#a1ecac73b638bee9f38086e102ca44b34">view.c</a>
+, <a class="el" href="cl__input_8c.html#a797e8527e0cc9ef4a65fcb1f598b048b">cl_input.c</a>
 </li>
 <li>IN_BackDown()
 : <a class="el" href="cl__input_8c.html#aba1f5db135c4831097d288584d014053">cl_input.c</a>
@@ -117,15 +114,18 @@ $(function() {
 : <a class="el" href="cl__input_8c.html#a7215648d82f3a1975858b808e3b9f6c7">cl_input.c</a>
 </li>
 <li>IN_ClearStates()
-: <a class="el" href="in__win_8c.html#ab78198d2d362056479c0ee33036d4e3b">in_win.c</a>
+: <a class="el" href="in__sdl_8c.html#ab78198d2d362056479c0ee33036d4e3b">in_sdl.c</a>
 , <a class="el" href="input_8h.html#ab78198d2d362056479c0ee33036d4e3b">input.h</a>
 </li>
 <li>IN_Commands()
-: <a class="el" href="in__win_8c.html#a45c469dcd036dde62e2cbe43797d11ad">in_win.c</a>
+: <a class="el" href="in__sdl_8c.html#a45c469dcd036dde62e2cbe43797d11ad">in_sdl.c</a>
 , <a class="el" href="input_8h.html#a45c469dcd036dde62e2cbe43797d11ad">input.h</a>
 </li>
+<li>IN_DeactivateJoystick()
+: <a class="el" href="in__sdl_8c.html#a4d54703cb61e31867266795061a155e5">in_sdl.c</a>
+</li>
 <li>IN_DeactivateMouse()
-: <a class="el" href="in__win_8c.html#a98365b1a7213261170a3aaf1ef2fc6ab">in_win.c</a>
+: <a class="el" href="in__sdl_8c.html#a98365b1a7213261170a3aaf1ef2fc6ab">in_sdl.c</a>
 , <a class="el" href="winquake_8h.html#a98365b1a7213261170a3aaf1ef2fc6ab">winquake.h</a>
 </li>
 <li>in_down
@@ -151,7 +151,7 @@ $(function() {
 : <a class="el" href="cl__input_8c.html#aa28f6b3815a3d472d5a8448ef0182b25">cl_input.c</a>
 </li>
 <li>IN_HideMouse()
-: <a class="el" href="in__win_8c.html#a1d2acbba32e5546387d3356b4d32b070">in_win.c</a>
+: <a class="el" href="in__sdl_8c.html#a1d2acbba32e5546387d3356b4d32b070">in_sdl.c</a>
 , <a class="el" href="winquake_8h.html#a1d2acbba32e5546387d3356b4d32b070">winquake.h</a>
 </li>
 <li>IN_Impulse()
@@ -161,17 +161,14 @@ $(function() {
 : <a class="el" href="cl__input_8c.html#a276cea8287cb3ea274518537502bf889">cl_input.c</a>
 </li>
 <li>IN_Init()
-: <a class="el" href="in__win_8c.html#a64ecfae2c62ed2a8820bb0047ec22c0c">in_win.c</a>
+: <a class="el" href="in__sdl_8c.html#a64ecfae2c62ed2a8820bb0047ec22c0c">in_sdl.c</a>
 , <a class="el" href="input_8h.html#a64ecfae2c62ed2a8820bb0047ec22c0c">input.h</a>
 </li>
-<li>IN_InitDInput()
-: <a class="el" href="in__win_8c.html#af823f1e48044ccdd51fa1c16500f6c57">in_win.c</a>
-</li>
 <li>IN_JoyMove()
-: <a class="el" href="in__win_8c.html#a011d96a525eafcd5876070ec88dadc88">in_win.c</a>
+: <a class="el" href="in__sdl_8c.html#a011d96a525eafcd5876070ec88dadc88">in_sdl.c</a>
 </li>
 <li>in_joystick
-: <a class="el" href="in__win_8c.html#a75ca1aae613b9d2cc7b4539f6cb035e8">in_win.c</a>
+: <a class="el" href="in__sdl_8c.html#a75ca1aae613b9d2cc7b4539f6cb035e8">in_sdl.c</a>
 </li>
 <li>in_jump
 : <a class="el" href="cl__input_8c.html#a7528080f8a10712d3d24eb5eb405a077">cl_input.c</a>
@@ -230,18 +227,18 @@ $(function() {
 : <a class="el" href="cl__input_8c.html#ae3279b6f886d7f2e360c813207bc4dce">cl_input.c</a>
 </li>
 <li>IN_MouseEvent()
-: <a class="el" href="winquake_8h.html#af590ce54b272cb71312a529aac4e5e4a">winquake.h</a>
-, <a class="el" href="in__win_8c.html#af590ce54b272cb71312a529aac4e5e4a">in_win.c</a>
+: <a class="el" href="in__sdl_8c.html#af590ce54b272cb71312a529aac4e5e4a">in_sdl.c</a>
+, <a class="el" href="winquake_8h.html#af590ce54b272cb71312a529aac4e5e4a">winquake.h</a>
 </li>
 <li>IN_MouseMotion()
-: <a class="el" href="in__win_8c.html#a0117943b3718dd55adf9c5d425a14519">in_win.c</a>
+: <a class="el" href="in__sdl_8c.html#a0117943b3718dd55adf9c5d425a14519">in_sdl.c</a>
 , <a class="el" href="input_8h.html#a0117943b3718dd55adf9c5d425a14519">input.h</a>
 </li>
 <li>IN_MouseMove()
-: <a class="el" href="in__win_8c.html#ab4f5c556d75c57355975eed71c55607a">in_win.c</a>
+: <a class="el" href="in__sdl_8c.html#ab4f5c556d75c57355975eed71c55607a">in_sdl.c</a>
 </li>
 <li>IN_Move()
-: <a class="el" href="in__win_8c.html#a7e6e66067afa337d6c5676cd8908243f">in_win.c</a>
+: <a class="el" href="in__sdl_8c.html#a7e6e66067afa337d6c5676cd8908243f">in_sdl.c</a>
 , <a class="el" href="input_8h.html#a7e6e66067afa337d6c5676cd8908243f">input.h</a>
 </li>
 <li>in_moveleft
@@ -263,10 +260,10 @@ $(function() {
 : <a class="el" href="cl__input_8c.html#af72f76ebec674b661ad9b138b037f9ac">cl_input.c</a>
 </li>
 <li>IN_ReadJoystick()
-: <a class="el" href="in__win_8c.html#a9b44cf484ae249d06a7d90e74fa82651">in_win.c</a>
+: <a class="el" href="in__sdl_8c.html#a9b44cf484ae249d06a7d90e74fa82651">in_sdl.c</a>
 </li>
 <li>IN_RestoreOriginalMouseState()
-: <a class="el" href="in__win_8c.html#a31306a480ba615e4573d434801a88512">in_win.c</a>
+: <a class="el" href="in__sdl_8c.html#a31306a480ba615e4573d434801a88512">in_sdl.c</a>
 , <a class="el" href="winquake_8h.html#a31306a480ba615e4573d434801a88512">winquake.h</a>
 </li>
 <li>in_right
@@ -279,16 +276,16 @@ $(function() {
 : <a class="el" href="cl__input_8c.html#a27d50587d01cb508818565ff7bdfedb1">cl_input.c</a>
 </li>
 <li>IN_SetQuakeMouseState()
-: <a class="el" href="in__win_8c.html#a85513c48a08ce9b38dd81e65db06868e">in_win.c</a>
+: <a class="el" href="in__sdl_8c.html#a85513c48a08ce9b38dd81e65db06868e">in_sdl.c</a>
 , <a class="el" href="winquake_8h.html#a85513c48a08ce9b38dd81e65db06868e">winquake.h</a>
 </li>
 <li>IN_ShowMouse()
-: <a class="el" href="in__win_8c.html#afa9c6bc6447205b707c81991e76c59a7">in_win.c</a>
+: <a class="el" href="in__sdl_8c.html#afa9c6bc6447205b707c81991e76c59a7">in_sdl.c</a>
 , <a class="el" href="winquake_8h.html#afa9c6bc6447205b707c81991e76c59a7">winquake.h</a>
 </li>
 <li>IN_Shutdown()
-: <a class="el" href="input_8h.html#a781003199e06bab03bde6ff7051bdcbe">input.h</a>
-, <a class="el" href="in__win_8c.html#a781003199e06bab03bde6ff7051bdcbe">in_win.c</a>
+: <a class="el" href="in__sdl_8c.html#a781003199e06bab03bde6ff7051bdcbe">in_sdl.c</a>
+, <a class="el" href="input_8h.html#a781003199e06bab03bde6ff7051bdcbe">input.h</a>
 </li>
 <li>in_speed
 : <a class="el" href="cl__input_8c.html#a68527cab09127d4c9d345748f4dd5f2b">cl_input.c</a>
@@ -301,10 +298,10 @@ $(function() {
 : <a class="el" href="cl__input_8c.html#a8eee4580acbe22707ea71feb23238109">cl_input.c</a>
 </li>
 <li>IN_StartupJoystick()
-: <a class="el" href="in__win_8c.html#a5bc97852ddd8b675620a30d49afb76e0">in_win.c</a>
+: <a class="el" href="in__sdl_8c.html#a5bc97852ddd8b675620a30d49afb76e0">in_sdl.c</a>
 </li>
 <li>IN_StartupMouse()
-: <a class="el" href="in__win_8c.html#a450e3779514be25608ff35e2385c7ca0">in_win.c</a>
+: <a class="el" href="in__sdl_8c.html#a450e3779514be25608ff35e2385c7ca0">in_sdl.c</a>
 </li>
 <li>in_strafe
 : <a class="el" href="cl__input_8c.html#a71c3f2edc79c472906f4ab24cebc6942">cl_input.c</a>
@@ -320,7 +317,7 @@ $(function() {
 : <a class="el" href="cl__input_8c.html#ad4f1e4a128fc17620917bfa76bb4c5c1">cl_input.c</a>
 </li>
 <li>IN_UpdateClipCursor()
-: <a class="el" href="in__win_8c.html#adcb9dd282999fe3a7af3080b6bd25a5a">in_win.c</a>
+: <a class="el" href="in__sdl_8c.html#adcb9dd282999fe3a7af3080b6bd25a5a">in_sdl.c</a>
 , <a class="el" href="winquake_8h.html#adcb9dd282999fe3a7af3080b6bd25a5a">winquake.h</a>
 </li>
 <li>IN_UpDown()
@@ -356,15 +353,15 @@ $(function() {
 , <a class="el" href="common_8h.html#a3b2c99571bb1f8e4c63f701a5cd7b83d">common.h</a>
 </li>
 <li>InsertLinkBefore()
-: <a class="el" href="common_8h.html#ae16960874d19d02f89b54067f14910f9">common.h</a>
-, <a class="el" href="common_8c.html#ae16960874d19d02f89b54067f14910f9">common.c</a>
+: <a class="el" href="common_8c.html#ae16960874d19d02f89b54067f14910f9">common.c</a>
+, <a class="el" href="common_8h.html#ae16960874d19d02f89b54067f14910f9">common.h</a>
 </li>
 <li>insubmodel
 : <a class="el" href="r__local_8h.html#aebfc3f1734c8b08498d3f77705e20111">r_local.h</a>
 </li>
 <li>int()
-: <a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">winquake.h</a>
-, <a class="el" href="net__wins_8c.html#adeb1ec2bfcab870d22eedfa8457a9d8f">net_wins.c</a>
+: <a class="el" href="net__wins_8c.html#adeb1ec2bfcab870d22eedfa8457a9d8f">net_wins.c</a>
+, <a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">winquake.h</a>
 </li>
 <li>intsintable
 : <a class="el" href="r__shared_8h.html#adec0c9ba1c8158ed3c4600a226fe00aa">r_shared.h</a>
@@ -374,8 +371,8 @@ $(function() {
 , <a class="el" href="mathlib_8h.html#a838787ac48861784e8ec14248e45c586">mathlib.h</a>
 </li>
 <li>ipxAvailable
-: <a class="el" href="net_8h.html#a300e5f6c7054d797d1c6266505878e54">net.h</a>
-, <a class="el" href="net__main_8c.html#a300e5f6c7054d797d1c6266505878e54">net_main.c</a>
+: <a class="el" href="net__main_8c.html#a300e5f6c7054d797d1c6266505878e54">net_main.c</a>
+, <a class="el" href="net_8h.html#a300e5f6c7054d797d1c6266505878e54">net.h</a>
 </li>
 <li>IPXConfig
 : <a class="el" href="menu_8c.html#a8e67446c989fb4126915e3cd04ef3a39">menu.c</a>
@@ -387,8 +384,8 @@ $(function() {
 : <a class="el" href="mathlib_8h.html#ac2246d945b53c51c63e9d0e7beeb2425">mathlib.h</a>
 </li>
 <li>isDedicated
-: <a class="el" href="sys__sdl_8c.html#affc69ef1ef25716aea17cc902b8a973b">sys_sdl.c</a>
-, <a class="el" href="quakedef_8h.html#affc69ef1ef25716aea17cc902b8a973b">quakedef.h</a>
+: <a class="el" href="quakedef_8h.html#affc69ef1ef25716aea17cc902b8a973b">quakedef.h</a>
+, <a class="el" href="sys__sdl_8c.html#affc69ef1ef25716aea17cc902b8a973b">sys_sdl.c</a>
 </li>
 <li>isPermedia
 : <a class="el" href="gl__vidsdl_8c.html#a933c215cca11e58943cf3d23f4a6931a">gl_vidsdl.c</a>

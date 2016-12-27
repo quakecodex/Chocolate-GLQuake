@@ -8,6 +8,5 @@ var searchData=
   ['mplane_5ft',['mplane_t',['../gl__model_8h.html#af77748e4cfb55641c405f90927d64213',1,'mplane_t():&#160;gl_model.h'],['../model_8h.html#af77748e4cfb55641c405f90927d64213',1,'mplane_t():&#160;model.h']]],
   ['mspriteframe_5ft',['mspriteframe_t',['../gl__model_8h.html#a85fc0210d862360e8031dc3aa96ba735',1,'mspriteframe_t():&#160;gl_model.h'],['../model_8h.html#a85fc0210d862360e8031dc3aa96ba735',1,'mspriteframe_t():&#160;model.h']]],
   ['msurface_5ft',['msurface_t',['../gl__model_8h.html#ad0b800351070e7639c74ac2facafa99e',1,'msurface_t():&#160;gl_model.h'],['../model_8h.html#ad0b800351070e7639c74ac2facafa99e',1,'msurface_t():&#160;model.h']]],
-  ['mtriangle_5ft',['mtriangle_t',['../gl__model_8h.html#a084a209290f10ab3745b648ecfa1a2be',1,'mtriangle_t():&#160;gl_model.h'],['../model_8h.html#a084a209290f10ab3745b648ecfa1a2be',1,'mtriangle_t():&#160;model.h']]],
-  ['mydata',['MYDATA',['../in__win_8c.html#af346633d25146a22da5645cd0e022cf3',1,'in_win.c']]]
+  ['mtriangle_5ft',['mtriangle_t',['../gl__model_8h.html#a084a209290f10ab3745b648ecfa1a2be',1,'mtriangle_t():&#160;gl_model.h'],['../model_8h.html#a084a209290f10ab3745b648ecfa1a2be',1,'mtriangle_t():&#160;model.h']]]
 ];

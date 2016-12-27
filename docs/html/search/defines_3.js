@@ -14,7 +14,6 @@ var searchData=
   ['deg2rad',['DEG2RAD',['../mathlib_8c.html#a4aa807bca73db74b6ddba3da933e64aa',1,'mathlib.c']]],
   ['dfunc',['dfunc',['../net__dgrm_8c.html#ad3bb26c8859b96f57d5e8aed4c651c5d',1,'dfunc():&#160;net_dgrm.c'],['../net__main_8c.html#ad3bb26c8859b96f57d5e8aed4c651c5d',1,'dfunc():&#160;net_main.c']]],
   ['di_5fnodir',['DI_NODIR',['../sv__move_8c.html#a5f596f718d18a1b8ccd15db3f2ed2cb0',1,'sv_move.c']]],
-  ['dinput_5fbuffersize',['DINPUT_BUFFERSIZE',['../in__win_8c.html#aff98d28d921bc4302c99ef5608f594be',1,'in_win.c']]],
   ['directconfig',['DirectConfig',['../menu_8c.html#a1a26c310917cf3ef232eb4870b65e689',1,'menu.c']]],
   ['dist_5fepsilon',['DIST_EPSILON',['../world_8c.html#a82ee37356bf84e55ca09a66547ec4899',1,'world.c']]],
   ['dist_5fnot_5fset',['DIST_NOT_SET',['../r__local_8h.html#ad5317beb9a97dc14f4f39bc1921f85ad',1,'r_local.h']]],

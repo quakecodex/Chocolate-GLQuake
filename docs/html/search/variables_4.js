@@ -83,10 +83,9 @@ var searchData=
   ['dv_5ftime2',['dv_time2',['../r__local_8h.html#a8589b35c002731ec3f8d6b90a505e144',1,'r_local.h']]],
   ['dvertexes',['dvertexes',['../bspfile_8h.html#a89b75b5befff2f2980570dfb49028995',1,'bspfile.h']]],
   ['dvisdata',['dvisdata',['../bspfile_8h.html#a86d13b1d1c759e7d543b8eb1882f5907',1,'bspfile.h']]],
-  ['dwaxisflags',['dwAxisFlags',['../in__win_8c.html#af7e001c3ba5f3af40ecebac7ddfb4751',1,'in_win.c']]],
-  ['dwaxismap',['dwAxisMap',['../in__win_8c.html#ad735af8faa0e096856831533a2912da1',1,'in_win.c']]],
-  ['dwcontrolmap',['dwControlMap',['../in__win_8c.html#a1c34a0d54855f63bba430b162aad1f90',1,'in_win.c']]],
-  ['dwversion',['dwVersion',['../in__win_8c.html#ac5ef173abf9ef976872acfd2422718d1',1,'in_win.c']]],
+  ['dwaxisflags',['dwAxisFlags',['../in__sdl_8c.html#af7e001c3ba5f3af40ecebac7ddfb4751',1,'in_sdl.c']]],
+  ['dwaxismap',['dwAxisMap',['../in__sdl_8c.html#ad735af8faa0e096856831533a2912da1',1,'in_sdl.c']]],
+  ['dwcontrolmap',['dwControlMap',['../in__sdl_8c.html#a1c34a0d54855f63bba430b162aad1f90',1,'in_sdl.c']]],
   ['dx',['dx',['../unionregs__t.html#a81cae824d501dd0819a121d3ac14afc7',1,'regs_t']]],
   ['dx_5fhi',['dx_hi',['../unionregs__t.html#ac807eb7dfdc28f437263af134b8060aa',1,'regs_t']]]
 ];

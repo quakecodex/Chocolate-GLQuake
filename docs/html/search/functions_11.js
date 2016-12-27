@@ -118,7 +118,6 @@ var searchData=
   ['r_5fviewchanged',['R_ViewChanged',['../render_8h.html#a47b8bdfd480f2b7b734f5def4a4ef592',1,'render.h']]],
   ['r_5fzdrawsubmodelpolys',['R_ZDrawSubmodelPolys',['../r__local_8h.html#ad25f8dac74510f309559494e87dcfa42',1,'r_local.h']]],
   ['radiusfrombounds',['RadiusFromBounds',['../gl__model_8c.html#aa30bfb8499c76d115bcffa829083d2c4',1,'gl_model.c']]],
-  ['rawvaluepointer',['RawValuePointer',['../in__win_8c.html#a8f0b682f176d9386624d0c2568513a9a',1,'in_win.c']]],
   ['readtext',['ReadText',['../conproc_8c.html#a724c2a0f1b03345d9cd20cb0205936a8',1,'conproc.c']]],
   ['real2ptr',['real2ptr',['../dosisms_8h.html#a4a15a3eb24e48387d3616c66f647fdf8',1,'dosisms.h']]],
   ['recursivelightpoint',['RecursiveLightPoint',['../gl__rlight_8c.html#af6cf827e28e6d537edb2b388d8def596',1,'gl_rlight.c']]],

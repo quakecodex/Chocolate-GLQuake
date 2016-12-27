@@ -42,7 +42,6 @@ var searchData=
   ['pds',['pDS',['../snd__win_8c.html#a4aed0c9ddcb03c75c64c9967538f0fb4',1,'pDS():&#160;snd_win.c'],['../winquake_8h.html#a4aed0c9ddcb03c75c64c9967538f0fb4',1,'pDS():&#160;snd_win.c']]],
   ['pdsbuf',['pDSBuf',['../snd__win_8c.html#a3015befe9fd82757692173907234de67',1,'pDSBuf():&#160;snd_win.c'],['../winquake_8h.html#a3015befe9fd82757692173907234de67',1,'pDSBuf():&#160;snd_win.c']]],
   ['pdspbuf',['pDSPBuf',['../snd__win_8c.html#ae57856ee5307c1b537f8643e4694fd99',1,'snd_win.c']]],
-  ['pdwrawvalue',['pdwRawValue',['../in__win_8c.html#ac3152c129824fbeefa3d843b896bd32f',1,'in_win.c']]],
   ['percent',['percent',['../structcshift__t.html#a4f9bdeb78667c8ab59d8d6f0c70a2cc3',1,'cshift_t']]],
   ['perpendicularvector',['PerpendicularVector',['../mathlib_8c.html#ac1911182ec6ba5b710056432ffb7c685',1,'mathlib.c']]],
   ['pf_5faim',['PF_aim',['../pr__cmds_8c.html#a34ea5597ad6e9a2222606b8c8e24bd54',1,'pr_cmds.c']]],
@@ -125,6 +124,7 @@ var searchData=
   ['pixel_5ft',['pixel_t',['../vid_8h.html#a69465c5347b5fd76f1091d8cb8f239e7',1,'vid.h']]],
   ['pixelaspect',['pixelAspect',['../r__shared_8h.html#a778f53615ae6ed0b1543027ce48c5d7b',1,'r_shared.h']]],
   ['pixels',['pixels',['../structmspriteframe__s.html#ae1ebbc1aeee1905f23e469fe41216d01',1,'mspriteframe_s']]],
+  ['pjoystick',['pJoystick',['../in__sdl_8c.html#a2a08981fad851c0dd9a7f2557f35385d',1,'in_sdl.c']]],
   ['plane',['plane',['../structmsurface__s.html#abb326864b7da96ed5715e90a630b7fc5',1,'msurface_s::plane()'],['../structmnode__s.html#abb326864b7da96ed5715e90a630b7fc5',1,'mnode_s::plane()'],['../structtrace__t.html#abf3edea9e55d4f8d0ee49012804ea243',1,'trace_t::plane()']]],
   ['plane_5fanyx',['PLANE_ANYX',['../bspfile_8h.html#ae9d54d00d719b68547837a79dfa39346',1,'bspfile.h']]],
   ['plane_5fanyy',['PLANE_ANYY',['../bspfile_8h.html#ade265a2fa71394abc5faa6da1954e18b',1,'bspfile.h']]],
@@ -232,6 +232,6 @@ var searchData=
   ['ptriangles',['ptriangles',['../structaffinetridesc__t.html#a98e33570c1c92cc62f7f492ecef612ce',1,'affinetridesc_t::ptriangles()'],['../r__local_8h.html#a98e33570c1c92cc62f7f492ecef612ce',1,'ptriangles():&#160;r_local.h']]],
   ['ptype_5ft',['ptype_t',['../d__iface_8h.html#a723256dea8a6fd9c487829bc1ed6f911',1,'ptype_t():&#160;d_iface.h'],['../glquake_8h.html#a723256dea8a6fd9c487829bc1ed6f911',1,'ptype_t():&#160;glquake.h']]],
   ['punchangle',['punchangle',['../structclient__state__t.html#acbf158fad43f73b99a477e3cb911c45a',1,'client_state_t']]],
-  ['punkouter',['punkOuter',['../in__win_8c.html#ae79eb938422bb8f239817b1577f05401',1,'punkOuter():&#160;in_win.c'],['../snd__win_8c.html#aa76f9028e02ed3b43a6b273191a65991',1,'pUnkOuter():&#160;snd_win.c']]],
+  ['punkouter',['pUnkOuter',['../snd__win_8c.html#aa76f9028e02ed3b43a6b273191a65991',1,'snd_win.c']]],
   ['pverts',['pverts',['../structpolydesc__s.html#afab35ea519c022d61f0f206edd3f4135',1,'polydesc_s::pverts()'],['../structspritedesc__t.html#a5807e64957538e9bf91ce8d36fc239be',1,'spritedesc_t::pverts()']]]
 ];

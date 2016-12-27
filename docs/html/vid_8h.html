@@ -196,6 +196,12 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Initializes the video system. Creates a window and initializes OpenGL. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">palette</td><td>Pointer to an array of 256 RGB triplets (unsigned byte) specifying the current palette</td></tr>
+  </table>
+  </dd>
+</dl>
 <p>Initializes the video system. Creates a window and initializes OpenGL. @ param palette Pointer to an array of 256 RGB triplets (unsigned byte) specifying the current palette </p>
 
 </div>
@@ -251,6 +257,12 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Set the palette quake will use for rendering. Used to convert textures to full color for OpenGL. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">palette</td><td>Array of 256 RGB triplets defining the palette. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -269,6 +281,13 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Shifts the pallete towards a color. (Red or white.) Not used in GL Quake </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">palette</td><td>Array of 256 RGB triplets defining the palette.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Does nothing? </p>
 
 </div>
 </div>
@@ -287,6 +306,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Exits the current video mode. Shuts down the app window and SDL. </p>
 
 </div>
 </div>
@@ -305,6 +325,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Updates the video mode? Not used in GL Quake </p>
 
 </div>
 </div>

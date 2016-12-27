@@ -11,6 +11,6 @@ var searchData=
   ['floatnoswap',['FloatNoSwap',['../common_8c.html#a9fe357d18098a536a373c6026df0954c',1,'common.c']]],
   ['floatswap',['FloatSwap',['../common_8c.html#aa6c5effea70a7dc83c97ff2c6a2a12ed',1,'common.c']]],
   ['floordivmod',['FloorDivMod',['../mathlib_8c.html#a2b1de03fbdd551f1e637875076004926',1,'FloorDivMod(double numer, double denom, int *quotient, int *rem):&#160;mathlib.c'],['../mathlib_8h.html#a2b1de03fbdd551f1e637875076004926',1,'FloorDivMod(double numer, double denom, int *quotient, int *rem):&#160;mathlib.c']]],
-  ['force_5fcenterview_5ff',['Force_CenterView_f',['../in__win_8c.html#aa11355d49219730039c42556dfaa8a44',1,'in_win.c']]],
+  ['force_5fcenterview_5ff',['Force_CenterView_f',['../in__sdl_8c.html#aa11355d49219730039c42556dfaa8a44',1,'in_sdl.c']]],
   ['freesound',['FreeSound',['../snd__win_8c.html#a8bb1cac2696c69a103abed0a69c46c95',1,'snd_win.c']]]
 ];
