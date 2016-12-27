@@ -53,5 +53,9 @@
 ## [Unreleased] - 2016-12-23
 ### Changes
  - Ported joystick input to SDL
+ 
+## [Unreleased] - 2016-12-27
+### Changes
+ - Added title bar icon
 
 
