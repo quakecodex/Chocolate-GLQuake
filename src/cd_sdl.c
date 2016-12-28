@@ -33,7 +33,6 @@ static qboolean	enabled = false;
 static qboolean playLooping = false;
 static float	cdvolume;
 static byte 	remap[100];
-static byte		cdrom;
 static byte		playTrack;
 static byte		maxTrack;
 
