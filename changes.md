@@ -57,5 +57,10 @@
 ## [0.1.1] - 2016-12-27
 ### Changes
  - Added title bar icon
+ 
+ ## [Unreleased] - 2016-12-27
+### Changes
+ - Ported CD audio to SDL
+
 
 
