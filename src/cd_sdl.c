@@ -124,10 +124,10 @@ void CDAudio_Play(byte track, qboolean looping)
 	}
 	
 	// don't try to play a non-audio track
-	dwReturn = SDL_CDPlay(cdinfo, cdinfo->track[track].offset, cdinfo->track[track].length);
+	dwReturn = SDL_CDPlayTracks(cdinfo, track, 0, 0, cdinfo->track[track].length);
 	if (dwReturn < 0)
 	{
-		Con_DPrintf("SDL_CDPlay failed (%i)\n", dwReturn);
+		Con_DPrintf("SDL_CDPlayTracks failed (%i)\n", dwReturn);
 		return;
 	}
 
@@ -391,6 +391,10 @@ void CDAudio_Shutdown(void)
 	if (!initialized)
 		return;
 	CDAudio_Stop();
-	SDL_CDClose(cdinfo);
+	if (cdinfo) 
+	{
+		SDL_CDClose(cdinfo);
+		cdinfo = NULL;
+	}
 	SDL_QuitSubSystem(SDL_INIT_CDROM);
 }
