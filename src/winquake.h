@@ -25,8 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define WM_MOUSEWHEEL                   0x020A
 
 #ifndef SERVERONLY
-#include <ddraw.h>
-#include <dsound.h>
+// Nothing
 #ifndef GLQUAKE
 #include <mgraph.h>
 #endif
@@ -36,15 +35,6 @@ extern	HINSTANCE	global_hInstance;
 extern	int			global_nCmdShow;
 
 #ifndef SERVERONLY
-
-extern LPDIRECTDRAW		lpDD;
-extern qboolean			DDActive;
-extern LPDIRECTDRAWSURFACE	lpPrimary;
-extern LPDIRECTDRAWSURFACE	lpFrontBuffer;
-extern LPDIRECTDRAWSURFACE	lpBackBuffer;
-extern LPDIRECTDRAWPALETTE	lpDDPal;
-extern LPDIRECTSOUND pDS;
-extern LPDIRECTSOUNDBUFFER pDSBuf;
 
 extern DWORD gSndBufSize;
 //#define SNDBUFSIZE 65536

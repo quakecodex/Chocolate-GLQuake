@@ -14,7 +14,6 @@ extern int desired_bits;
 
 
 DWORD	gSndBufSize;
-LPDIRECTSOUNDBUFFER pDSBuf;
 
 
 static void paint_audio(void *unused, Uint8 *stream, int len)
