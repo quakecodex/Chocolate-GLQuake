@@ -224,7 +224,9 @@ void Q_strcat (char *dest, char *src)
 
 int Q_strcmp (char *s1, char *s2)
 {
-	while (1)
+	int working = 1;
+
+	while (working)
 	{
 		if (*s1 != *s2)
 			return -1;              // strings not equal    
@@ -239,7 +241,8 @@ int Q_strcmp (char *s1, char *s2)
 
 int Q_strncmp (char *s1, char *s2, int count)
 {
-	while (1)
+	int working = 1;
+	while (working)
 	{
 		if (!count--)
 			return 0;

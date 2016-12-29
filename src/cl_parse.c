@@ -721,6 +721,7 @@ void CL_ParseServerMessage (void)
 {
 	int			cmd;
 	int			i;
+	int			reading;
 	
 //
 // if recording demos, copy the message out
@@ -736,7 +737,8 @@ void CL_ParseServerMessage (void)
 //
 	MSG_BeginReading ();
 	
-	while (1)
+	reading = 1;
+	while (reading)
 	{
 		if (msg_badread)
 			Host_Error ("CL_ParseServerMessage: Bad server message");
@@ -746,6 +748,7 @@ void CL_ParseServerMessage (void)
 		if (cmd == -1)
 		{
 			SHOWNET("END OF MESSAGE");
+			//reading = 0;
 			return;		// end of message
 		}
 

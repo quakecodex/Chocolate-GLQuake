@@ -320,24 +320,30 @@ int	Datagram_GetMessage (qsocket_t *sock)
 	struct qsockaddr readaddr;
 	unsigned int	sequence;
 	unsigned int	count;
+	int reading;
 
 	if (!sock->canSend)
 		if ((net_time - sock->lastSendTime) > 1.0)
 			ReSendMessage (sock);
 
-	while(1)
+	reading = 1;
+	while(reading)
 	{	
 		length = sfunc.Read (sock->socket, (byte *)&packetBuffer, NET_DATAGRAMSIZE, &readaddr);
 
 //	if ((rand() & 255) > 220)
 //		continue;
 
-		if (length == 0)
+		if (length == 0) 
+		{
+			reading = 0;
 			break;
+		}
 
 		if (length == -1)
 		{
 			Con_Printf("Read error\n");
+			reading = 0;
 			return -1;
 		}
 
@@ -373,6 +379,7 @@ int	Datagram_GetMessage (qsocket_t *sock)
 			{
 				Con_DPrintf("Got a stale datagram\n");
 				ret = 0;
+				reading = 0;
 				break;
 			}
 			if (sequence != sock->unreliableReceiveSequence)
@@ -389,6 +396,7 @@ int	Datagram_GetMessage (qsocket_t *sock)
 			SZ_Write (&net_message, packetBuffer.data, length);
 
 			ret = 2;
+			reading = 0;
 			break;
 		}
 
@@ -447,6 +455,7 @@ int	Datagram_GetMessage (qsocket_t *sock)
 				sock->receiveMessageLength = 0;
 
 				ret = 1;
+				reading = 0;
 				break;
 			}
 

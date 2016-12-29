@@ -91,6 +91,7 @@ int CL_GetMessage (void)
 {
 	int		r, i;
 	float	f;
+	int working;
 	
 	if	(cls.demoplayback)
 	{
@@ -135,18 +136,23 @@ int CL_GetMessage (void)
 		return 1;
 	}
 
-	while (1)
+	working = 1;
+	r = -1;
+	while (working)
 	{
 		r = NET_GetMessage (cls.netcon);
 		
 		if (r != 1 && r != 2)
 			return r;
 	
-	// discard nop keepalive message
+		// discard nop keepalive message
 		if (net_message.cursize == 1 && net_message.data[0] == svc_nop)
+		{
 			Con_Printf ("<-- server to client keepalive\n");
-		else
+		} else {
+			working = 0;
 			break;
+		}
 	}
 
 	if (cls.demorecording)

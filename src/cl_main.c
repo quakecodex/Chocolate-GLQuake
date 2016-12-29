@@ -274,6 +274,7 @@ Debugging tool, just flashes the screen
 */
 void SetPal (int i)
 {
+	i = 0;
 #if 0
 	static int old;
 	byte	pal[768];
