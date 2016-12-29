@@ -123,12 +123,12 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;.\libs\SDL-1.2.15\include&quot;;.\libs\dxsdk\SDK\INC"
+				AdditionalIncludeDirectories="&quot;.\libs\SDL-1.2.15\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;GLQUAKE;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
-				WarningLevel="3"
+				WarningLevel="4"
 				DebugInformationFormat="3"
 			/>
 			<Tool
@@ -143,9 +143,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="sdl.lib sdlmain.lib dxguid.lib comctl32.lib winmm.lib wsock32.lib opengl32.lib glu32.lib"
+				AdditionalDependencies="sdl.lib sdlmain.lib comctl32.lib winmm.lib wsock32.lib opengl32.lib glu32.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;.\libs\SDL-1.2.15\lib\x86&quot;;.\libs\dxsdk\SDK\LIB"
+				AdditionalLibraryDirectories="&quot;.\libs\SDL-1.2.15\lib\x86&quot;"
 				GenerateDebugInformation="false"
 				SubSystem="2"
 				OptimizeReferences="2"
