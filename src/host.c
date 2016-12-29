@@ -897,7 +897,7 @@ void Host_Init (quakeparms_t *parms)
 #else
 
 #ifdef	GLQUAKE
-	// FIXME: doesn't use the new one-window approach yet
+	// FIXME: doesn't use the new one-window approach ye		t
 		S_Init ();
 #endif
 
