@@ -351,10 +351,11 @@ void Con_Print (char *txt)
 Con_DebugLog
 ================
 */
+static char data[4096];
 void Con_DebugLog(char *file, char *fmt, ...)
 {
     va_list argptr; 
-    static char data[1024];
+    
     int fd;
     
     va_start(argptr, fmt);

@@ -401,13 +401,15 @@ void CheckMultiTextureExtensions(void)
 }
 #endif
 
+static char ext[2048];
+
 /**
  * Initializes OpenGL. Get's vender, version and renderer strings. Checks extension
  * support and sets initial shading, texture blending and filtering modes.
  */
 void GL_Init (void)
 {
-	char ext[2048];
+	
 
 	gl_vendor = glGetString (GL_VENDOR);
 	Con_Printf ("GL_VENDOR: %s\n", gl_vendor);
@@ -419,7 +421,7 @@ void GL_Init (void)
 	gl_extensions = glGetString (GL_EXTENSIONS);
 	// Truncate extenstion string, to prevent buffer overrun
 	// Sometimes GL extenstion string doesn't have terminating null.
-	strncpy(ext, gl_extensions, 2048);
+	Q_strncpy(ext, gl_extensions, 2048);
 	ext[2047] = '\0';
 	Con_Printf ("GL_EXTENSIONS: %s\n", ext);
 
