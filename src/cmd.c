@@ -481,7 +481,6 @@ Parses the given string into command line tokens.
 void Cmd_TokenizeString (char *text)
 {
 	int		i;
-	int working;
 	
 // clear the args from the last string
 	for (i=0 ; i<cmd_argc ; i++)
@@ -490,8 +489,7 @@ void Cmd_TokenizeString (char *text)
 	cmd_argc = 0;
 	cmd_args = NULL;
 	
-	working = 1;
-	while (working)
+	while (1)
 	{
 // skip whitespace up to a /n
 		while (*text && *text <= ' ' && *text != '\n')
@@ -502,7 +500,6 @@ void Cmd_TokenizeString (char *text)
 		if (*text == '\n')
 		{	// a newline seperates commands in the buffer
 			text++;
-			working = 0;
 			break;
 		}
 

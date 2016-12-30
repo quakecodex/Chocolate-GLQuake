@@ -200,7 +200,8 @@ void BuildTris (void)
 	int		i, j, k;
 	int		startv;
 	float	s, t;
-	int		len, bestlen, besttype;
+	int		len, bestlen;
+	int		besttype = 0;
 	int		bestverts[1024];
 	int		besttris[1024];
 	int		type;

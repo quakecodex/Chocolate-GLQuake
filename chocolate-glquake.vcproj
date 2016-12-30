@@ -49,6 +49,7 @@
 				UsePrecompiledHeader="0"
 				WarningLevel="4"
 				DebugInformationFormat="4"
+				DisableSpecificWarnings="4054;4100; 4152; 4127; 4189; 4310; 4706"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -68,6 +69,7 @@
 				OutputFile="$(OutDir)\$(ProjectName)_dbg.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;.\libs\SDL-1.2.15\lib\x86&quot;"
+				IgnoreDefaultLibraryNames="msvcrt.lib"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="2"
@@ -130,6 +132,7 @@
 				UsePrecompiledHeader="0"
 				WarningLevel="4"
 				DebugInformationFormat="3"
+				DisableSpecificWarnings="4054;4100; 4152; 4127; 4189; 4310; 4706"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"

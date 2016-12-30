@@ -67,12 +67,6 @@ void S_TransferStereo16 (int endtime)
 	int		lpos;
 	int		lpaintedtime;
 	DWORD	*pbuf;
-#ifdef _WIN32
-	int		reps;
-	DWORD	dwSize,dwSize2;
-	DWORD	*pbuf2;
-	HRESULT	hresult;
-#endif
 	
 	snd_vol = volume.value*256;
 
@@ -112,12 +106,6 @@ void S_TransferPaintBuffer(int endtime)
 	int		val;
 	int		snd_vol;
 	DWORD	*pbuf;
-#ifdef _WIN32
-	int		reps;
-	DWORD	dwSize,dwSize2;
-	DWORD	*pbuf2;
-	HRESULT	hresult;
-#endif
 
 	if (shm->samplebits == 16 && shm->channels == 2)
 	{
@@ -278,7 +266,7 @@ void SND_PaintChannelFrom8 (channel_t *ch, sfxcache_t *sc, int count)
 		
 	lscale = snd_scaletable[ch->leftvol >> 3];
 	rscale = snd_scaletable[ch->rightvol >> 3];
-	sfx = (signed char *)sc->data + ch->pos;
+	sfx = (unsigned char *)(sc->data + ch->pos);
 
 	for (i=0 ; i<count ; i++)
 	{

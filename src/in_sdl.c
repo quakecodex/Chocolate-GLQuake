@@ -480,30 +480,6 @@ void IN_Move (usercmd_t *cmd)
 
 
 /*
-===========
-IN_Accumulate
-===========
-*/
-void IN_Accumulate (void)
-{
-	return;
-	if (mouseactive)
-	{
-		if (!dinput)
-		{
-			GetCursorPos (&current_pos);
-
-			mx_accum += current_pos.x - window_center_x;
-			my_accum += current_pos.y - window_center_y;
-
-		// force the mouse to the center, so there's room to move
-			SetCursorPos (window_center_x, window_center_y);
-		}
-	}
-}
-
-
-/*
 ===================
 IN_ClearStates
 ===================

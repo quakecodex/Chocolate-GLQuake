@@ -91,7 +91,6 @@ int CL_GetMessage (void)
 {
 	int		r, i;
 	float	f;
-	int working;
 	
 	if	(cls.demoplayback)
 	{
@@ -136,9 +135,8 @@ int CL_GetMessage (void)
 		return 1;
 	}
 
-	working = 1;
 	r = -1;
-	while (working)
+	while (1)
 	{
 		r = NET_GetMessage (cls.netcon);
 		
@@ -150,7 +148,6 @@ int CL_GetMessage (void)
 		{
 			Con_Printf ("<-- server to client keepalive\n");
 		} else {
-			working = 0;
 			break;
 		}
 	}

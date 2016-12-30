@@ -240,7 +240,7 @@ int WIPX_Read (int handle, byte *buf, int len, struct qsockaddr *addr)
 	int socket = ipxsocket[handle];
 	int ret;
 
-	ret = precvfrom (socket, packetBuffer, len+4, 0, (struct sockaddr *)addr, &addrlen);
+	ret = precvfrom (socket, (char*)packetBuffer, len+4, 0, (struct sockaddr *)addr, &addrlen);
 	if (ret == -1)
 	{
 		// Changed errno to qerrno - JJ 2016/11/14
@@ -281,7 +281,7 @@ int WIPX_Write (int handle, byte *buf, int len, struct qsockaddr *addr)
 	memcpy(&packetBuffer[4], buf, len);
 	len += 4;
 
-	ret = psendto (socket, packetBuffer, len, 0, (struct sockaddr *)addr, sizeof(struct qsockaddr));
+	ret = psendto (socket, (const char*)packetBuffer, len, 0, (struct sockaddr *)addr, sizeof(struct qsockaddr));
 	if (ret == -1)
 		if (pWSAGetLastError() == WSAEWOULDBLOCK)
 			return 0;

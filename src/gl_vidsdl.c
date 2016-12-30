@@ -203,7 +203,7 @@ qboolean VID_SetFullDIBMode (int modenum)
 
 		if (!result) {
 			Sys_Error ("Couldn't set fullscreen DIB mode");
-			exit(-1);
+			//exit(-1);
 		}
 	}
 
@@ -340,7 +340,7 @@ BINDTEXFUNCPTR bindTexFunc;
  */
 void CheckTextureExtensions (void)
 {
-	char		*tmp;
+	unsigned char		*tmp;
 	qboolean	texture_ext;
 	HINSTANCE	hInstGL;
 
@@ -360,7 +360,7 @@ void CheckTextureExtensions (void)
 		if (hInstGL == NULL)
 			Sys_Error ("Couldn't load opengl32.dll\n");
 
-		bindTexFunc = (void *)GetProcAddress(hInstGL,"glBindTexture");
+		bindTexFunc = (void*)GetProcAddress(hInstGL,"glBindTexture");
 
 		if (!bindTexFunc)
 			Sys_Error ("No texture objects!");
@@ -386,8 +386,8 @@ void CheckMultiTextureExtensions(void)
 {
 	if (strstr(gl_extensions, "GL_SGIS_multitexture ") && !COM_CheckParm("-nomtex")) {
 		Con_Printf("Multitexture extensions found.\n");
-		qglMTexCoord2fSGIS = (void *) wglGetProcAddress("glMTexCoord2fSGIS");
-		qglSelectTextureSGIS = (void *) wglGetProcAddress("glSelectTextureSGIS");
+		qglMTexCoord2fSGIS = (void*) wglGetProcAddress("glMTexCoord2fSGIS");
+		qglSelectTextureSGIS = (void*) wglGetProcAddress("glSelectTextureSGIS");
 		gl_mtexable = true;
 	}
 }
@@ -411,17 +411,17 @@ void GL_Init (void)
 {
 	
 
-	gl_vendor = glGetString (GL_VENDOR);
+	gl_vendor = (const char*)glGetString (GL_VENDOR);
 	Con_Printf ("GL_VENDOR: %s\n", gl_vendor);
-	gl_renderer = glGetString (GL_RENDERER);
+	gl_renderer = (const char*)glGetString (GL_RENDERER);
 	Con_Printf ("GL_RENDERER: %s\n", gl_renderer);
 
-	gl_version = glGetString (GL_VERSION);
+	gl_version = (const char*)glGetString (GL_VERSION);
 	Con_Printf ("GL_VERSION: %s\n", gl_version);
-	gl_extensions = glGetString (GL_EXTENSIONS);
+	gl_extensions = (const char*)glGetString (GL_EXTENSIONS);
 	// Truncate extenstion string, to prevent buffer overrun
 	// Sometimes GL extenstion string doesn't have terminating null.
-	Q_strncpy(ext, gl_extensions, 2048);
+	Q_strncpy(ext, (char*)gl_extensions, 2048);
 	ext[2047] = '\0';
 	Con_Printf ("GL_EXTENSIONS: %s\n", ext);
 
@@ -1057,7 +1057,7 @@ void	VID_Init (unsigned char *palette)
 	int		i; /* Counter */
 	int		existingmode; /* Current video mode */
 	int		basenummodes;
-	int width, height; /* Size of chosen mode in pixels */
+	int width, height = 0; /* Size of chosen mode in pixels */
 	int bpp; /* Bit per pixel of chosen mode */
 	int findbpp, done; /* Flags? */
 	char	gldir[MAX_OSPATH]; /* Directory in ID1 to store converted textures for OpenGL */
