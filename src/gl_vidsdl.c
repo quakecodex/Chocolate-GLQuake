@@ -115,6 +115,7 @@ char *VID_GetModeDescription (int mode);
 void ClearAllStates (void);
 void VID_UpdateWindowStatus (void);
 void GL_Init (void);
+const char* format_glextensions(char* s);
 
 PROC glArrayElementEXT;
 PROC glColorPointerEXT;
@@ -401,14 +402,14 @@ void CheckMultiTextureExtensions(void)
 }
 #endif
 
+static const char* ext;
+
 /**
  * Initializes OpenGL. Get's vender, version and renderer strings. Checks extension
  * support and sets initial shading, texture blending and filtering modes.
  */
 void GL_Init (void)
 {
-	char ext[2048];
-
 	gl_vendor = glGetString (GL_VENDOR);
 	Con_Printf ("GL_VENDOR: %s\n", gl_vendor);
 	gl_renderer = glGetString (GL_RENDERER);
@@ -417,11 +418,10 @@ void GL_Init (void)
 	gl_version = glGetString (GL_VERSION);
 	Con_Printf ("GL_VERSION: %s\n", gl_version);
 	gl_extensions = glGetString (GL_EXTENSIONS);
-	// Truncate extenstion string, to prevent buffer overrun
-	// Sometimes GL extenstion string doesn't have terminating null.
-	strncpy(ext, gl_extensions, 2048);
-	ext[2047] = '\0';
-	Con_Printf ("GL_EXTENSIONS: %s\n", ext);
+	// Truncate extension string, to prevent buffer overrun
+	// GL String on modern cars is too long for quake.
+	//ext = format_glextensions(gl_extensions);
+	Con_Printf ("GL_EXTENSIONS: %s\n", gl_extensions);
 
 //	Con_Printf ("%s %s\n", gl_renderer, gl_version);
 	
@@ -1488,4 +1488,18 @@ void VID_FreeQuakeIcon(void)
 		SDL_FreeSurface(quakeicon);
 		quakeicon = NULL;
 	}
+}
+
+static char dest[4096];
+
+const char* format_glextensions(char* s)
+{
+	int len;
+
+	len = strlen(s);
+	if (len >= 4096) {
+		len = 4096;
+	}
+	strncpy(dest, s, len);
+	return (const char*)dest;
 }
