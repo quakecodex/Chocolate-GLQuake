@@ -409,8 +409,6 @@ static char ext[2048];
  */
 void GL_Init (void)
 {
-	
-
 	gl_vendor = (const char*)glGetString (GL_VENDOR);
 	Con_Printf ("GL_VENDOR: %s\n", gl_vendor);
 	gl_renderer = (const char*)glGetString (GL_RENDERER);
@@ -1296,7 +1294,7 @@ void	VID_Init (unsigned char *palette)
 	sdlFlags = SDL_OPENGL;
 	if (modelist[vid_default].fullscreen)
 		sdlFlags |= SDL_FULLSCREEN;
-	pBackbuffer = SDL_SetVideoMode(modelist[vid_default].width, modelist[vid_default].height, 32, sdlFlags);
+	pBackbuffer = SDL_SetVideoMode(modelist[vid_default].width, modelist[vid_default].height, modelist[vid_default].bpp, sdlFlags);
     if (pBackbuffer == NULL) 
         Sys_Error("Unable to set video mode.");
 
