@@ -58,9 +58,14 @@
 ### Changes
  - Added title bar icon
  
- ## [Unreleased] - 2016-12-27
+## [Unreleased] - 2016-12-27
 ### Changes
  - Ported CD audio to SDL
+ 
+## [Unreleased] - 2016-12-29
+### Changes
+ - Ported Sound to SDL
+ - Fixed or ignored level 4 warnings
 
 
 
