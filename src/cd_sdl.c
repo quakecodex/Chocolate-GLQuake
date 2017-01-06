@@ -94,7 +94,9 @@ static int CDAudio_GetAudioDiskInfo(void)
 
 
 /**
- * Plays a track.
+ * Plays a CD track.
+ * @param track		The track number to play starting with 2. The 1st track on the Quake CD is reserved for the game data. Vanilla Quake has 10 tracks in total, numbered 2-11.
+ * @param looping	True to loop the music, false to play once. Note that this does not work on all systems. 
  */
 void CDAudio_Play(byte track, qboolean looping)
 {
@@ -102,6 +104,7 @@ void CDAudio_Play(byte track, qboolean looping)
 	int trackLength;
 	CDstatus status;
 
+	/* Check that the CD-ROM drive is initialized and there is a CD in the tray. */
 	if (!enabled)
 		return;
 	
@@ -112,17 +115,19 @@ void CDAudio_Play(byte track, qboolean looping)
 			return;
 	}
 
+	/* SDL ignores data tracks, so it always starts at 1. The track number needs to be adjusted to work with SDL. */
 	track = remap[track];
 
-	status = SDL_CDStatus(cdinfo);
+	status = SDL_CDStatus(cdinfo); /* Remove? */s
 
+	/* Check to make sure the track is valid. */
 	if (track < 1 || track > maxTrack)
 	{
 		Con_DPrintf("CDAudio: Bad track number %u.\n", track);
 		return;
 	}
 	
-	// don't try to play a non-audio track
+	/* Play the track */
 	dwReturn = SDL_CDPlayTracks(cdinfo, track, 0, 0, cdinfo->track[track].length);
 	if (dwReturn < 0)
 	{
@@ -137,6 +142,7 @@ void CDAudio_Play(byte track, qboolean looping)
 	playTrack = track;
 	playing = true;
 
+	/* There's no volume control for CD music, so pause the CD if the volume is off. */
 	if (cdvolume == 0.0)
 		CDAudio_Pause ();
 }
