@@ -130,6 +130,10 @@ Functions</h2></td></tr>
 <tr class="separator:a438d552ea5b94e61e76f357d34e09023"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e2cee8538d5cb976e8ea74736bd50b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a3e2cee8538d5cb976e8ea74736bd50b3">GL_Init</a> (void)</td></tr>
 <tr class="separator:a3e2cee8538d5cb976e8ea74736bd50b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51b27d0489efecfc730052cb9390128b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a51b27d0489efecfc730052cb9390128b">VID_LoadQuakeIcon</a> (void)</td></tr>
+<tr class="separator:a51b27d0489efecfc730052cb9390128b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0edd4346019bb0da8af47533188bb60"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#ad0edd4346019bb0da8af47533188bb60">VID_FreeQuakeIcon</a> (void)</td></tr>
+<tr class="separator:ad0edd4346019bb0da8af47533188bb60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2bf325d47e1e5aaee03d837f2314f86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="common_8h.html#a110846a9664bbd925f955266e60e9136">qboolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#af2bf325d47e1e5aaee03d837f2314f86">VID_SetWindowedMode</a> (<a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a> modenum)</td></tr>
 <tr class="separator:af2bf325d47e1e5aaee03d837f2314f86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae3d8c20c795de388c530e2181873acc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="common_8h.html#a110846a9664bbd925f955266e60e9136">qboolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#aae3d8c20c795de388c530e2181873acc">VID_SetFullDIBMode</a> (<a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a> modenum)</td></tr>
@@ -283,6 +287,8 @@ Variables</h2></td></tr>
 <tr class="separator:aca33f926b061680d857699a22f676418"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61838f06e2e314156698362cfa40d00e"><td class="memItemLeft" align="right" valign="top">RECT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a61838f06e2e314156698362cfa40d00e">window_rect</a></td></tr>
 <tr class="separator:a61838f06e2e314156698362cfa40d00e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a454aea3b07cbb997397ca229ed9dd3c0"><td class="memItemLeft" align="right" valign="top">SDL_Surface *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a454aea3b07cbb997397ca229ed9dd3c0">quakeicon</a></td></tr>
+<tr class="separator:a454aea3b07cbb997397ca229ed9dd3c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17d7de78e0d9387c0376fcf56ff6e20e"><td class="memItemLeft" align="right" valign="top">BINDTEXFUNCPTR&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a17d7de78e0d9387c0376fcf56ff6e20e">bindTexFunc</a></td></tr>
 <tr class="separator:a17d7de78e0d9387c0376fcf56ff6e20e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e115459fa4bc6309a94dff9b23cd70f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gl__vidsdl_8c.html#a5e115459fa4bc6309a94dff9b23cd70f">texture_mode</a> = GL_LINEAR</td></tr>
@@ -969,6 +975,25 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="ad0edd4346019bb0da8af47533188bb60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0edd4346019bb0da8af47533188bb60">&sect;&nbsp;</a></span>VID_FreeQuakeIcon()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VID_FreeQuakeIcon </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Frees the resources taken by the Quake titlebar icon. </p>
+
+</div>
+</div>
 <a id="a3c8fe6dd7952f04c48a0f654b1962446"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3c8fe6dd7952f04c48a0f654b1962446">&sect;&nbsp;</a></span>VID_GetExtModeDescription()</h2>
 
@@ -1098,6 +1123,26 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Gets a list of fullscreen video modes and adds them to modelist. </p>
+
+</div>
+</div>
+<a id="a51b27d0489efecfc730052cb9390128b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51b27d0489efecfc730052cb9390128b">&sect;&nbsp;</a></span>VID_LoadQuakeIcon()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="winquake_8h.html#adeb1ec2bfcab870d22eedfa8457a9d8f">int</a> VID_LoadQuakeIcon </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Quake icon for window title bar</p>
+<p>Loads in the Quake icon for the title bar. Icon must be named "quake.bmp" and be located in same directory as chocolate-glquake.exe. Use magenta as the transparent color key (R:266, G:0, B:255). </p><dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
 
 </div>
 </div>
@@ -1783,6 +1828,20 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="common_8h.html#a110846a9664bbd925f955266e60e9136">qboolean</a> mouseactive</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a454aea3b07cbb997397ca229ed9dd3c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a454aea3b07cbb997397ca229ed9dd3c0">&sect;&nbsp;</a></span>quakeicon</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Surface* quakeicon</td>
         </tr>
       </table>
 </div><div class="memdoc">

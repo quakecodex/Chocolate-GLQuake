@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['in_5faccumulate',['IN_Accumulate',['../in__sdl_8c.html#aa5a71c26e95d9cc14094a47aae96b8c0',1,'in_sdl.c']]],
   ['in_5factivatemouse',['IN_ActivateMouse',['../in__sdl_8c.html#a110f79b07f2a8e8b731d92a36107d520',1,'IN_ActivateMouse(void):&#160;in_sdl.c'],['../winquake_8h.html#a110f79b07f2a8e8b731d92a36107d520',1,'IN_ActivateMouse(void):&#160;in_sdl.c']]],
   ['in_5fattackdown',['IN_AttackDown',['../cl__input_8c.html#a08b65730e74679bb3961c3677bcd1e42',1,'cl_input.c']]],
   ['in_5fattackup',['IN_AttackUp',['../cl__input_8c.html#a34be54a8d5c81f188afbffd775c19431',1,'cl_input.c']]],

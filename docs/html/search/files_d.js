@@ -8,6 +8,7 @@ var searchData=
   ['snd_5fdma_2ec',['snd_dma.c',['../snd__dma_8c.html',1,'']]],
   ['snd_5fmem_2ec',['snd_mem.c',['../snd__mem_8c.html',1,'']]],
   ['snd_5fmix_2ec',['snd_mix.c',['../snd__mix_8c.html',1,'']]],
+  ['snd_5fsdl_2ec',['snd_sdl.c',['../snd__sdl_8c.html',1,'']]],
   ['snd_5fwin_2ec',['snd_win.c',['../snd__win_8c.html',1,'']]],
   ['sound_2eh',['sound.h',['../sound_8h.html',1,'']]],
   ['spritegn_2eh',['spritegn.h',['../spritegn_8h.html',1,'']]],
